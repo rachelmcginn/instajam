@@ -64,13 +64,15 @@ class Band_users(db.Model):
         pass
 
 class BandGenres(db.Model):
-    """Intermediate table connecting Band_users and Genres."""
+    """Intermediate table connecting band_users and band_user_genres"""
 
     __tablename__ = "BandGenres"
 
-    ##what is the primary key going to be 
+    band_genres = db.Column(db.Text, nullable=False, primary_key=True)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    band_id = db.Column(db.Integer, db.ForeignKey('band_user.band_id'), nullable=False)
+    band_id = db.Column(db.Integer, db.ForeignKey('band_users.band_id'), nullable=False)
+
+    #relationships to genres and band_users
 
     def __repr__(self):
         pass
@@ -80,15 +82,14 @@ class Band_user_genres(db.Model):
 
     __tablename__ = "band_user_genres"
 
-    ##what is the primary key going to be 
-    ##do i need forgein key
+    ##do i need foreign key
     band_genre = db.Column(db.Text, nullable=False, primary_key=True)
 
     def __repr__(self):
         pass
 
 class BandSkills(db.Model):
-    """Intermediate table connecting band_users and all_skills."""
+    """Intermediate table connecting band_users and band_user_skills."""
 
     __tablename__ = "BandSkills"
 
@@ -107,7 +108,8 @@ class Band_user_skills(db.Model):
 
     ##what is the primary key going to be 
     ##do i need forgein key
-    skill_id = db.Column(db.Text, db.ForeignKey('BandSkills.bandskills_id'), nullable=False)
+    band_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
+    band_skills = db.Column(db.Text, db.ForeignKey('BandSkills.bandskills'), nullable=False)
 
     def __repr__(self):
         pass
