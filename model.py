@@ -2,6 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+#####Questions:
+#id's: auto increment? 
+#unique = True for emails, etc?
+#for intermediate tables: 
+    # what kind of primary key makes sense
+    # how are genres being stored
+
+
 class All_skills(db.Model):
     """Data model for all selectable skills."""
 
@@ -11,7 +19,7 @@ class All_skills(db.Model):
     skill_name = db.Column(db.varchar(50), nullable=False)
 
     def __repr__(self):
-        pass
+        return f'<All_skills skill_id={self.skill_id} skill_name={self.skill_name}>'
 
 class Genres(db.Model):
     """Data model for all selectable genres."""
@@ -22,9 +30,8 @@ class Genres(db.Model):
     genre_name = db.Column(db.varchar(20), nullable=False)
 
     def __repr__(self):
-        pass
+        return f'<Genres genre_id={self.genre_id} genre_name={self.genre_name}>'
 
-###### User tables ######
 
 class User(db.Model):
     """Data model for generic user."""
@@ -33,6 +40,7 @@ class User(db.Model):
 
     user_id = db.Column(db.Text, nullable=False, primary_key=True)
     email = db.Column(db.Text, nullable=False) 
+    password = db.Column(db.varchar(20), nullable=False)
     display_name = db.Column(db.varchar(50), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.Text, nullable=False)
@@ -41,7 +49,7 @@ class User(db.Model):
     description = db.Column(db.varchar(250), nullable=False)
 
     def __repr__(self):
-        pass
+        return f'<Genres user_id={self.user_id} email={self.email}>'
 
 class Band_users(db.Model):
     """Data model for a band user."""
@@ -52,9 +60,10 @@ class Band_users(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     #relationship to users
+    # human = db.relationship('Human')  
 
     def __repr__(self):
-        pass
+        return f'<Band_users band_id={self.band_id} user_id={self.user_name}>'
 
 class Musician_users(db.Model):
     """Data model for a musician user."""
@@ -67,7 +76,7 @@ class Musician_users(db.Model):
     #relationship to users
 
     def __repr__(self):
-        pass
+        return f'<Musician_users musician_id={self.musician_id} user_id={self.user_id}>'
 
 class BandGenres(db.Model):
     """Intermediate table connecting band_users and band_user_genres"""
@@ -81,7 +90,7 @@ class BandGenres(db.Model):
     #relationships to genres and band_users
 
     def __repr__(self):
-        pass
+        return f'<BandGenres genre_id={self.genre_id} band_id={self.band_id}>'
 
 class MusicianGenres(db.Model):
     """Intermediate table connecting musician_users and musician_user_genres"""
@@ -95,7 +104,7 @@ class MusicianGenres(db.Model):
     #relationships to genres and musician_users
 
     def __repr__(self):
-        pass
+        return f'<Genres genre_id={self.genre_id} musician_id={self.musician_id}>'
 
 class Band_user_genres(db.Model):
     """Contains the selected genres of a given band user."""
@@ -108,7 +117,7 @@ class Band_user_genres(db.Model):
     #relationship to BandGenre
 
     def __repr__(self):
-        pass
+        return f'<Band_user_genres band_genres={self.band_genres}>'
 
 class Musician_user_genres(db.Model):
     """Contains the selected genres of a given musician user."""
@@ -121,7 +130,7 @@ class Musician_user_genres(db.Model):
     #relationship to MusicianGenre
 
     def __repr__(self):
-        pass
+        return f'<Musician_user_genres musician_genres={self.musician_genres}>'
 
 class BandSkills(db.Model):
     """Intermediate table connecting band_users and band_user_skills."""
@@ -135,7 +144,7 @@ class BandSkills(db.Model):
     #relationships to all_skills and band_users
 
     def __repr__(self):
-        pass
+        return f'<BandSkills skill_id={self.skill_id} band_id={self.band_id}>'
 
 class MusicianSkills(db.Model):
     """Intermediate table connecting musician_users and musician_user_skills."""
@@ -149,7 +158,7 @@ class MusicianSkills(db.Model):
     #relationships to all_skills and musician_users
 
     def __repr__(self):
-        pass
+        return f'<MusicianSkills skill_id={self.skill_id} musician_id={self.band_id}>'
 
 class Band_user_skills(db.Model):
     """Contains the selected skills of a given band user."""
@@ -159,8 +168,10 @@ class Band_user_skills(db.Model):
     band_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
     band_skills = db.Column(db.Text, db.ForeignKey('BandSkills.band_skills'), nullable=False)
 
+    #relationship to BandSkills
+
     def __repr__(self):
-        pass
+        return f'<Band_user_skills band_skills={self.band_skills}>'
 
 class Musician_user_skills(db.Model):
     """Contains the selected skills of a given musician user."""
@@ -170,8 +181,10 @@ class Musician_user_skills(db.Model):
     musician_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
     musician_skills = db.Column(db.Text, db.ForeignKey('BandSkills.musician_skills'), nullable=False)
 
+    #relationship to MusicianSkills
+
     def __repr__(self):
-        pass
+        return f'<Musician_user_skills musician_skills={self.musician_skills}>'
 
 
 
@@ -181,6 +194,15 @@ class Musician_user_skills(db.Model):
 
 
 
+
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///instajam'
+    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
 
 if __name__ == '__main__':
     from server import app
