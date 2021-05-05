@@ -3,11 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 #####Questions:
-#id's: auto increment? 
-#"unique = True" for emails, etc?
-#for intermediate tables: 
-    # what kind of primary key makes sense
-    # how are genres being stored
+#logistics of how genres being stored
+#current error:  Key columns "musician_skills" and "musician_skills" are of incompatible types: text and integer.
+    # skills are numbered by an integer, I believe is the issue
 
 
 class All_skills(db.Model):
@@ -38,8 +36,8 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Text, autoincrement=True, nullable=False, primary_key=True)
-    email = db.Column(db.Text, nullable=False) 
+    user_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True, unique=True)
+    email = db.Column(db.Text, nullable=False, unique=True) 
     password = db.Column(db.VARCHAR(20), nullable=False)
     display_name = db.Column(db.VARCHAR(50), nullable=False)
     age = db.Column(db.Integer, nullable=False)
@@ -56,7 +54,7 @@ class Band_users(db.Model):
 
     __tablename__ = "band_users"
 
-    band_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
+    band_id = db.Column(db.Integer, autoincrement=True, nullable=False, unique=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user = db.relationship('User')
@@ -69,7 +67,7 @@ class Musician_users(db.Model):
 
     __tablename__ = "musician_users"
 
-    musician_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
+    musician_id = db.Column(db.Integer, autoincrement=True, nullable=False, unique=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user = db.relationship('User')
@@ -138,7 +136,7 @@ class BandSkills(db.Model):
 
     __tablename__ = "BandSkills"
 
-    band_skills = db.Column(db.Integer, nullable=False, primary_key=True)
+    band_skills = db.Column(db.Text, nullable=False, primary_key=True)
     skill_id = db.Column(db.Integer, db.ForeignKey('all_skills.skill_id'), nullable=False)
     band_id = db.Column(db.Integer, db.ForeignKey('band_users.band_id'), nullable=False)
 
@@ -182,7 +180,7 @@ class Musician_user_skills(db.Model):
     __tablename__ = "musician_user_skills"
 
     musician_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
-    musician_skills = db.Column(db.Text, db.ForeignKey('BandSkills.musician_skills'), nullable=False)
+    musician_skills = db.Column(db.Text, db.ForeignKey('MusicianSkills.musician_skills'), nullable=False)
 
     musicianSkills = db.relationship('MusicianSkills')
 
