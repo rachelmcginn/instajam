@@ -15,7 +15,7 @@ class All_skills(db.Model):
 
     __tablename__ = "all_skills"
 
-    skill_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    skill_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
     skill_name = db.Column(db.varchar(50), nullable=False)
 
     def __repr__(self):
@@ -26,7 +26,7 @@ class Genres(db.Model):
 
     __tablename__ = "genres"
 
-    genre_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    genre_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
     genre_name = db.Column(db.varchar(20), nullable=False)
 
     def __repr__(self):
@@ -38,7 +38,7 @@ class User(db.Model):
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Text, nullable=False, primary_key=True)
+    user_id = db.Column(db.Text, autoincrement=True, nullable=False, primary_key=True)
     email = db.Column(db.Text, nullable=False) 
     password = db.Column(db.varchar(20), nullable=False)
     display_name = db.Column(db.varchar(50), nullable=False)
@@ -56,7 +56,7 @@ class Band_users(db.Model):
 
     __tablename__ = "band_users"
 
-    band_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    band_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user = db.relationship('User')
@@ -69,7 +69,7 @@ class Musician_users(db.Model):
 
     __tablename__ = "musician_users"
 
-    musician_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    musician_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user = db.relationship('User')
@@ -171,7 +171,6 @@ class Band_user_skills(db.Model):
     band_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
     band_skills = db.Column(db.Text, db.ForeignKey('BandSkills.band_skills'), nullable=False)
 
-    #relationship to BandSkills
     bandSkills = db.relationship('BandSkills')
     
     def __repr__(self):
