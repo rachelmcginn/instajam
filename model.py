@@ -16,7 +16,7 @@ class All_skills(db.Model):
     __tablename__ = "all_skills"
 
     skill_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
-    skill_name = db.Column(db.varchar(50), nullable=False)
+    skill_name = db.Column(db.VARCHAR(50), nullable=False)
 
     def __repr__(self):
         return f'<All_skills skill_id={self.skill_id} skill_name={self.skill_name}>'
@@ -27,7 +27,7 @@ class Genres(db.Model):
     __tablename__ = "genres"
 
     genre_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
-    genre_name = db.Column(db.varchar(20), nullable=False)
+    genre_name = db.Column(db.VARCHAR(20), nullable=False)
 
     def __repr__(self):
         return f'<Genres genre_id={self.genre_id} genre_name={self.genre_name}>'
@@ -40,13 +40,13 @@ class User(db.Model):
 
     user_id = db.Column(db.Text, autoincrement=True, nullable=False, primary_key=True)
     email = db.Column(db.Text, nullable=False) 
-    password = db.Column(db.varchar(20), nullable=False)
-    display_name = db.Column(db.varchar(50), nullable=False)
+    password = db.Column(db.VARCHAR(20), nullable=False)
+    display_name = db.Column(db.VARCHAR(50), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.Text, nullable=False)
-    influences = db.Column(db.varchar(250), nullable=False)
-    location = db.Column(db.varchar(50), nullable=False)
-    description = db.Column(db.varchar(250), nullable=False)
+    influences = db.Column(db.VARCHAR(250), nullable=False)
+    location = db.Column(db.VARCHAR(50), nullable=False)
+    description = db.Column(db.VARCHAR(250), nullable=False)
 
     def __repr__(self):
         return f'<Genres user_id={self.user_id} email={self.email}>'
