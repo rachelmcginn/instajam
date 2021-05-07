@@ -49,7 +49,7 @@ class User(db.Model):
     description = db.Column(db.VARCHAR(250), nullable=False)
 
     def __repr__(self):
-        return f'<Genres user_id={self.user_id} email={self.email}>'
+        return f'<User user_id={self.user_id} email={self.email}>'
 
 class Band_users(db.Model):
     """Data model for a band user."""
@@ -62,7 +62,7 @@ class Band_users(db.Model):
     user = db.relationship('User')
 
     def __repr__(self):
-        return f'<Band_users band_id={self.band_id} user_id={self.user_name}>'
+        return f'<Band_users band_id={self.band_id} user_id={self.user_id}>'
 
 class Musician_users(db.Model):
     """Data model for a musician user."""
@@ -105,7 +105,7 @@ class MusicianGenres(db.Model):
     musician_users = db.relationship('Musician_users')
 
     def __repr__(self):
-        return f'<Genres genre_id={self.genre_id} musician_id={self.musician_id}>'
+        return f'<MusicianGenres genre_id={self.genre_id} musician_id={self.musician_id}>'
 
 class Band_user_genres(db.Model):
     """Contains the selected genres of a given band user."""
@@ -161,7 +161,7 @@ class MusicianSkills(db.Model):
     musician_users = db.relationship('Musician_users')
 
     def __repr__(self):
-        return f'<MusicianSkills skill_id={self.skill_id} musician_id={self.band_id}>'
+        return f'<MusicianSkills skill_id={self.skill_id} musician_id={self.musician_id}>'
 
 class Band_user_skills(db.Model):
     """Contains the selected skills of a given band user."""
