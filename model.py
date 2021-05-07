@@ -115,7 +115,7 @@ class Band_user_genres(db.Model):
     band_user_genres = db.Column(db.Text, nullable=False, primary_key=True)
     band_genres = db.Column(db.Text, db.ForeignKey('BandGenres.band_genres'), nullable=False)
 
-    BandGenre = db.relationship('BandGenre')
+    BandGenres = db.relationship('BandGenres')
 
     def __repr__(self):
         return f'<Band_user_genres band_genres={self.band_genres}>'
@@ -128,7 +128,7 @@ class Musician_user_genres(db.Model):
     musician_user_genres = db.Column(db.Text, nullable=False, primary_key=True)
     musician_genres = db.Column(db.Text, db.ForeignKey('MusicianGenres.musician_genres'), nullable=False)
 
-    musicianGenre = db.relationship('MusicianGenre')
+    musicianGenres = db.relationship('MusicianGenres')
 
     def __repr__(self):
         return f'<Musician_user_genres musician_genres={self.musician_genres}>'
