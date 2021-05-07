@@ -4,10 +4,6 @@ db = SQLAlchemy()
 
 #####Questions:
 #logistics of how genres being stored
-#current error:  Key columns "musician_skills" and "musician_skills" are of incompatible types: text and integer.
-    # skills are numbered by an integer, I believe is the issue
-    # I think this is because skills are numbered by an integer
-        #So the idea is that you can access a skill by its integer
 
 
 class All_skills(db.Model):
