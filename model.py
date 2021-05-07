@@ -6,6 +6,8 @@ db = SQLAlchemy()
 #logistics of how genres being stored
 #current error:  Key columns "musician_skills" and "musician_skills" are of incompatible types: text and integer.
     # skills are numbered by an integer, I believe is the issue
+    # I think this is because skills are numbered by an integer
+        #So the idea is that you can access a skill by its integer
 
 
 class All_skills(db.Model):
@@ -151,7 +153,7 @@ class MusicianSkills(db.Model):
 
     __tablename__ = "MusicianSkills"
 
-    musician_skills = db.Column(db.Integer, nullable=False, primary_key=True)
+    musician_skills = db.Column(db.Text, nullable=False, primary_key=True)
     skill_id = db.Column(db.Integer, db.ForeignKey('all_skills.skill_id'), nullable=False)
     musician_id = db.Column(db.Integer, db.ForeignKey('musician_users.musician_id'), nullable=False)
 
@@ -199,7 +201,7 @@ class Musician_user_skills(db.Model):
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///Instajam'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///instajam'
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
