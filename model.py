@@ -2,39 +2,34 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-#####Questions:
-#logistics of how genres being stored
-
-
-class All_skills(db.Model):
+class Skill(db.Model):
     """Data model for all selectable skills."""
 
-    __tablename__ = "all_skills"
+    __tablename__ = "skills"
 
-    skill_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
+    skill_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     skill_name = db.Column(db.VARCHAR(50), nullable=False)
 
     def __repr__(self):
-        return f'<All_skills skill_id={self.skill_id} skill_name={self.skill_name}>'
+        return f'<Skill skill_id={self.skill_id} skill_name={self.skill_name}>'
 
-class Genres(db.Model):
+class Genre(db.Model):
     """Data model for all selectable genres."""
 
     __tablename__ = "genres"
 
-    genre_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True)
+    genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     genre_name = db.Column(db.VARCHAR(20), nullable=False)
 
     def __repr__(self):
-        return f'<Genres genre_id={self.genre_id} genre_name={self.genre_name}>'
-
+        return f'<Genre genre_id={self.genre_id} genre_name={self.genre_name}>'
 
 class User(db.Model):
     """Data model for generic user."""
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, autoincrement=True, nullable=False, primary_key=True, unique=True)
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.Text, nullable=False, unique=True) 
     password = db.Column(db.VARCHAR(20), nullable=False)
     display_name = db.Column(db.VARCHAR(50), nullable=False)
@@ -45,145 +40,92 @@ class User(db.Model):
     description = db.Column(db.VARCHAR(250), nullable=False)
 
     def __repr__(self):
-        return f'<User user_id={self.user_id} email={self.email}>'
+        return f'<User display_name={self.display_name} user_id={self.user_id} email={self.email}>'
 
-class Band_users(db.Model):
+class Band(db.Model):
     """Data model for a band user."""
 
-    __tablename__ = "band_users"
+    __tablename__ = "bands"
 
-    band_id = db.Column(db.Integer, autoincrement=True, nullable=False, unique=True, primary_key=True)
+    band_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
     user = db.relationship('User')
 
     def __repr__(self):
-        return f'<Band_users band_id={self.band_id} user_id={self.user_id}>'
+        return f'<Band display_name={self.display_name} band_id={self.band_id} user_id={self.user_id}>'
 
-class Musician_users(db.Model):
+class Musician(db.Model):
     """Data model for a musician user."""
 
-    __tablename__ = "musician_users"
+    __tablename__ = "musicians"
 
-    musician_id = db.Column(db.Integer, autoincrement=True, nullable=False, unique=True, primary_key=True)
+    musician_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
+    
     user = db.relationship('User')
+    skills = db.relationship('Skill',
+                            secondary='musician_skills')
 
     def __repr__(self):
-        return f'<Musician_users musician_id={self.musician_id} user_id={self.user_id}>'
+        return f'<Musician musician_id={self.musician_id} user_id={self.user_id}>'
 
-class BandGenres(db.Model):
-    """Intermediate table connecting band_users and band_user_genres"""
+class BandGenre(db.Model):
+    """Intermediate table connecting bands and genres"""
 
-    __tablename__ = "BandGenres"
+    __tablename__ = "band_genres"
 
     band_genres = db.Column(db.Text, nullable=False, primary_key=True)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    band_id = db.Column(db.Integer, db.ForeignKey('band_users.band_id'), nullable=False)
+    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    genres = db.relationship('Genres')
-    band_users = db.relationship('Band_users')
+    genres = db.relationship('Genre')
+    bands = db.relationship('Band')
 
     def __repr__(self):
-        return f'<BandGenres genre_id={self.genre_id} band_id={self.band_id}>'
+        return f'<BandGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} band_id={self.band_id}>'
 
-class MusicianGenres(db.Model):
-    """Intermediate table connecting musician_users and musician_user_genres"""
+class MusicianGenre(db.Model):
+    """Intermediate table connecting musicians and genres"""
 
-    __tablename__ = "MusicianGenres"
+    __tablename__ = "musicians"
 
-    musician_genres = db.Column(db.Text, nullable=False, primary_key=True)
+    musician_genres = db.Column(db.Text, primary_key=True)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    musician_id = db.Column(db.Integer, db.ForeignKey('musician_users.musician_id'), nullable=False)
+    musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), nullable=False)
 
-    genres = db.relationship('Genres')
-    musician_users = db.relationship('Musician_users')
-
-    def __repr__(self):
-        return f'<MusicianGenres genre_id={self.genre_id} musician_id={self.musician_id}>'
-
-class Band_user_genres(db.Model):
-    """Contains the selected genres of a given band user."""
-
-    __tablename__ = "band_user_genres"
-
-    band_user_genres = db.Column(db.Text, nullable=False, primary_key=True)
-    band_genres = db.Column(db.Text, db.ForeignKey('BandGenres.band_genres'), nullable=False)
-
-    BandGenres = db.relationship('BandGenres')
+    genres = db.relationship('Genre')
+    musician = db.relationship('Musician')
 
     def __repr__(self):
-        return f'<Band_user_genres band_genres={self.band_genres}>'
-
-class Musician_user_genres(db.Model):
-    """Contains the selected genres of a given musician user."""
-
-    __tablename__ = "musician_user_genres"
-
-    musician_user_genres = db.Column(db.Text, nullable=False, primary_key=True)
-    musician_genres = db.Column(db.Text, db.ForeignKey('MusicianGenres.musician_genres'), nullable=False)
-
-    musicianGenres = db.relationship('MusicianGenres')
-
-    def __repr__(self):
-        return f'<Musician_user_genres musician_genres={self.musician_genres}>'
+        return f'<MusicianGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} musician_id={self.musician_id}>'
 
 class BandSkills(db.Model):
-    """Intermediate table connecting band_users and band_user_skills."""
+    """Intermediate table connecting bands and skills."""
 
-    __tablename__ = "BandSkills"
+    __tablename__ = "band_skills"
 
-    band_skills = db.Column(db.Text, nullable=False, primary_key=True)
-    skill_id = db.Column(db.Integer, db.ForeignKey('all_skills.skill_id'), nullable=False)
-    band_id = db.Column(db.Integer, db.ForeignKey('band_users.band_id'), nullable=False)
+    band_skills = db.Column(db.Text, primary_key=True)
+    skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), nullable=False)
+    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    all_skills = db.relationship('All_skills')
-    band_users = db.relationship('Band_users')
+    skills = db.relationship('Skill')
+    bands = db.relationship('Band')
 
     def __repr__(self):
-        return f'<BandSkills skill_id={self.skill_id} band_id={self.band_id}>'
+        return f'<BandSkills skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
 
 class MusicianSkills(db.Model):
-    """Intermediate table connecting musician_users and musician_user_skills."""
+    """Intermediate table connecting musicians and skills."""
 
-    __tablename__ = "MusicianSkills"
+    __tablename__ = "musician_skills"
 
-    musician_skills = db.Column(db.Text, nullable=False, primary_key=True)
-    skill_id = db.Column(db.Integer, db.ForeignKey('all_skills.skill_id'), nullable=False)
-    musician_id = db.Column(db.Integer, db.ForeignKey('musician_users.musician_id'), nullable=False)
-
-    all_skills = db.relationship('All_skills')
-    musician_users = db.relationship('Musician_users')
+    skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), primary_key=True)
+    musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), primary_key=True)
 
     def __repr__(self):
-        return f'<MusicianSkills skill_id={self.skill_id} musician_id={self.musician_id}>'
+        return f'<MusicianSkills skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
 
-class Band_user_skills(db.Model):
-    """Contains the selected skills of a given band user."""
-
-    __tablename__ = "band_user_skills"
-
-    band_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
-    band_skills = db.Column(db.Text, db.ForeignKey('BandSkills.band_skills'), nullable=False)
-
-    bandSkills = db.relationship('BandSkills')
-    
-    def __repr__(self):
-        return f'<Band_user_skills band_skills={self.band_skills}>'
-
-class Musician_user_skills(db.Model):
-    """Contains the selected skills of a given musician user."""
-
-    __tablename__ = "musician_user_skills"
-
-    musician_user_skills = db.Column(db.Text, nullable=False, primary_key=True)
-    musician_skills = db.Column(db.Text, db.ForeignKey('MusicianSkills.musician_skills'), nullable=False)
-
-    musicianSkills = db.relationship('MusicianSkills')
-
-    def __repr__(self):
-        return f'<Musician_user_skills musician_skills={self.musician_skills}>'
 
 
 
