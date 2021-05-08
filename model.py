@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
+###Notes: Skills and Genres will be hardcoded
+
 db = SQLAlchemy()
 
 class Skill(db.Model):
