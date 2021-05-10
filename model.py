@@ -1,30 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-###Notes: Skills and Genres will be hardcoded
-
 db = SQLAlchemy()
-
-class Skill(db.Model):
-    """Data model for all selectable skills."""
-
-    __tablename__ = "skills"
-
-    skill_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    skill_name = db.Column(db.VARCHAR(50), nullable=False)
-
-    def __repr__(self):
-        return f'<Skill skill_id={self.skill_id} skill_name={self.skill_name}>'
-
-class Genre(db.Model):
-    """Data model for all selectable genres."""
-
-    __tablename__ = "genres"
-
-    genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    genre_name = db.Column(db.VARCHAR(20), nullable=False)
-
-    def __repr__(self):
-        return f'<Genre genre_id={self.genre_id} genre_name={self.genre_name}>'
 
 class User(db.Model):
     """Data model for generic user."""
@@ -41,6 +17,9 @@ class User(db.Model):
     location = db.Column(db.VARCHAR(50), nullable=False)
     description = db.Column(db.VARCHAR(250), nullable=False)
 
+    band = db.relationship('Band') ########## ? Is this needed
+    musician = db.relationship('Musician') #########? Is this needed
+
     def __repr__(self):
         return f'<User display_name={self.display_name} user_id={self.user_id} email={self.email}>'
 
@@ -52,7 +31,8 @@ class Band(db.Model):
     band_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
-    user = db.relationship('User')
+    user = db.relationship('User') ########### ? Is this needed
+    skills = db.relationship('Skill', secondary='band_skills')
 
     def __repr__(self):
         return f'<Band display_name={self.display_name} band_id={self.band_id} user_id={self.user_id}>'
@@ -65,12 +45,37 @@ class Musician(db.Model):
     musician_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
-    user = db.relationship('User')
-    skills = db.relationship('Skill',
-                            secondary='musician_skills')
+    user = db.relationship('User') ########## ? Is this needed
+    skills = db.relationship('Skill', secondary='musician_skills')
 
     def __repr__(self):
         return f'<Musician musician_id={self.musician_id} user_id={self.user_id}>'
+
+class Skill(db.Model):
+    """Data model for all selectable skills."""
+
+    __tablename__ = "skills"
+
+    skill_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    skill_name = db.Column(db.VARCHAR(50), nullable=False)
+
+    bands = db.relationship('Band', secondary='band_skills')
+
+    def __repr__(self):
+        return f'<Skill skill_id={self.skill_id} skill_name={self.skill_name}>'
+
+class Genre(db.Model):
+    """Data model for all selectable genres."""
+
+    __tablename__ = "genres"
+
+    genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    genre_name = db.Column(db.VARCHAR(20), nullable=False)
+
+    bands = db.relationship('Band', secondary='band_genres')
+
+    def __repr__(self):
+        return f'<Genre genre_id={self.genre_id} genre_name={self.genre_name}>'
 
 class BandGenre(db.Model):
     """Intermediate table connecting bands and genres"""
@@ -81,8 +86,8 @@ class BandGenre(db.Model):
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
     band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    genres = db.relationship('Genre')
-    bands = db.relationship('Band')
+    genres = db.relationship('Genre') ############ ? # Add backref 
+    bands = db.relationship('Band') # Add backref 
 
     def __repr__(self):
         return f'<BandGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} band_id={self.band_id}>'
@@ -96,8 +101,8 @@ class MusicianGenre(db.Model):
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
     musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), nullable=False)
 
-    genres = db.relationship('Genre')
-    musician = db.relationship('Musician')
+    genres = db.relationship('Genre') #Add backref 
+    musician = db.relationship('Musician') #Add backref 
 
     def __repr__(self):
         return f'<MusicianGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} musician_id={self.musician_id}>'
@@ -111,8 +116,8 @@ class BandSkills(db.Model):
     skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), nullable=False)
     band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    skills = db.relationship('Skill')
-    bands = db.relationship('Band')
+    skills = db.relationship('Skill') #Add backref
+    bands = db.relationship('Band') #Add backref
 
     def __repr__(self):
         return f'<BandSkills skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
@@ -124,6 +129,9 @@ class MusicianSkills(db.Model):
 
     skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), primary_key=True)
     musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), primary_key=True)
+
+    skills = db.relationship('Skill') #Add backref
+    musicians = db.relationship('Musician') #Add backref
 
     def __repr__(self):
         return f'<MusicianSkills skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
