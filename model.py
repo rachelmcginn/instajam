@@ -73,6 +73,7 @@ class Genre(db.Model):
     genre_name = db.Column(db.VARCHAR(20), nullable=False)
 
     bands = db.relationship('Band', secondary='band_genres')
+    musicians = db.relationship('Musician', secondary='musician_genres')
 
     def __repr__(self):
         return f'<Genre genre_id={self.genre_id} genre_name={self.genre_name}>'
@@ -86,8 +87,8 @@ class BandGenre(db.Model):
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
     band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    genres = db.relationship('Genre') ############ ? # Add backref 
-    bands = db.relationship('Band') # Add backref 
+    genres = db.relationship('Genre', back_populates='genres') ############ Check
+    bands = db.relationship('Band', back_populates='bands') ######### Check 
 
     def __repr__(self):
         return f'<BandGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} band_id={self.band_id}>'
@@ -101,8 +102,8 @@ class MusicianGenre(db.Model):
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
     musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), nullable=False)
 
-    genres = db.relationship('Genre') #Add backref 
-    musician = db.relationship('Musician') #Add backref 
+    genres = db.relationship('Genre', back_populates='genres') ######### Check 
+    musician = db.relationship('Musician', back_populates='bands') ######### Check  
 
     def __repr__(self):
         return f'<MusicianGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} musician_id={self.musician_id}>'
@@ -116,8 +117,8 @@ class BandSkills(db.Model):
     skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), nullable=False)
     band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
 
-    skills = db.relationship('Skill') #Add backref
-    bands = db.relationship('Band') #Add backref
+    skills = db.relationship('Skill', back_populates='skills') ######### Check 
+    bands = db.relationship('Band', back_populates='bands') ######### Check 
 
     def __repr__(self):
         return f'<BandSkills skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
@@ -130,8 +131,8 @@ class MusicianSkills(db.Model):
     skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), primary_key=True)
     musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), primary_key=True)
 
-    skills = db.relationship('Skill') #Add backref
-    musicians = db.relationship('Musician') #Add backref
+    skills = db.relationship('Skill', back_populates='skills') ######### Check 
+    musicians = db.relationship('Musician', back_populates='musicians') ######### Check 
 
     def __repr__(self):
         return f'<MusicianSkills skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
