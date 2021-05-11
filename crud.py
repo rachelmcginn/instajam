@@ -1,4 +1,4 @@
-from model import db, Skill, Genre, User, Band, Musician, BandSkills, MusicianSkills, BandGenre, MusicianGenre, connect_to_db
+from model import db, Skill, Genre, User, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
 def create_user(email, password, display_name, age, gender, influences, location, description):
@@ -38,7 +38,22 @@ def create_band(user_id):
 
     return band
 
+def create_skill(skill_name):
+    """Create new skill."""
 
+    skill = Skill(skill_name=skill_name)
+
+    db.session.add(Skill(skill_name=skill))
+    db.session.commit()
+
+    return skill
+
+def add_a_skill(skill):
+    """Add a new skill to a user profile"""
+    pass
+
+
+    return skill
 
 def create_a_test_user():
     email = 'ted@test.com'

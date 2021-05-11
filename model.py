@@ -109,7 +109,7 @@ class MusicianGenre(db.Model):
     def __repr__(self):
         return f'<MusicianGenre genre_name={self.genre_name} genre_id={self.genre_id} display_name={self.display_name} musician_id={self.musician_id}>'
 
-class BandSkills(db.Model):
+class BandSkill(db.Model):
     """Intermediate table connecting bands and skills."""
 
     __tablename__ = "band_skills"
@@ -122,9 +122,9 @@ class BandSkills(db.Model):
     bands = db.relationship('Band') 
 
     def __repr__(self):
-        return f'<BandSkills skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
+        return f'<BandSkill skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
 
-class MusicianSkills(db.Model):
+class MusicianSkill(db.Model):
     """Intermediate table connecting musicians and skills."""
 
     __tablename__ = "musician_skills"
@@ -136,7 +136,7 @@ class MusicianSkills(db.Model):
     musicians = db.relationship('Musician') 
 
     def __repr__(self):
-        return f'<MusicianSkills skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
+        return f'<MusicianSkill skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
 
 
 
