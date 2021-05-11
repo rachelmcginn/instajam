@@ -41,9 +41,9 @@ def create_band(user_id):
 
 
 def create_a_test_user():
-    email = 'test1@test.com'
+    email = 'ted@test.com'
     password = '1234'
-    display_name = 'bob'
+    display_name = 'ted'
     age = 21
     gender = 'm'
     influences = 'the beatles'
@@ -59,15 +59,15 @@ def create_a_test_user():
     return test_user
 
 
-def create_a_test_user2():
-    email = 'test2@test.com'
-    password = '1234'
-    display_name = 'todd'
-    age = 21
+def create_a_test_user_2():
+    email = 'bill@test.com'
+    password = '5678'
+    display_name = 'bill'
+    age = 22
     gender = 'm'
     influences = 'the rolling stones'
-    location = 'nyc'
-    description = 'this is my description'
+    location = 'boston'
+    description = 'my description goes here'
 
     test_user_2 = User(email=email, password=password, display_name=display_name,
         age=age, gender=gender, influences=influences, location=location,
@@ -89,11 +89,11 @@ def seed_test_data():
     db.session.add(Skill(skill_name=skill2))
     
     
-    bob = create_a_test_user()
-    todd = create_a_test_user2()
+    ted = create_a_test_user()
+    bill = create_a_test_user_2()
 
-    db.session.add(Musician(user=bob))
-    db.session.add(Band(user=todd))
+    db.session.add(Musician(user=ted))
+    db.session.add(Band(user=bill))
 
 
     db.session.commit()
@@ -105,4 +105,4 @@ if __name__ == '__main__':
 
     
     connect_to_db(app)
-    print('Connected to db')
+    print('Connected to db!')

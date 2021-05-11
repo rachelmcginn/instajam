@@ -142,12 +142,6 @@ class MusicianSkills(db.Model):
 
 
 
-
-
-
-
-
-
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
@@ -156,6 +150,7 @@ def connect_to_db(app):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    app.app_context().push()
 
 if __name__ == '__main__':
     from server import app
