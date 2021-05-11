@@ -1,7 +1,5 @@
-from model import db, Skill, Genre, User, Band, Musician, BandSkills, MusicianSkills, BandGenres, MusicianGenres, connect_to_db
+from model import db, Skill, Genre, User, Band, Musician, BandSkills, MusicianSkills, BandGenre, MusicianGenre, connect_to_db
 import os
-
-###Notes: Skills and Genres will be hardcoded
 
 def create_user(email, password, display_name, age, gender, influences, location, description):
     """Create and return a new user"""
@@ -30,9 +28,9 @@ def create_musician(user_id):
 
     return musician
 
-def create_band(band_id):
+def create_band(user_id):
     """Create and return a new band"""
-    
+
     band = Band(user_id=user_id)
 
     db.session.add(band)
@@ -42,40 +40,63 @@ def create_band(band_id):
 
 
 
-# def create_a_test_user():
-#     email = 'test2@test.com'
-#     password = '1234'
-#     display_name = 'bob2'
-#     age = 21
-#     gender = 'm'
-#     influences = 'the beatles'
-#     location = 'nyc'
-#     description = 'this is my description'
+def create_a_test_user():
+    email = 'test1@test.com'
+    password = '1234'
+    display_name = 'bob'
+    age = 21
+    gender = 'm'
+    influences = 'the beatles'
+    location = 'nyc'
+    description = 'this is my description'
 
-#     test_user_2 = User(email=email, password=password, display_name=display_name,
-#         age=age, gender=gender, influences=influences, location=location,
-#         description=description)
+    test_user = User(email=email, password=password, display_name=display_name,
+        age=age, gender=gender, influences=influences, location=location,
+        description=description)
 
-#     db.session.add(test_user_2)
-#     db.session.commit()
-#     return test_user_2
+    db.session.add(test_user)
+    db.session.commit()
+    return test_user
 
-# def seed_test_data():
-#     os.system('dropdb instajam')
-#     os.system('createdb instajam')
-#     db.create_all()
 
-#     skill1 = 'guitar'
-#     skill2 = 'bass'
+def create_a_test_user2():
+    email = 'test2@test.com'
+    password = '1234'
+    display_name = 'todd'
+    age = 21
+    gender = 'm'
+    influences = 'the rolling stones'
+    location = 'nyc'
+    description = 'this is my description'
 
-#     db.session.add(Skill(skill_name=skill1))
-#     db.session.add(Skill(skill_name=skill2))
+    test_user_2 = User(email=email, password=password, display_name=display_name,
+        age=age, gender=gender, influences=influences, location=location,
+        description=description)
+
+    db.session.add(test_user_2)
+    db.session.commit()
+    return test_user_2
+
+def seed_test_data():
+    os.system('dropdb instajam')
+    os.system('createdb instajam')
+    db.create_all()
+
+    skill1 = 'guitar'
+    skill2 = 'bass'
+
+    db.session.add(Skill(skill_name=skill1))
+    db.session.add(Skill(skill_name=skill2))
     
     
-#     bob = create_a_test_user()
+    bob = create_a_test_user()
+    todd = create_a_test_user2()
 
-#     db.session.add(Musician_users(user=bob))
-#     db.session.commit()
+    db.session.add(Musician(user=bob))
+    db.session.add(Band(user=todd))
+
+
+    db.session.commit()
     
     
 
