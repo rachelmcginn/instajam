@@ -1,0 +1,18 @@
+[
+    {   
+        "banjo": "banjo",
+        "bass": "bass",
+        "cello": "cello",
+        "drums": "drums",
+        "flute": "flute",
+        "guitar": "guitar",
+        "keyboard": "keyboard",
+        "piano": "piano",
+        "trumpet": "trumpet",
+        "violin": "violin",
+        "vocals": "vocals",
+        "saxophone": "saxophone",
+        "synth": "synth"
+    }
+]
+

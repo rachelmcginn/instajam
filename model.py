@@ -114,9 +114,8 @@ class BandSkill(db.Model):
 
     __tablename__ = "band_skills"
 
-    band_skills = db.Column(db.Text, primary_key=True)
-    skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), nullable=False)
-    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
+    skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), primary_key=True)
+    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), primary_key=True)
 
     skills = db.relationship('Skill')
     bands = db.relationship('Band') 
@@ -154,7 +153,6 @@ def connect_to_db(app):
 
 if __name__ == '__main__':
     from server import app
-
     
     connect_to_db(app)
     print('Connected to db')

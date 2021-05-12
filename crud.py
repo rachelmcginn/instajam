@@ -1,3 +1,4 @@
+from typing import NoReturn
 from model import db, Skill, Genre, User, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
@@ -55,6 +56,26 @@ def add_a_skill(skill):
 
     return skill
 
+def add_a_genre(genre):
+    """Add a genre to a user profile"""
+    pass
+    
+    return genre
+
+def match_user(user_match):
+    """Match a user"""
+
+    user_match = ""
+    pass
+
+    return user_match
+
+def display_matches(matches):
+    """Display all matches"""
+    matches = ""
+    pass
+    return matches
+
 def create_a_test_user():
     email = 'ted@test.com'
     password = '1234'
@@ -97,19 +118,28 @@ def seed_test_data():
     os.system('createdb instajam')
     db.create_all()
 
-    skill1 = 'guitar'
-    skill2 = 'bass'
+    guitar = Skill(skill_name='guitar')
+    db.session.add(guitar)
 
-    db.session.add(Skill(skill_name=skill1))
-    db.session.add(Skill(skill_name=skill2))
+    bass = Skill(skill_name='bass')
+    db.session.add(bass)
+
     
     
     ted = create_a_test_user()
     bill = create_a_test_user_2()
 
-    db.session.add(Musician(user=ted))
-    db.session.add(Band(user=bill))
+    ted_musician = Musician(user=ted)
+    ted_musician.skills.append(bass)
+    db.session.add(ted_musician)
 
+    
+    bills_band = Band(user=bill)
+    bills_band.skills.append(bass)
+
+    db.session.add(bills_band)
+
+    
 
     db.session.commit()
     
