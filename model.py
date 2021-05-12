@@ -2,12 +2,33 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
-    """Data model for generic user."""
+# class User(db.Model):
+#     """Data model for generic user."""
 
-    __tablename__ = "users"
+#     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     email = db.Column(db.Text, nullable=False, unique=True) 
+#     password = db.Column(db.VARCHAR(20), nullable=False)
+#     display_name = db.Column(db.VARCHAR(50), nullable=False)
+#     age = db.Column(db.Integer, nullable=False)
+#     gender = db.Column(db.Text, nullable=False)
+#     influences = db.Column(db.VARCHAR(250), nullable=False)
+#     location = db.Column(db.VARCHAR(50), nullable=False)
+#     description = db.Column(db.VARCHAR(250), nullable=False)
+
+#     band = db.relationship('Band') ########## 
+#     musician = db.relationship('Musician') #########
+
+#     def __repr__(self):
+#         return f'<User display_name={self.display_name} user_id={self.user_id} email={self.email}>'
+
+class Band(db.Model):
+    """Data model for a band user."""
+
+    __tablename__ = "bands"
+
+    band_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.Text, nullable=False, unique=True) 
     password = db.Column(db.VARCHAR(20), nullable=False)
     display_name = db.Column(db.VARCHAR(50), nullable=False)
@@ -16,26 +37,13 @@ class User(db.Model):
     influences = db.Column(db.VARCHAR(250), nullable=False)
     location = db.Column(db.VARCHAR(50), nullable=False)
     description = db.Column(db.VARCHAR(250), nullable=False)
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
-    band = db.relationship('Band') ########## 
-    musician = db.relationship('Musician') #########
-
-    def __repr__(self):
-        return f'<User display_name={self.display_name} user_id={self.user_id} email={self.email}>'
-
-class Band(db.Model):
-    """Data model for a band user."""
-
-    __tablename__ = "bands"
-
-    band_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-    user = db.relationship('User') ########### 
+    #user = db.relationship('User') ########### 
     skills = db.relationship('Skill', secondary='band_skills')
 
     def __repr__(self):
-        return f'<Band band_id={self.band_id} user_id={self.user_id}>'
+        return f'<Band band_id={self.band_id} display_name={self.display_name}>'
 
 class Musician(db.Model):
     """Data model for a musician user."""
@@ -43,13 +51,21 @@ class Musician(db.Model):
     __tablename__ = "musicians"
 
     musician_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    email = db.Column(db.Text, nullable=False, unique=True) 
+    password = db.Column(db.VARCHAR(20), nullable=False)
+    display_name = db.Column(db.VARCHAR(50), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.Text, nullable=False)
+    influences = db.Column(db.VARCHAR(250), nullable=False)
+    location = db.Column(db.VARCHAR(50), nullable=False)
+    description = db.Column(db.VARCHAR(250), nullable=False)
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
-    user = db.relationship('User') ########## 
+    #user = db.relationship('User') ########## 
     skills = db.relationship('Skill', secondary='musician_skills')
 
     def __repr__(self):
-        return f'<Musician musician_id={self.musician_id} user_id={self.user_id}>'
+        return f'<Musician musician_id={self.musician_id} display_name={self.display_name}>'
 
 class Skill(db.Model):
     """Data model for all selectable skills."""

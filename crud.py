@@ -1,11 +1,45 @@
 from typing import NoReturn
-from model import db, Skill, Genre, User, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
+from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-def create_user(email, password, display_name, age, gender, influences, location, description):
-    """Create and return a new user"""
+# def create_user(email, password, display_name, age, gender, influences, location, description):
+#     """Create and return a new user"""
 
-    user = User(email=email,
+#     user = User(email=email,
+#                 password=password, 
+#                 display_name=display_name,
+#                 age=age,
+#                 gender=gender,
+#                 influences=influences,
+#                 location=location,
+#                 description=description)
+    
+#     db.session.add(user)
+#     db.session.commit()
+
+#     return user
+
+def create_musician(email, password, display_name, age, gender, influences, location, description):
+    """Create and return a new musician"""
+
+    musician = Musician(email=email,
+                        password=password, 
+                        display_name=display_name,
+                        age=age,
+                        gender=gender,
+                        influences=influences,
+                        location=location,
+                        description=description)
+
+    db.session.add(musician)
+    db.session.commit()
+
+    return musician
+
+def create_band(email, password, display_name, age, gender, influences, location, description):
+    """Create and return a new band"""
+
+    band = Band(email=email,
                 password=password, 
                 display_name=display_name,
                 age=age,
@@ -13,26 +47,6 @@ def create_user(email, password, display_name, age, gender, influences, location
                 influences=influences,
                 location=location,
                 description=description)
-    
-    db.session.add(user)
-    db.session.commit()
-
-    return user
-
-def create_musician(user_id):
-    """Create and return a new musician"""
-
-    musician = Musician(user_id=user_id)
-
-    db.session.add(musician)
-    db.session.commit()
-
-    return musician
-
-def create_band(user_id):
-    """Create and return a new band"""
-
-    band = Band(user_id=user_id)
 
     db.session.add(band)
     db.session.commit()
@@ -76,7 +90,7 @@ def display_matches(matches):
     pass
     return matches
 
-def create_a_test_user():
+def create_a_test_musician():
     email = 'ted@test.com'
     password = '1234'
     display_name = 'ted'
@@ -86,32 +100,32 @@ def create_a_test_user():
     location = 'nyc'
     description = 'this is my description'
 
-    test_user = User(email=email, password=password, display_name=display_name,
+    test_musician = Musician(email=email, password=password, display_name=display_name,
         age=age, gender=gender, influences=influences, location=location,
         description=description)
 
-    db.session.add(test_user)
+    db.session.add(test_musician)
     db.session.commit()
-    return test_user
+    return test_musician
 
 
-def create_a_test_user_2():
+def create_a_test_band():
     email = 'bill@test.com'
     password = '5678'
-    display_name = 'bill'
+    display_name = 'bills band'
     age = 22
     gender = 'm'
     influences = 'the rolling stones'
     location = 'boston'
     description = 'my description goes here'
 
-    test_user_2 = User(email=email, password=password, display_name=display_name,
+    test_band = Band(email=email, password=password, display_name=display_name,
         age=age, gender=gender, influences=influences, location=location,
         description=description)
 
-    db.session.add(test_user_2)
+    db.session.add(test_band)
     db.session.commit()
-    return test_user_2
+    return test_band
 
 def seed_test_data():
     os.system('dropdb instajam')
@@ -126,15 +140,16 @@ def seed_test_data():
 
     
     
-    ted = create_a_test_user()
-    bill = create_a_test_user_2()
+    ted = create_a_test_musician()
+    bill = create_a_test_band()
 
-    ted_musician = Musician(user=ted)
+    #Getting errors on 146, it used to say Musician(user=Ted) but now thats invalid
+    ted_musician = Musician(musician=ted)
     ted_musician.skills.append(bass)
     db.session.add(ted_musician)
 
     
-    bills_band = Band(user=bill)
+    bills_band = Band(band=bill)
     bills_band.skills.append(bass)
 
     db.session.add(bills_band)
