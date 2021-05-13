@@ -1,0 +1,42 @@
+[
+    {
+        "email": "ted@test.com",
+        "password": "1234",
+        "display_name": "Ted Shreds",
+        "age": 25,
+        "gender": "m",
+        "influences":"The Beatles",
+        "location": "NYC",
+        "description": "Hey I'm Ted & I play the guitar."
+    },
+    {
+        "email": "caroline@test.com",
+        "password": "abcde!",
+        "display_name": "Caro",
+        "age": 28,
+        "gender": "f",
+        "influences":"The Whitestripes, Stevie Nicks, Phoebe Bridgers",
+        "location": "NYC",
+        "description": "I've been singing as long as I can remember. Experienced live performer."
+    },
+    {
+        "email": "eddy@test.com",
+        "password": "1234",
+        "display_name": "Stix McGee",
+        "age": 32,
+        "gender": "m",
+        "influences":"Phil Collins",
+        "location": "NYC",
+        "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)"
+    }
+    {
+        "email": "luke@test.com",
+        "password": "luv_flutes22",
+        "display_name": "Flute Master",
+        "age": 19,
+        "gender": "m",
+        "influences":"That one Titanic song.",
+        "location": "NYC",
+        "description": "I can't wait to jam out with a band who truly appreciates my fluting talents."
+    }
+]

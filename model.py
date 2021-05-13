@@ -2,27 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-# class User(db.Model):
-#     """Data model for generic user."""
-
-#     __tablename__ = "users"
-
-#     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     email = db.Column(db.Text, nullable=False, unique=True) 
-#     password = db.Column(db.VARCHAR(20), nullable=False)
-#     display_name = db.Column(db.VARCHAR(50), nullable=False)
-#     age = db.Column(db.Integer, nullable=False)
-#     gender = db.Column(db.Text, nullable=False)
-#     influences = db.Column(db.VARCHAR(250), nullable=False)
-#     location = db.Column(db.VARCHAR(50), nullable=False)
-#     description = db.Column(db.VARCHAR(250), nullable=False)
-
-#     band = db.relationship('Band') ########## 
-#     musician = db.relationship('Musician') #########
-
-#     def __repr__(self):
-#         return f'<User display_name={self.display_name} user_id={self.user_id} email={self.email}>'
-
 class Band(db.Model):
     """Data model for a band user."""
 
@@ -37,9 +16,7 @@ class Band(db.Model):
     influences = db.Column(db.VARCHAR(250), nullable=False)
     location = db.Column(db.VARCHAR(50), nullable=False)
     description = db.Column(db.VARCHAR(250), nullable=False)
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-    #user = db.relationship('User') ########### 
+   
     skills = db.relationship('Skill', secondary='band_skills')
     genres = db.relationship('Genre', secondary='band_genres')
 
@@ -60,10 +37,7 @@ class Musician(db.Model):
     influences = db.Column(db.VARCHAR(250), nullable=False)
     location = db.Column(db.VARCHAR(50), nullable=False)
     description = db.Column(db.VARCHAR(250), nullable=False)
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    
-
-    #user = db.relationship('User') ########## 
+  
     skills = db.relationship('Skill', secondary='musician_skills')
     genres = db.relationship('Genre', secondary='musician_genres')
 
@@ -153,9 +127,6 @@ class MusicianSkill(db.Model):
 
     def __repr__(self):
         return f'<MusicianSkill skill_name={self.skill_name} skill_id={self.skill_id} display_name={self.display_name} musician_id={self.musician_id}>'
-
-
-
 
 
 def connect_to_db(app):

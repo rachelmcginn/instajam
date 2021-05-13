@@ -1,0 +1,42 @@
+[
+    {
+        "email": "bill@test.com",
+        "password": "56789",
+        "display_name": "The Billionaires",
+        "age": 25,
+        "gender": "m",
+        "influences":"The Beatles, Tame Impala, Kurt Vile",
+        "location": "NYC",
+        "description": "Hi I'm Bill & I'm looking for a bassist for my new band."
+    },
+    {
+        "email": "candance@test.com",
+        "password": "ri0tgrrl",
+        "display_name": "Venus Razor",
+        "age": 23,
+        "gender": "f",
+        "influences":"Bikini Kill, Hole, L7",
+        "location": "NYC",
+        "description": "We are a riot grrl band looking for a female vocalist."
+    },
+    {
+        "email": "benji@test.com",
+        "password": "benjirules5",
+        "display_name": "The Bongos",
+        "age": 26,
+        "gender": "m",
+        "influences":"The B52s, Vampire Weekend, Talking Heads",
+        "location": "NYC",
+        "description": "Looking for a drummer to join The Bongos."
+    }
+    {
+        "email": "frank@test.com",
+        "password": "ihatejazzsecretly84",
+        "display_name": "Frank and the Other Guys",
+        "age": 37,
+        "gender": "m",
+        "influences":"Miles Davis, Louis Armstrong",
+        "location": "NYC",
+        "description": "We're looking for a saxophonist to join Frank and the Other Guys."
+    }
+]
