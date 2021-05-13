@@ -41,6 +41,7 @@ class Band(db.Model):
 
     #user = db.relationship('User') ########### 
     skills = db.relationship('Skill', secondary='band_skills')
+    genres = db.relationship('Genre', secondary='band_genres')
 
     def __repr__(self):
         return f'<Band band_id={self.band_id} display_name={self.display_name}>'
@@ -61,8 +62,10 @@ class Musician(db.Model):
     description = db.Column(db.VARCHAR(250), nullable=False)
     #user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     
+
     #user = db.relationship('User') ########## 
     skills = db.relationship('Skill', secondary='musician_skills')
+    genres = db.relationship('Genre', secondary='musician_genres')
 
     def __repr__(self):
         return f'<Musician musician_id={self.musician_id} display_name={self.display_name}>'
@@ -100,9 +103,8 @@ class BandGenre(db.Model):
 
     __tablename__ = "band_genres"
 
-    band_genres = db.Column(db.Text, nullable=False, primary_key=True)
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), primary_key=True)
+    band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), primary_key=True)
 
     genres = db.relationship('Genre')
     bands = db.relationship('Band') 
@@ -115,9 +117,8 @@ class MusicianGenre(db.Model):
 
     __tablename__ = "musician_genres"
 
-    musician_genres = db.Column(db.Text, primary_key=True)
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), primary_key=True)
+    musician_id = db.Column(db.Integer, db.ForeignKey('musicians.musician_id'), primary_key=True)
 
     genres = db.relationship('Genre') 
     musician = db.relationship('Musician')

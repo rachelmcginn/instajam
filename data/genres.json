@@ -1,16 +1,2 @@
-[
-    {   
-        "blues": "blues",
-        "country": "country",
-        "electronic": "electronic",
-        "experimental": "experimental",
-        "folk": "folk",
-        "hip hop": "hip hop",
-        "jazz": "jazz",
-        "latin": "latin",
-        "pop": "pop",
-        "rock": "rock",
-        "R&B": "R&B",
-    }
-]
+["blues", "country", "electronic", "experimental", "folk", "hip hop", "jazz", "latin", "pop", "rock", "R&B"]
 
