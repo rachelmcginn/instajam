@@ -38,17 +38,6 @@ def create_band(email, password, display_name, age, gender, influences, location
     return band
 
 
-def create_skill(skill_name):
-    """Create new skill."""
-
-    skill = Skill(skill_name=skill_name)
-
-    db.session.add(Skill(skill_name=skill))
-    db.session.commit()
-
-    return skill
-
-
 def create_a_skill(skill):
     """Add a new skill to the db"""
     skill = Skill(skill_name=skill)
@@ -77,30 +66,72 @@ def add_a_musician_skill(musician, skill):
 
 def add_a_musician_genre(musician, genre):
     """Add a genre to a musician's profile"""
+    genre = Genre(genre_name=genre)
+    musician = Musician(musician_id=musician)
+
     return genre
 
 
 def add_a_band_skill(band, skill):
     """Add a skill to a band's profile"""
+    skill = Skill(skill_name=skill)
+    band = Band(band_id=band)
+
     return skill
 
 
-def add_a_band_genre(band, skill):
-    """Add a skill to a band's profile"""
-    return skill
+def add_a_band_genre(band, genre):
+    """Add a genre to a band's profile"""
+    genre = Genre(genre_name=genre)
+    band = Band(band_id=band)
+
+    return genre
 
 
-def match_user(user_match):
-    """Match a user"""
+def get_musician_by_id(musician_id):
+    """"Returns musician by ID."""
 
-    user_match = ""
+    return Musician.query.get(musician_id)
 
-    return user_match
 
-def display_matches(matches):
-    """Display all matches"""
-    matches = ""
-    return matches    
+def get_band_by_id(band_id):
+    """"Returns band by ID."""
+
+    return Band.query.get(band_id)
+
+
+def get_musician_by_email(email):
+    """Return user if musician exists."""
+
+    return Musician.query.filter(Musician.email == email).first()
+
+
+def get_band_by_email(email):
+    """Return user if band exists."""
+
+    return Band.query.filter(Band.email == email).first()
+
+
+# def match_user(matched_user):
+#     """Match with another user"""
+
+
+#     return matched_user
+
+# def see_matches(matches):
+#     """See all matches"""
+#     
+#     return matches    
+
+#View profile
+
+#See potential matches
+
+#Match with user
+
+#See all matches
+
+
 
 
 if __name__ == '__main__':
