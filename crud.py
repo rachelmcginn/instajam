@@ -37,10 +37,18 @@ def create_band(email, password, display_name, age, gender, influences, location
 
     return band
 
+# def create_account(user_type):
+    # """Create a new account"""
+#   if user_type == "band":
+#       create_band()
+#       return band
+#   else:
+#       create_musician()
+
 
 def create_a_skill(skill):
     """Add a new skill to the db"""
-    skill = Skill(skill_name=skill)
+    skill = Skill(skill_id=skill)
     db.session.add(skill)
     db.session.commit()
 
@@ -58,8 +66,10 @@ def create_a_genre(genre):
 
 def add_a_musician_skill(musician, skill): 
     """Add a skill to a musician's profile"""
-    skill = Skill(skill_name=skill)
+    skill = Skill(skill_id=skill)
     musician = Musician(musician_id=musician)
+
+    db.session.commit()
 
     return skill
 
@@ -69,13 +79,17 @@ def add_a_musician_genre(musician, genre):
     genre = Genre(genre_name=genre)
     musician = Musician(musician_id=musician)
 
+    db.session.commit()
+
     return genre
 
 
 def add_a_band_skill(band, skill):
     """Add a skill to a band's profile"""
-    skill = Skill(skill_name=skill)
+    skill = Skill(skill_id=skill)
     band = Band(band_id=band)
+
+    db.session.commit()
 
     return skill
 
@@ -84,6 +98,8 @@ def add_a_band_genre(band, genre):
     """Add a genre to a band's profile"""
     genre = Genre(genre_name=genre)
     band = Band(band_id=band)
+
+    db.session.commit()
 
     return genre
 
