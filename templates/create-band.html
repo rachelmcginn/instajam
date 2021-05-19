@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Instajam{% endblock %}
+
+{% block body %}
+  <h1>Create A Band</h1>
+  <form action="/users" method="POST"> <!--Where should info post -->
+    <p>
+      Email <input type="text" name="email">
+    </p>
+
+    <p>
+      Password <input type="password" name="password">
+    </p>
+    <!--Add other necessary parameters -->
+    <p>
+      <input type="submit">
+    </p>
+  </form>
+
+  <h2>Navigation</h2>
+{% endblock %}
