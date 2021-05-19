@@ -37,15 +37,6 @@ def create_band(email, password, display_name, age, gender, influences, location
 
     return band
 
-# def create_account(user_type):
-    # """Create a new account"""
-#   if user_type == "band":
-#       create_band()
-#       return band
-#   else:
-#       create_musician()
-
-
 def create_a_skill(skill):
     """Add a new skill to the db"""
     skill = Skill(skill_id=skill)
