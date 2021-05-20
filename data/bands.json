@@ -6,7 +6,7 @@
         "age": 25,
         "gender": "m",
         "influences":"The Beatles, Tame Impala, Kurt Vile",
-        "location": "NYC",
+        "location": "New York City",
         "description": "Hi I'm Bill & I'm looking for a bassist for my new band."
     },
     {
@@ -16,7 +16,7 @@
         "age": 23,
         "gender": "f",
         "influences":"Bikini Kill, Hole, L7",
-        "location": "NYC",
+        "location": "New York City",
         "description": "We are a riot grrl band looking for a female vocalist."
     },
     {
@@ -26,7 +26,7 @@
         "age": 26,
         "gender": "m",
         "influences":"The B52s, Vampire Weekend, Talking Heads",
-        "location": "NYC",
+        "location": "New York City",
         "description": "Looking for a drummer to join The Bongos."
     },
     {
@@ -36,7 +36,7 @@
         "age": 37,
         "gender": "m",
         "influences":"Miles Davis, Louis Armstrong",
-        "location": "NYC",
+        "location": "New York City",
         "description": "We're looking for a saxophonist to join Frank and the Other Guys."
     }
 ]

@@ -6,7 +6,7 @@
         "age": 25,
         "gender": "m",
         "influences":"The Beatles",
-        "location": "NYC",
+        "location": "New York City",
         "description": "Hey I'm Ted & I play the guitar."
     },
     {
@@ -16,7 +16,7 @@
         "age": 28,
         "gender": "f",
         "influences":"The Whitestripes, Stevie Nicks, Phoebe Bridgers",
-        "location": "NYC",
+        "location": "New York City",
         "description": "I've been singing as long as I can remember. Experienced live performer."
     },
     {
@@ -26,7 +26,7 @@
         "age": 32,
         "gender": "m",
         "influences":"Phil Collins",
-        "location": "NYC",
+        "location": "New York City",
         "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)"
     },
     {
@@ -36,7 +36,7 @@
         "age": 19,
         "gender": "m",
         "influences":"That one Titanic song.",
-        "location": "NYC",
+        "location": "New York City",
         "description": "I can't wait to jam out with a band who truly appreciates my fluting talents."
     }
 ]

@@ -3,15 +3,45 @@
 
 {% block body %}
   <h1>Create A Band</h1>
-  <form action="/users" method="POST"> <!--Where should info post -->
+  <form action="/create-band" method="POST"> 
     <p>
-      Email <input type="text" name="email">
+      Email: <input type="text" name="email">
     </p>
 
     <p>
-      Password <input type="password" name="password">
+      Password: <input type="password" name="password">
     </p>
-    <!--Add other necessary parameters -->
+
+    <p>
+      Display Name: <input type="text" name="display_name">
+    </p>
+
+    <p>
+      Age: <input type="text" name="display_name">
+    </p>
+
+    <p>Gender:</p> 
+    <input type="radio" id="male" name="gender">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender">
+    <label for="female">Female</label>
+    <input type="radio" id="nonbinary" name="gender">
+    <label for="nonbinary">Nonbinary</label>
+    <input type="radio" id="other" name="gender">
+    <label for="other">Other</label>
+	
+    <p>Location: </p>
+    <input type="radio" id="New York City" name="location">
+    <label for="New York City">New York City</label>
+    <input type="radio" id="Los Angeles" name="location">
+    <label for="Los Angeles">Los Angeles</label>
+
+    <p>Influences:</p> 
+    <input type="text" name="influences">
+
+    <p>Description:</p> 
+    <input type="text" name="description">
+    
     <p>
       <input type="submit">
     </p>
@@ -19,3 +49,7 @@
 
   <h2>Navigation</h2>
 {% endblock %}
+
+
+
+email, password, display_name, age, gender, influences, location, description
