@@ -20,7 +20,7 @@
       Age: <input type="text" name="display_name">
     </p>
 
-    <p>Gender:</p> 
+    <p>Gender:</p> <!---Check all that apply?-->
     <input type="radio" id="male" name="gender">
     <label for="male">Male</label>
     <input type="radio" id="female" name="gender">
@@ -41,15 +41,41 @@
 
     <p>Description:</p> 
     <input type="text" name="description">
+
+    <p>Select skill(s) you're in search of:</p>
+    <input type="checkbox" id="banjo" name="banjo" value="Banjo">
+    <label for="banjo">Banjo</label><br>
+    <input type="checkbox" id="bass" name="bass" value="bass">
+    <label for="bass">Bass</label><br>
+    <input type="checkbox" id="cello" name="cello" value="cello">
+    <label for="cello">Cello</label><br>
+    <input type="checkbox" id="drums" name="drums" value="drums">
+    <label for="drums">Drums</label><br>
+    <input type="checkbox" id="flute" name="flute" value="flute">
+    <label for="flute">Flute</label><br>
+    <input type="checkbox" id="guitar" name="guitar" value="guitar">
+    <label for="guitar">Guitar</label><br>
+    <input type="checkbox" id="keyboard" name="keyboard" value="keyboard">
+    <label for="keyboard">Keyboard</label><br>
+    <input type="checkbox" id="piano" name="piano" value="piano">
+    <label for="piano">Piano</label><br>
+    <input type="checkbox" id="trumpet" name="trumpet" value="trumpet">
+    <label for="trumpet">Trumpet</label><br>
+    <input type="checkbox" id="violin" name="violin" value="violin">
+    <label for="violin">Violin</label><br>
+    <input type="checkbox" id="vocals" name="vocals" value="vocals">
+    <label for="vocals">Vocals</label><br>
+    <input type="checkbox" id="saxophone" name="saxophone" value="saxophone">
+    <label for="saxophone">Saxophone</label><br>
+    <input type="checkbox" id="synth" name="synth" value="synth">
+    <label for="synth">Synth</label><br>
     
-    <p>
-      <input type="submit">
-    </p>
+    
+    <p><input type="submit"></p>
   </form>
 
-  <h2>Navigation</h2>
-{% endblock %}
+    {% endblock %}
 
 
 
-email, password, display_name, age, gender, influences, location, description
+    email, password, display_name, age, gender, influences, location, description
