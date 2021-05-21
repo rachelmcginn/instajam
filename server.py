@@ -15,7 +15,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def homepage():
     """View landing-page"""
-    return render_template('landing-page.html')
+    return render_template('home.html')
 
 @app.route('/create-band', methods=['GET'])
 def get_new_band_info(): 
@@ -29,19 +29,19 @@ def get_new_band_info():
 @app.route('/create-band', methods=['POST'])
 def create_new_band(): #####param?
     """Creates a new band user"""
-############
+    ############
     # band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
     #Get above values from form data 
     
     return render_template('dashboard.html')
 
-# @app.route('/create-musician', methods=['GET'])
-# def create_musician_user(): 
-#     """Creates a new musician user"""
-# ###########
-#     new_musician = crud.create_musician()
+@app.route('/create-musician', methods=['GET'])
+def create_musician_user(): 
+    """Creates a new musician user"""
+    ###########
+    #new_musician = crud.create_musician()
     
-#     return render_template('create-musician.html')
+    return render_template('create-musician.html')
 
 # @app.route('/create-musician', methods=['POST'])
 # def create_musician_user(): 
