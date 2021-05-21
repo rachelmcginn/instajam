@@ -1,5 +1,5 @@
-from Instajam.model import Musician
-from Instajam.crud import create_band, create_musician
+from model import Musician
+from crud import create_band, create_musician
 from flask import (Flask, render_template, request, flash, session, redirect)
 
 import crud
@@ -18,7 +18,7 @@ def homepage():
     return render_template('landing-page.html')
 
 @app.route('/create-band', methods=['GET'])
-def create_band_user(): 
+def get_new_band_info(): 
     """Creates a new band user"""
 ############
     #give form
@@ -27,10 +27,10 @@ def create_band_user():
     return render_template('create-band.html')
 
 @app.route('/create-band', methods=['POST'])
-def create_band_user(): #####param?
+def create_new_band(): #####param?
     """Creates a new band user"""
 ############
-    band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
+    # band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
     #Get above values from form data 
     
     return render_template('dashboard.html')
