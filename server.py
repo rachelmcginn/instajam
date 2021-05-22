@@ -14,43 +14,64 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
-    """View landing-page"""
+    """View homepage"""
     return render_template('home.html')
 
-@app.route('/create-band', methods=['GET'])
-def get_new_band_info(): 
+@app.route('/create-band')
+def create_band(): 
     """Creates a new band user"""
-############
-    #give form
     
     
     return render_template('create-band.html')
 
-@app.route('/create-band', methods=['POST'])
-def create_new_band(): #####param?
-    """Creates a new band user"""
-    ############
-    # band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
+@app.route('/handle-create-band', methods=['POST'])
+def create_new_band(): 
+    """Handles new band user"""
+    
+    email = request.form['email']
+    password = request.form['password']
+    display_name = request.form['display_name']
+    age = request.form['age']
+    gender = request.form['gender']
+    influences = request.form['influences']
+    location = request.form['location']
+    description = request.form['description']
+
+    user = crud.get_band_by_email(email)
+    if user:
+        flash("Band already exists, please log in.")
+    else:
+        crud.create_band(email, password, display_name, age, gender, influences, location, description)
+        flash("Band successfully created!")
+        return render_template("login.html")
+    
+    #band = request.form.get('')
+
+    #commit to db
+    
+    #return render_template('dashboard.html')
+
+# @app.route('/create-musician', methods=['GET'])
+# def create_musician_user(): 
+#     """Creates a new musician user"""
+#     ###########
+#     #new_musician = crud.create_musician()
+    
+#     return render_template('create-musician.html')
+
+@app.route('/create-musician', methods=['POST'])
+def create_musician_user(): 
+    """Creates a new musician user"""
+############
+    # musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
     #Get above values from form data 
     
     return render_template('dashboard.html')
 
-@app.route('/create-musician', methods=['GET'])
-def create_musician_user(): 
-    """Creates a new musician user"""
-    ###########
-    #new_musician = crud.create_musician()
-    
-    return render_template('create-musician.html')
-
-# @app.route('/create-musician', methods=['POST'])
-# def create_musician_user(): 
-#     """Creates a new musician user"""
-# ############
-#     musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-#     #Get above values from form data 
-    
-#     return render_template('dashboard.html')
+@app.route('/sign-up')
+def sign_up():
+    """Displays sign up options."""
+    return render_template('sign-up.html')
 
 @app.route('/login')
 def login():

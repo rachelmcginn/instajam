@@ -3,7 +3,7 @@
 
 {% block body %}
   <h1>Band Details</h1>
-  <form action="/create-band" method="POST"> 
+  <form action="/handle-create-band" method="POST"> 
     <p>
       Email: <input type="text" name="email">
     </p>
@@ -12,15 +12,17 @@
       Password: <input type="password" name="password">
     </p>
 
+    <!--Password repeat form-->
+
     <p>
       Display Name: <input type="text" name="display_name">
     </p>
 
     <p>
-      Age: <input type="text" name="display_name">
+      Age: <input type="text" name="age">
     </p>
 
-    <p>Gender:</p> <!---Check all that apply?-->
+    <p>Gender:</p> 
     <input type="radio" id="male" name="gender">
     <label for="male">Male</label>
     <input type="radio" id="female" name="gender">
