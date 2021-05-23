@@ -19,13 +19,13 @@ def homepage():
 
 @app.route('/create-band')
 def create_band(): 
-    """Creates a new band user"""
+    """Displays form to create a new band user"""
     
     
     return render_template('create-band.html')
 
 @app.route('/handle-create-band', methods=['POST'])
-def create_new_band(): 
+def handle_create_band(): 
     """Handles new band user"""
     
     email = request.form['email']
@@ -42,31 +42,36 @@ def create_new_band():
         flash("Band already exists, please log in.")
     else:
         crud.create_band(email, password, display_name, age, gender, influences, location, description)
-        flash("Band successfully created!")
+        flash("Band profile successfully created!")
         return render_template("login.html")
     
-    #band = request.form.get('')
-
-    #commit to db
+@app.route('/create-musician')
+def create_musician(): 
+    """Displays form to create a new musician user"""
     
-    #return render_template('dashboard.html')
-
-# @app.route('/create-musician', methods=['GET'])
-# def create_musician_user(): 
-#     """Creates a new musician user"""
-#     ###########
-#     #new_musician = crud.create_musician()
     
-#     return render_template('create-musician.html')
+    return render_template('create-musician.html')
 
-@app.route('/create-musician', methods=['POST'])
-def create_musician_user(): 
-    """Creates a new musician user"""
-############
-    # musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-    #Get above values from form data 
+@app.route('/handle-create-musician', methods=['POST'])
+def handle_create_musician(): 
+    """Handles new musician user"""
     
-    return render_template('dashboard.html')
+    email = request.form['email']
+    password = request.form['password']
+    display_name = request.form['display_name']
+    age = request.form['age']
+    gender = request.form['gender']
+    influences = request.form['influences']
+    location = request.form['location']
+    description = request.form['description']
+
+    user = crud.get_musician_by_email(email)
+    if user:
+        flash("Musician already exists, please log in.")
+    else:
+        crud.create_musician(email, password, display_name, age, gender, influences, location, description)
+        flash("Musician profile successfully created!")
+        return render_template("login.html")
 
 @app.route('/sign-up')
 def sign_up():
