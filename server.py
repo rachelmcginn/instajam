@@ -73,24 +73,61 @@ def handle_create_musician():
         flash("Musician profile successfully created!")
         return render_template("login.html")
 
+
 @app.route('/sign-up')
 def sign_up():
     """Displays sign up options."""
     return render_template('sign-up.html')
 
-@app.route('/login')
-def login():
-    """Logs in existing user"""
-    return render_template('login.html')
+
+@app.route('/band-login', methods = ['POST'])
+def band_login():
+    """Logs in band"""
+
+    email = request.form['email']
+    incoming_password = request.form['password']
+    user = crud.get_band_by_email(email)
+    if user == None:
+        flash('Account does not exist. Please try again.')
+        return redirect ('/')
+    # else:
+    #     if (incoming_password == band.password):
+    #         return redirect ('/dashboard.html')  
+    #     else:
+    #         flash('Incorrect Password. Please try again.')
+    #         return redirect ('/')  
+
+
+# @app.route('/musician-login', methods = ['POST'])
+# def musician_login():
+#     """Logs in musician"""
+
+#     email = request.form['email']
+#     incoming_password = request.form['password']
+#     user = crud.get_musician_by_email(email)
+#     if user == None:
+#         flash('Account does not exist. Please try again.')
+#         return redirect ('/')
+#     # else:
+#     #     if (incoming_password == musician.password):
+#     #         return redirect ('/dashboard.html')  
+#     #     else:
+#     #         flash('Incorrect Password. Please try again.')
+#     #         return redirect ('/')  
 
 @app.route('/dashboard')
 def dashboard():
     """Displays dashboard to logged in user"""
     return render_template('dashboard.html')
 
-# @app.route('/user-profile')
-# def user_profile():
-#     """Displays the profile of currently logged in user"""
+# @app.route('/user-profile/<band_id>')
+# def band_profile():
+#     """Displays the profile of currently logged in band user"""
+#     return render_template('user-profile.html')
+
+# @app.route('/user-profile/<musician_id>')
+# def musician_profile():
+#     """Displays the profile of currently logged in musician user"""
 #     return render_template('user-profile.html')
 
 @app.route('/match-queue')
