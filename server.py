@@ -80,22 +80,24 @@ def sign_up():
     return render_template('sign-up.html')
 
 
-@app.route('/band-login', methods = ['POST'])
-def band_login():
+@app.route('/handle-band-login', methods = ['POST'])
+def handle_band_login():
     """Logs in band"""
 
     email = request.form['email']
-    incoming_password = request.form['password']
-    user = crud.get_band_by_email(email)
-    if user == None:
+    password = request.form['password']
+    band = crud.get_band_by_email(email)
+    if band == None:
         flash('Account does not exist. Please try again.')
         return redirect ('/')
-    # else:
-    #     if (incoming_password == band.password):
-    #         return redirect ('/dashboard.html')  
-    #     else:
-    #         flash('Incorrect Password. Please try again.')
-    #         return redirect ('/')  
+    else:
+        if (password == band.password):
+            #session['current_user'] = band             ### Question about ['current_user']
+            flash(f'Logged in as {email}')
+            return redirect ('/dashboard.html')  
+        else:
+            flash('Incorrect Password. Please try again.')
+            return redirect ('/')  
 
 
 # @app.route('/musician-login', methods = ['POST'])
