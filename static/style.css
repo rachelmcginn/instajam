@@ -1,8 +1,8 @@
-@import url('static/Ramabhadra/Ramabhadra-Regular.ttf');
+@import url('/static/Ramabhadra/Ramabhadra-Regular.ttf');
 
-/* title {
+h1 {
     font-family: Ramabhadra;
-} */
+}
 
 body {
     font-family: Helvetica, sans-serif;

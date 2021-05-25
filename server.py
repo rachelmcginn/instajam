@@ -73,6 +73,15 @@ def handle_create_musician():
         flash("Musician profile successfully created!")
         return render_template("login.html")
 
+# @app.route('/handle-login')
+# def handle_login():
+#     """Handles log in"""
+#     return redirect('dashboard.html')
+
+@app.route('/login')
+def login():
+    """Log in"""
+    return render_template('login.html')
 
 @app.route('/sign-up')
 def sign_up():
@@ -80,25 +89,41 @@ def sign_up():
     return render_template('sign-up.html')
 
 
-@app.route('/handle-band-login', methods = ['POST'])
-def handle_band_login():
-    """Logs in band"""
+@app.route('/handle-login', methods = ['POST'])
+def handle_login():
+    """Handles log in"""
 
     email = request.form['email']
     password = request.form['password']
-    band = crud.get_band_by_email(email)
-    if band == None:
+    user = crud.get_band_by_email(email)
+    if user == None:
         flash('Account does not exist. Please try again.')
         return redirect ('/')
     else:
-        if (password == band.password):
-            #session['current_user'] = band             ### Question about ['current_user']
+        if (password == user.password):
+            session['user_id'] = user.band_id
+            session['user_type'] = 'band'
+            
             flash(f'Logged in as {email}')
-            return redirect ('/dashboard.html')  
+            return redirect ('/dashboard')  
         else:
             flash('Incorrect Password. Please try again.')
             return redirect ('/')  
 
+@app.route('/set-session')
+def set_session():
+
+    session['user_id'] = 1
+    session['user_type'] = 'band'
+
+    return redirect ('display-session.html')
+
+@app.route('/display-session')
+def display_session():
+
+    print(session)
+
+    return render_template('display-session.html')
 
 # @app.route('/musician-login', methods = ['POST'])
 # def musician_login():
@@ -120,7 +145,9 @@ def handle_band_login():
 @app.route('/dashboard')
 def dashboard():
     """Displays dashboard to logged in user"""
-    return render_template('dashboard.html')
+    display_name = "rachel"
+    return render_template('dashboard.html',
+                            display_name=display_name)
 
 # @app.route('/user-profile/<band_id>')
 # def band_profile():

@@ -39,7 +39,7 @@ def create_band(email, password, display_name, age, gender, influences, location
 
 def create_a_skill(skill):
     """Add a new skill to the db"""
-    skill = Skill(skill_id=skill)
+    skill = Skill(skill_name=skill)
     db.session.add(skill)
     db.session.commit()
 
