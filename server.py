@@ -72,11 +72,7 @@ def handle_create_musician():
         crud.create_musician(email, password, display_name, age, gender, influences, location, description)
         flash("Musician profile successfully created!")
         return render_template("login.html")
-
-# @app.route('/handle-login')
-# def handle_login():
-#     """Handles log in"""
-#     return redirect('dashboard.html')
+        
 
 @app.route('/login')
 def login():
