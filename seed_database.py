@@ -45,7 +45,7 @@ with open('./data/musicians.json') as f:
     db.session.add(musician)
     db.session.commit()
 
-with open('./data/musicians.json') as f:
+with open('./data/bands.json') as f:
     band_data = json.loads(f.read())
 
     for dict in band_data:
