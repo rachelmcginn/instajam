@@ -112,7 +112,7 @@ class BandSkill(db.Model):
     bands = db.relationship('Band') 
 
     def __repr__(self):
-        return f'<BandSkill skill_name={self.skill_name} skill_id={self.skill_id} diplay_name={self.display_name} band_id={self.band_id}>'
+        return f'<BandSkill skill_id={self.skill_id} band_id={self.band_id}>'
 
 class MusicianSkill(db.Model):
     """Intermediate table connecting musicians and skills."""

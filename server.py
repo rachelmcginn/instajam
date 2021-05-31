@@ -17,9 +17,11 @@ def set_session():
 
     user_type = session.get('user_type')
     user_id = session.get('user_id')
+    display_name = session.get('display_name')
     
     session['user_id'] = user_id
     session['user_type'] = user_type
+    session['display_name'] = display_name
 
     return redirect ('display-session.html')
 
@@ -46,7 +48,7 @@ def create_band():
     
     return render_template('create-band.html')
 
-
+### add skill/add genre not showing up in db #####
 @app.route('/handle-create-band', methods=['POST'])
 def handle_create_band(): 
     """Handles new band user"""
@@ -59,16 +61,28 @@ def handle_create_band():
     influences = request.form['influences']
     location = request.form['location']
     description = request.form['description']
-
+    print(description)
+    skill = request.form['skill']
+    print(skill)
+    genre = request.form['genre']
+    print(genre)
+    
     user = crud.get_band_by_email(email)
+    print(user)
     if user:
         flash("Band already exists, please log in.")
     else:
-        crud.create_band(email, password, display_name, age, gender, influences, location, description)
+        band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
+        print(band)
+
+        saved_skills = crud.add_a_band_skill(band, skill)
+        print(saved_skills)
+        saved_genres = crud.add_a_band_genre(band, genre)
+        print(saved_genres)
         flash("Band profile successfully created!")
         return render_template("login.html")
 
-
+### add skill/add genre not showing up in db #####
 @app.route('/create-musician')
 def create_musician(): 
     """Displays form to create a new musician user"""
@@ -90,11 +104,17 @@ def handle_create_musician():
     location = request.form['location']
     description = request.form['description']
 
+    skill = request.form['skill']
+    genre = request.form['genre']
+
     user = crud.get_musician_by_email(email)
+
     if user:
         flash("Musician already exists, please log in.")
     else:
         crud.create_musician(email, password, display_name, age, gender, influences, location, description)
+        crud.add_a_musician_skill(user, skill)
+        crud.add_a_musician_genre(user, genre)
         flash("Musician profile successfully created!")
         return render_template("login.html")
 
@@ -127,6 +147,7 @@ def handle_login_band():
         if (password == user.password):
             session['user_type'] = 'band' 
             session['user_id'] = user.band_id 
+            session['display_name'] = user.display_name 
             
             flash(f'Logged in as {email}')
             return redirect ('/dashboard')  
@@ -151,6 +172,7 @@ def handle_login_musician():
         if (password == user.password):
             session['user_type'] = 'musician' 
             session['user_id'] = user.musician_id 
+            session['display_name'] = user.display_name 
             
             flash(f'Logged in as {email}')
             return redirect ('/dashboard')  
@@ -163,22 +185,31 @@ def handle_login_musician():
 def dashboard():
     """Displays dashboard to logged in user"""
     #Want to add "hello [displayname] via jinja"
-
-    user_type = session.get('user_type')
-    #dn = "hello" #can't pass to jinja 
-
+##################################################
+    user_type = session.get('user_type') 
+    user_id = session.get('user_id')
+    print(user_type)
+    
+###################################################
     if user_type == None:
         return  redirect ('/login')
     if user_type == 'band':
-        return render_template('dashboard.html') 
+        print(user_id)
+        band = crud.get_band_by_id(user_id)
+        display_name = band.display_name
+        print(display_name)
+        return render_template('dashboard.html',
+                                display_name=display_name) 
     if user_type == 'musician':
-        return render_template('dashboard.html')
+        display_name = crud.get_musician_by_email('display_name')
+        return render_template('dashboard.html',
+                                display_name=display_name)
 
 
 @app.route('/match-queue')
 def match_queue():
     """Displays potential matches"""
-
+    
     user_type = session.get('user_type')
     user_id = session.get('user_id')
 
@@ -188,7 +219,7 @@ def match_queue():
         #musicians = []
         #for musician musicians 
             #if skill in user_id.band_skills
-            #show musician profile #### So i need a crud display info function?
+            #render musician profile 
         return render_template('match-queue.html')
     if user_type == 'musician':
         return render_template('match-queue.html')

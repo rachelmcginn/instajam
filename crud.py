@@ -77,12 +77,22 @@ def add_a_musician_genre(musician, genre):
 
 def add_a_band_skill(band, skill):
     """Add a skill to a band's profile"""
-    skill = Skill(skill_id=skill)
-    band = Band(band_id=band)
+    print("I'm here!")
+    print(band)
+    print(skill)
+    found_skill = Skill.query.filter(Skill.skill_name==skill).first()
+    #db.session.query(Skill).filter(Skill.skill_name==skill)
+    print(found_skill)
+    
+    #Musician.query.filter(Musician.email == email).first()
+    band_skills = BandSkill(skill_id=found_skill.skill_id,
+                            band_id=band.band_id)
+    print(band_skills)
 
+    db.session.add(band_skills)
     db.session.commit()
 
-    return skill
+    return band_skills
 
 
 def add_a_band_genre(band, genre):
