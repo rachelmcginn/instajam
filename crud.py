@@ -49,6 +49,7 @@ def create_a_skill(skill):
 def create_a_genre(genre):
     """Add a genre to the db"""
     genre = Genre(genre_name=genre)
+    
     db.session.add(genre)
     db.session.commit()
     
@@ -77,17 +78,11 @@ def add_a_musician_genre(musician, genre):
 
 def add_a_band_skill(band, skill):
     """Add a skill to a band's profile"""
-    print("I'm here!")
-    print(band)
-    print(skill)
+    #Need ability to add multiple skills
+
     found_skill = Skill.query.filter(Skill.skill_name==skill).first()
-    #db.session.query(Skill).filter(Skill.skill_name==skill)
-    print(found_skill)
-    
-    #Musician.query.filter(Musician.email == email).first()
     band_skills = BandSkill(skill_id=found_skill.skill_id,
                             band_id=band.band_id)
-    print(band_skills)
 
     db.session.add(band_skills)
     db.session.commit()
@@ -97,12 +92,16 @@ def add_a_band_skill(band, skill):
 
 def add_a_band_genre(band, genre):
     """Add a genre to a band's profile"""
-    genre = Genre(genre_name=genre)
-    band = Band(band_id=band)
+    #Need ability to add multiple genres
 
+    found_genre = Genre.query.filter(Genre.genre_name==genre).first()
+    band_genres = BandGenre(genre_id=found_genre.genre_id,
+                            band_id=band.band_id)
+
+    db.session.add(band_genres)
     db.session.commit()
 
-    return genre
+    return band_genres
 
 
 def get_musician_by_id(musician_id):
