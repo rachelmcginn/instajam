@@ -49,7 +49,7 @@ def create_a_skill(skill):
 def create_a_genre(genre):
     """Add a genre to the db"""
     genre = Genre(genre_name=genre)
-    
+
     db.session.add(genre)
     db.session.commit()
     
@@ -58,22 +58,28 @@ def create_a_genre(genre):
 
 def add_a_musician_skill(musician, skill): 
     """Add a skill to a musician's profile"""
-    skill = Skill(skill_id=skill)
-    musician = Musician(musician_id=musician)
+    found_skill = Skill.query.filter(Skill.skill_name==skill).first()
+    musician_skills = MusicianSkill(skill_id=found_skill.skill_id,
+                            musician_id=musician.musician_id)
 
+    db.session.add(musician_skills)
     db.session.commit()
 
-    return skill
+    return musician_skills
 
 
 def add_a_musician_genre(musician, genre):
     """Add a genre to a musician's profile"""
-    genre = Genre(genre_name=genre)
-    musician = Musician(musician_id=musician)
+    #Need ability to add multiple genres
 
+    found_genre = Genre.query.filter(Genre.genre_name==genre).first()
+    musician_genres = MusicianGenre(genre_id=found_genre.genre_id,
+                            musician_id=musician.musician_id)
+
+    db.session.add(musician_genres)
     db.session.commit()
 
-    return genre
+    return musician_genres
 
 
 def add_a_band_skill(band, skill):

@@ -48,7 +48,7 @@ def create_band():
     
     return render_template('create-band.html')
 
-### add skill/add genre not showing up in db #####
+
 @app.route('/handle-create-band', methods=['POST'])
 def handle_create_band(): 
     """Handles new band user"""
@@ -61,24 +61,19 @@ def handle_create_band():
     influences = request.form['influences']
     location = request.form['location']
     description = request.form['description']
-    print(description)
+    
     skill = request.form['skill']
-    print(skill)
     genre = request.form['genre']
-    print(genre)
     
     user = crud.get_band_by_email(email)
-    print(user)
+    
     if user:
         flash("Band already exists, please log in.")
     else:
         band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
-        print(band)
-
         saved_skills = crud.add_a_band_skill(band, skill)
-        print(saved_skills)
         saved_genres = crud.add_a_band_genre(band, genre)
-        print(saved_genres)
+
         flash("Band profile successfully created!")
         return render_template("login.html")
 
@@ -112,9 +107,10 @@ def handle_create_musician():
     if user:
         flash("Musician already exists, please log in.")
     else:
-        crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-        crud.add_a_musician_skill(user, skill)
-        crud.add_a_musician_genre(user, genre)
+        musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
+        saved_skills = crud.add_a_musician_skill(musician, skill)
+        saved_genres = crud.add_a_musician_genre(musician, genre)
+        
         flash("Musician profile successfully created!")
         return render_template("login.html")
 
@@ -184,20 +180,16 @@ def handle_login_musician():
 @app.route('/dashboard')
 def dashboard():
     """Displays dashboard to logged in user"""
-    #Want to add "hello [displayname] via jinja"
-##################################################
+    #Add in all the info you want passed through jinja
+
     user_type = session.get('user_type') 
     user_id = session.get('user_id')
-    print(user_type)
     
-###################################################
     if user_type == None:
         return  redirect ('/login')
     if user_type == 'band':
-        print(user_id)
         band = crud.get_band_by_id(user_id)
         display_name = band.display_name
-        print(display_name)
         return render_template('dashboard.html',
                                 display_name=display_name) 
     if user_type == 'musician':
