@@ -180,22 +180,47 @@ def handle_login_musician():
 @app.route('/dashboard')
 def dashboard():
     """Displays dashboard to logged in user"""
-    #Add in all the info you want passed through jinja
 
     user_type = session.get('user_type') 
     user_id = session.get('user_id')
     
     if user_type == None:
         return  redirect ('/login')
+
     if user_type == 'band':
         band = crud.get_band_by_id(user_id)
+
         display_name = band.display_name
+        age = band.age
+        gender = band.gender #may need to tweak this for bands (plural gender)
+        influences = band.influences
+        location = band.location
+        description = band.description
         return render_template('dashboard.html',
-                                display_name=display_name) 
+                                display_name=display_name,
+                                age=age,
+                                gender=gender,
+                                influences=influences,
+                                location=location,
+                                description=description) 
+
     if user_type == 'musician':
-        display_name = crud.get_musician_by_email('display_name')
+        musician = crud.get_musician_by_id(user_id)
+
+        display_name = musician.display_name
+        age = musician.age
+        gender = musician.gender 
+        influences = musician.influences
+        location = musician.location
+        description = musician.description
+
         return render_template('dashboard.html',
-                                display_name=display_name)
+                                display_name=display_name,
+                                age=age,
+                                gender=gender,
+                                influences=influences,
+                                location=location,
+                                description=description)
 
 
 @app.route('/match-queue')

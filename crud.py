@@ -111,13 +111,13 @@ def add_a_band_genre(band, genre):
 
 
 def get_musician_by_id(musician_id):
-    """"Returns musician by ID."""
+    """"Returns musician's ID."""
 
     return Musician.query.get(musician_id)
 
 
 def get_band_by_id(band_id):
-    """"Returns band by ID."""
+    """"Returns a band's ID."""
 
     return Band.query.get(band_id)
 
