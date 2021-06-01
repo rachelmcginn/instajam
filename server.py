@@ -192,10 +192,11 @@ def dashboard():
 
         display_name = band.display_name
         age = band.age
-        gender = band.gender #may need to tweak this for bands (plural gender)
+        gender = band.gender 
         influences = band.influences
         location = band.location
         description = band.description
+        #seeking = band_skills .. user_id ? 
         return render_template('dashboard.html',
                                 display_name=display_name,
                                 age=age,

@@ -1,40 +1,40 @@
 [
     {
-        "email": "bill@test.com",
-        "password": "56789",
+        "email": "bill@example.com",
+        "password": "1234",
         "display_name": "The Billionaires",
         "age": 25,
-        "gender": "m",
+        "gender": "Male",
         "influences":"The Beatles, Tame Impala, Kurt Vile",
         "location": "New York City",
-        "description": "Hi I'm Bill & I'm looking for a bassist for my new band."
+        "description": "The Billionaires are an eclectic mix of classic & psychedelic rock. "
     },
     {
-        "email": "candance@test.com",
-        "password": "ri0tgrrl",
+        "email": "candance@example.com",
+        "password": "1234",
         "display_name": "Venus Razor",
         "age": 23,
-        "gender": "f",
+        "gender": "Female",
         "influences":"Bikini Kill, Hole, L7",
         "location": "New York City",
         "description": "We are a riot grrl band looking for a female vocalist."
     },
     {
-        "email": "benji@test.com",
-        "password": "benjirules5",
+        "email": "benji@example.com",
+        "password": "1234",
         "display_name": "The Bongos",
         "age": 26,
-        "gender": "m",
+        "gender": "Male",
         "influences":"The B52s, Vampire Weekend, Talking Heads",
         "location": "New York City",
-        "description": "Looking for a drummer to join The Bongos."
+        "description": "Looking for a drummer ASAP so our name is less embarassing."
     },
     {
-        "email": "frank@test.com",
-        "password": "ihatejazzsecretly84",
+        "email": "frank@example.com",
+        "password": "1234",
         "display_name": "Frank and the Other Guys",
         "age": 37,
-        "gender": "m",
+        "gender": "Male",
         "influences":"Miles Davis, Louis Armstrong",
         "location": "New York City",
         "description": "We're looking for a saxophonist to join Frank and the Other Guys."
