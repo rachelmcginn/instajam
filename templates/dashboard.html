@@ -8,11 +8,17 @@
   <div>
     <h3>{{ display_name }}</h3><br>
     Location: {{ location }} <br>
-    Seeking: Sought after skills go here <br>
+      {% if user_type == 'band' %}
+      Seeking: {{ display_name }} after skills go here <br>
+      {% else %}
+      Talents: Skill list goes here 
+      {% endif %}
     About: {{ description }} <br>
-    Genre: Genres go here <br>
+    Genre: Genre list goes here <br>
     Influences: {{ influences }} <br>
-    Members: Members go here <br>
+      {% if user_type == 'band' %}
+      Members: {{ display_name }} members go here <br>
+      {% endif %}
     <br>
   </div>
   

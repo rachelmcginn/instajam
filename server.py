@@ -77,7 +77,7 @@ def handle_create_band():
         flash("Band profile successfully created!")
         return render_template("login.html")
 
-### add skill/add genre not showing up in db #####
+
 @app.route('/create-musician')
 def create_musician(): 
     """Displays form to create a new musician user"""
@@ -198,6 +198,7 @@ def dashboard():
         description = band.description
         #seeking = band_skills .. user_id ? 
         return render_template('dashboard.html',
+                                user_type=user_type,
                                 display_name=display_name,
                                 age=age,
                                 gender=gender,
@@ -216,6 +217,7 @@ def dashboard():
         description = musician.description
 
         return render_template('dashboard.html',
+                                user_type=user_type,
                                 display_name=display_name,
                                 age=age,
                                 gender=gender,
