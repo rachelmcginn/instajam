@@ -1,6 +1,6 @@
 [
     {
-        "email": "ted@test.com",
+        "email": "ted@example.com",
         "password": "1234",
         "display_name": "Ted Shreds",
         "age": 25,
@@ -10,8 +10,8 @@
         "description": "Hey I'm Ted & I play the guitar."
     },
     {
-        "email": "caroline@test.com",
-        "password": "abcde!",
+        "email": "caroline@example.com",
+        "password": "1234",
         "display_name": "Caro",
         "age": 28,
         "gender": "f",
@@ -20,7 +20,7 @@
         "description": "I've been singing as long as I can remember. Experienced live performer."
     },
     {
-        "email": "eddy@test.com",
+        "email": "eddy@example.com",
         "password": "1234",
         "display_name": "Stix McGee",
         "age": 32,
@@ -30,8 +30,8 @@
         "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)"
     },
     {
-        "email": "luke@test.com",
-        "password": "luv_flutes22",
+        "email": "luke@example.com",
+        "password": "1234",
         "display_name": "Flute Master",
         "age": 19,
         "gender": "m",
