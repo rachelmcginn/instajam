@@ -2,7 +2,7 @@ from typing import NoReturn
 from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-def create_musician(email, password, display_name, age, gender, influences, location, description):
+def create_musician(email, password, display_name, age, gender, influences, location, description, skills):
     """Create and return a new musician"""
 
     musician = Musician(email=email,
@@ -13,6 +13,9 @@ def create_musician(email, password, display_name, age, gender, influences, loca
                         influences=influences,
                         location=location,
                         description=description)
+    #create musician 
+    #check through list of skill objects
+    #add the chosen skills to musician 
 
     db.session.add(musician)
     db.session.commit()
@@ -133,12 +136,44 @@ def get_band_by_email(email):
 
     return Band.query.filter(Band.email == email).first()
 
+def find_matching_bands(musician):
+    """Finds matching bands"""
+    matches = set()
+    bands = Band.query.all()
+    musician_skills = musician.skills
+    musician_genres = musician.genres
 
-# def match_user(matched_user):
-#     """Match with another user"""
+    for band in bands:
+        matching_skill = False 
+        matching_genre = False 
 
+        for skill in band.skills:
+            if skill in musician_skills:
+                matching_skill = True
+                break 
 
-#     return matched_user
+        for genre in band.genres:
+            if genre in musician_genres:
+                matching_genre = True
+
+        if matching_skill and matching_genre == True:        
+            matches.add(band)
+
+    return matches
+        
+
+def find_matching_musicians(band):
+    """Finds matching musicians"""
+
+def find_matches(user):
+    """Match with another user"""
+    
+    if isinstance(user, Band):
+        return find_matching_musicians(user)
+    else:
+        return find_matching_bands(user)
+
+    return matched_user
 
 # def see_matches(matches):
 #     """See all matches"""
