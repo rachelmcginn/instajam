@@ -2,7 +2,7 @@ from typing import NoReturn
 from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-def create_musician(email, password, display_name, age, gender, influences, location, description, skills):
+def create_musician(email, password, display_name, age, gender, influences, location, description): #pass in skills 
     """Create and return a new musician"""
 
     musician = Musician(email=email,

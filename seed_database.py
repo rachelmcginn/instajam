@@ -40,7 +40,8 @@ with open('./data/musicians.json') as f:
                                     gender=dict['gender'],
                                     influences=dict['influences'],
                                     location=dict['location'],
-                                    description=dict['description'])
+                                    description=dict['description'],
+                                    skills=dict['skills']) 
 
     db.session.add(musician)
     db.session.commit()

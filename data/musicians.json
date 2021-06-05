@@ -4,39 +4,47 @@
         "password": "1234",
         "display_name": "Ted Shreds",
         "age": 25,
-        "gender": "m",
+        "gender": "Male",
         "influences":"The Beatles",
         "location": "New York City",
-        "description": "Hey I'm Ted & I play the guitar."
+        "description": "Hey I'm Ted & I play the guitar.",
+        "skills": ["guitar", "violin"],
+        "genres": ["rock", "R&B"]
     },
     {
         "email": "caroline@example.com",
         "password": "1234",
         "display_name": "Caro",
         "age": 28,
-        "gender": "f",
+        "gender": "Female",
         "influences":"The Whitestripes, Stevie Nicks, Phoebe Bridgers",
         "location": "New York City",
-        "description": "I've been singing as long as I can remember. Experienced live performer."
+        "description": "I've been singing as long as I can remember. Experienced live performer.",
+        "skills": ["vocals"],
+        "genre": ["rock", "pop", "country"]
     },
     {
         "email": "eddy@example.com",
         "password": "1234",
         "display_name": "Stix McGee",
         "age": 32,
-        "gender": "m",
+        "gender": "Male",
         "influences":"Phil Collins",
         "location": "New York City",
-        "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)"
+        "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)",
+        "skills": ["drums", "vocals"],
+        "genre": ["rock", "R&B", "blues", "hip hop"]
     },
     {
         "email": "luke@example.com",
         "password": "1234",
         "display_name": "Flute Master",
         "age": 19,
-        "gender": "m",
+        "gender": "Male",
         "influences":"That one Titanic song.",
         "location": "New York City",
-        "description": "I can't wait to jam out with a band who truly appreciates my fluting talents."
+        "description": "I can't wait to jam out with a band who truly appreciates my fluting talents.",
+        "skills": ["flute"],
+        "genre": ["experimental", "folk"]
     }
 ]

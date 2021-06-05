@@ -7,27 +7,34 @@
         "gender": "Male",
         "influences":"The Beatles, Tame Impala, Kurt Vile",
         "location": "New York City",
-        "description": "The Billionaires are an eclectic mix of classic & psychedelic rock. "
+        "description": "The Billionaires are an eclectic mix of classic & psychedelic rock. ",
+        "skills": ["guitar"],
+        "genre": ["rock"]
     },
     {
-        "email": "candance@example.com",
+        "email": "venusfly@example.com",
         "password": "1234",
-        "display_name": "Venus Razor",
+        "display_name": "Venus Fly",
         "age": 23,
         "gender": "Female",
         "influences":"Bikini Kill, Hole, L7",
         "location": "New York City",
-        "description": "We are a riot grrl band looking for a female vocalist."
+        "description": "We are a riot grrl band looking for a female vocalist.",
+        "skills": ["vocals"],
+        "genre": ["rock", "experimental"]
+        
     },
     {
-        "email": "benji@example.com",
+        "email": "thebongos@example.com",
         "password": "1234",
         "display_name": "The Bongos",
         "age": 26,
         "gender": "Male",
         "influences":"The B52s, Vampire Weekend, Talking Heads",
         "location": "New York City",
-        "description": "Looking for a drummer ASAP so our name is less embarassing."
+        "description": "Looking for a drummer ASAP so our name is less embarassing.",
+        "skills": ["drums"],
+        "genre": ["rock", "jazz"]
     },
     {
         "email": "frank@example.com",
@@ -37,6 +44,8 @@
         "gender": "Male",
         "influences":"Miles Davis, Louis Armstrong",
         "location": "New York City",
-        "description": "We're looking for a saxophonist to join Frank and the Other Guys."
+        "description": "We're looking for a saxophonist to join Frank and the Other Guys.",
+        "skills": ["saxophone"],
+        "genre": ["jazz", "blue", "R&B"]
     }
 ]

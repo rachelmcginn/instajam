@@ -107,6 +107,7 @@ class BandSkill(db.Model):
 
     skill_id = db.Column(db.Integer, db.ForeignKey('skills.skill_id'), primary_key=True)
     band_id = db.Column(db.Integer, db.ForeignKey('bands.band_id'), primary_key=True)
+    #bandskill_id =
 
     skills = db.relationship('Skill')
     bands = db.relationship('Band') 
