@@ -40,7 +40,7 @@ with open('./data/musicians.json') as f:
                                     gender=dict['gender'],
                                     influences=dict['influences'],
                                     location=dict['location'],
-                                    description=dict['description']),
+                                    description=dict['description'],
                                     skills=dict['skills'])  
                                     #genres
 
@@ -58,7 +58,7 @@ with open('./data/bands.json') as f:
                             gender=dict['gender'],
                             influences=dict['influences'],
                             location=dict['location'],
-                            description=dict['description']),
+                            description=dict['description'],
                             skills=dict['description'])
                             #genres
 

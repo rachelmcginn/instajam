@@ -101,14 +101,11 @@ def add_musician_skills(musician, skill_list):
 
 
 def add_band_genres(band, genre_list):
-    """Add a genre to a band's profile"""
+    """Add genres to a band's profile"""
 
-    print(band)
-    print(genre_list)
     band_genres = []
-    print(band_genres)
+
     found_genres = Genre.query.filter(Genre.genre_name.in_(genre_list)).all()
-    print(found_genres)
                     
     for genre in found_genres:
         band_genre = BandGenre(genre_id=genre.genre_id,
@@ -118,20 +115,25 @@ def add_band_genres(band, genre_list):
 
         db.session.add(band_genre)
 
-    print(band_genres)
     db.session.commit()
 
     return band_genres
 
-def add_musician_genres(musician, genre):
-    """Add a genre to a musician's profile"""
-    #Need ability to add multiple genres
+def add_musician_genres(musician, genre_list):
+    """Add genres to a musician's profile"""
 
-    found_genre = Genre.query.filter(Genre.genre_name==genre).first()
-    musician_genres = MusicianGenre(genre_id=found_genre.genre_id,
-                                    musician_id=musician.musician_id)
+    musician_genres = []
 
-    db.session.add(musician_genres)
+    found_genres = Genre.query.filter(Genre.genre_name.in_(genre_list)).all()
+                    
+    for genre in found_genres:
+        musician_genre = MusicianGenre(genre_id=genre.genre_id,
+                            musician_id=musician.musician_id)
+        musician_genres.append(musician_genre)
+
+
+        db.session.add(musician_genre)
+
     db.session.commit()
 
     return musician_genres

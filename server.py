@@ -100,7 +100,7 @@ def handle_create_musician():
     description = request.form['description']
 
     skills_list = request.form.getlist('skills')
-    genres_list = request.form.getlist('genre')
+    genres_list = request.form.getlist('genres')
 
     user = crud.get_musician_by_email(email)
 
