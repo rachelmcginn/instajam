@@ -63,7 +63,7 @@ def handle_create_band():
     description = request.form['description']
     
     skills_list = request.form.getlist('skills')
-    genres_list = request.form.getlist('genre')
+    genres_list = request.form.getlist('genres')
     
     user = crud.get_band_by_email(email)
     
@@ -71,8 +71,8 @@ def handle_create_band():
         flash("Band already exists, please log in.")
     else:
         band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_a_band_skill(band, skills_list)
-        saved_genres = crud.add_a_band_genre(band, genres_list)
+        saved_skills = crud.add_band_skills(band, skills_list)
+        saved_genres = crud.add_band_genres(band, genres_list)
 
         flash("Band profile successfully created!")
         return render_template("login.html")
@@ -99,8 +99,8 @@ def handle_create_musician():
     location = request.form['location']
     description = request.form['description']
 
-    skill = request.form['skill']
-    genre = request.form['genre']
+    skills_list = request.form.getlist('skills')
+    genres_list = request.form.getlist('genre')
 
     user = crud.get_musician_by_email(email)
 
@@ -108,8 +108,8 @@ def handle_create_musician():
         flash("Musician already exists, please log in.")
     else:
         musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_a_musician_skill(musician, skill)
-        saved_genres = crud.add_a_musician_genre(musician, genre)
+        saved_skills = crud.add_musician_skills(musician, skills_list)
+        saved_genres = crud.add_musician_genres(musician, genres_list)
         
         flash("Musician profile successfully created!")
         return render_template("login.html")

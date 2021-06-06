@@ -59,22 +59,19 @@ def create_a_genre(genre):
     return genre
 
 
-def add_a_band_skill(band, skill_list): #tweak name
+def add_band_skills(band, skill_list):
     """Add a skill to a band's profile"""
-    #Need ability to add multiple skills
-    print(band)
-    print(skill_list)
+    
     band_skills = []
 
     found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
-    print(found_skills)
 
                     
     for skill in found_skills:
         band_skill = BandSkill(skill_id=skill.skill_id,
                             band_id=band.band_id)
         band_skills.append(band_skill)
-        print(band_skills)
+
 
         db.session.add(band_skill)
 
@@ -82,36 +79,51 @@ def add_a_band_skill(band, skill_list): #tweak name
 
     return band_skills
 
-#########################################################
 
-def add_a_musician_skill(musician, skill): 
+def add_musician_skills(musician, skill_list): 
     """Add a skill to a musician's profile"""
-    #Need ability to add multiple skills 
 
-    found_skill = Skill.query.filter(Skill.skill_name==skill).first()
-    musician_skills = MusicianSkill(skill_id=found_skill.skill_id,
-                                    musician_id=musician.musician_id)
+    musician_skills = []
 
-    db.session.add(musician_skills)
+    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
+
+    for skill in found_skills:
+        musician_skill = MusicianSkill(skill_id=skill.skill_id,
+                            musician_id=musician.musician_id)
+        musician_skills.append(musician_skill)
+
+
+        db.session.add(musician_skill)
+
     db.session.commit()
 
     return musician_skills
 
 
-def add_a_band_genre(band, genre):
+def add_band_genres(band, genre_list):
     """Add a genre to a band's profile"""
-    #Need ability to add multiple genres
 
-    found_genre = Genre.query.filter(Genre.genre_name==genre).first()
-    band_genres = BandGenre(genre_id=found_genre.genre_id,
+    print(band)
+    print(genre_list)
+    band_genres = []
+    print(band_genres)
+    found_genres = Genre.query.filter(Genre.genre_name.in_(genre_list)).all()
+    print(found_genres)
+                    
+    for genre in found_genres:
+        band_genre = BandGenre(genre_id=genre.genre_id,
                             band_id=band.band_id)
+        band_genres.append(band_genre)
 
-    db.session.add(band_genres)
+
+        db.session.add(band_genre)
+
+    print(band_genres)
     db.session.commit()
 
     return band_genres
 
-def add_a_musician_genre(musician, genre):
+def add_musician_genres(musician, genre):
     """Add a genre to a musician's profile"""
     #Need ability to add multiple genres
 
