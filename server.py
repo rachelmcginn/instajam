@@ -62,8 +62,8 @@ def handle_create_band():
     location = request.form['location']
     description = request.form['description']
     
-    skill = request.form['skill']
-    genre = request.form['genre']
+    skills_list = request.form.getlist('skills')
+    genres_list = request.form.getlist('genre')
     
     user = crud.get_band_by_email(email)
     
@@ -71,8 +71,8 @@ def handle_create_band():
         flash("Band already exists, please log in.")
     else:
         band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_a_band_skill(band, skill)
-        saved_genres = crud.add_a_band_genre(band, genre)
+        saved_skills = crud.add_a_band_skill(band, skills_list)
+        saved_genres = crud.add_a_band_genre(band, genres_list)
 
         flash("Band profile successfully created!")
         return render_template("login.html")
