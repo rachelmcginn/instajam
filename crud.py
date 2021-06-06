@@ -2,9 +2,12 @@ from typing import NoReturn
 from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-def create_musician(email, password, display_name, age, gender, influences, location, description): #pass in skills 
-    """Create and return a new musician"""
 
+def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list): #pass in skills 
+    """Create and return a new musician"""
+    print(skill_list)
+
+    #create musician 
     musician = Musician(email=email,
                         password=password, 
                         display_name=display_name,
@@ -13,9 +16,20 @@ def create_musician(email, password, display_name, age, gender, influences, loca
                         influences=influences,
                         location=location,
                         description=description)
-    #create musician 
+    
+    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
+    print(found_skills)
+
+    musician_skills = []
     #check through list of skill objects
-    #add the chosen skills to musician 
+    # #add each skill to musician 
+    for skill in found_skills:
+        musician_skill = MusicianSkill(skill_id=skill.skill_id,
+                            musician_id=musician.musician_id)
+        musician_skills.append(musician_skill)
+
+    db.session.add(musician_skill)
+
 
     db.session.add(musician)
     db.session.commit()
@@ -23,7 +37,7 @@ def create_musician(email, password, display_name, age, gender, influences, loca
     return musician
 
 
-def create_band(email, password, display_name, age, gender, influences, location, description):
+def create_band(email, password, display_name, age, gender, influences, location, description): #pass in skills
     """Create and return a new band"""
 
     band = Band(email=email,

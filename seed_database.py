@@ -15,6 +15,14 @@ os.system('createdb instajam')
 model.connect_to_db(server.app)
 model.db.create_all()
 
+
+with open('./data/skills.json') as f:
+    skill_data = json.loads(f.read())
+
+    for skill in skill_data:
+        create_a_skill(skill)
+
+
 with open('./data/genres.json') as f:
     genre_data = json.loads(f.read())
 
@@ -22,11 +30,25 @@ with open('./data/genres.json') as f:
         create_a_genre(genre)
 
 
-with open('./data/skills.json') as f:
-    skill_data = json.loads(f.read())
+with open('./data/bands.json') as f:
+    band_data = json.loads(f.read())
 
-    for skill in skill_data:
-        create_a_skill(skill)
+    for dict in band_data:
+        band = create_band(email=dict['email'],
+                            password=dict['password'],
+                            display_name=dict['display_name'],
+                            age=dict['age'],
+                            gender=dict['gender'],
+                            influences=dict['influences'],
+                            location=dict['location'],
+                            description=dict['description'])
+                            #skills=dict['description'])
+                            #genres
+    
+    #could call add_band_skills, add_band_genres instead?
+
+    db.session.add(band)
+    db.session.commit()
 
 
 with open('./data/musicians.json') as f:
@@ -41,26 +63,9 @@ with open('./data/musicians.json') as f:
                                     influences=dict['influences'],
                                     location=dict['location'],
                                     description=dict['description'],
-                                    skills=dict['skills'])  
+                                    skill_list=dict['skills'])  
                                     #genres
 
     db.session.add(musician)
     db.session.commit()
 
-with open('./data/bands.json') as f:
-    band_data = json.loads(f.read())
-
-    for dict in band_data:
-        band = create_band(email=dict['email'],
-                            password=dict['password'],
-                            display_name=dict['display_name'],
-                            age=dict['age'],
-                            gender=dict['gender'],
-                            influences=dict['influences'],
-                            location=dict['location'],
-                            description=dict['description'],
-                            skills=dict['description'])
-                            #genres
-
-    db.session.add(band)
-    db.session.commit()
