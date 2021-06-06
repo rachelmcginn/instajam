@@ -3,101 +3,254 @@
 
 {% block body %}
   <h1>Musician Details</h1>
-  <form action="/handle-create-musician" method="POST"> 
-    <p>
-      Email: <input type="text" name="email">
-    </p>
+    <div class="container">
+      <form action="/handle-create-musician" method="POST"> 
+        <div class="form-group">
+          Email: <input type="text" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+          Password: <input type="password" class="form-control" name="password">
+        </div>
 
-    <p>
-      Password: <input type="password" name="password">
-    </p>
+        <!--Password repeat form-->
 
-    <!--Repeat pw form-->
-
-    <p>
-      Display Name: <input type="text" name="display_name">
-    </p>
-
-    <p>
-      Age: <input type="text" name="age">
-    </p>
-
-    <p>Gender:</p> 
-    <input type="radio" id="male" name="gender">
-    <label for="male">Male</label>
-    <input type="radio" id="female" name="gender">
-    <label for="female">Female</label>
-    <input type="radio" id="nonbinary" name="gender">
-    <label for="nonbinary">Nonbinary</label>
-    <input type="radio" id="other" name="gender">
-    <label for="other">Other</label>
-	
-    <p>Location: </p>
-    <input type="radio" id="New York City" name="location">
-    <label for="New York City">New York City</label>
-    <input type="radio" id="Los Angeles" name="location">
-    <label for="Los Angeles">Los Angeles</label>
-
-    <p>Influences:</p> 
-    <input type="text" name="influences">
-
-    <p>About me:</p> 
-    <input type="text" name="description">
+        <div class="form-group">
+          Display Name: <input type="text" class="form-control" name="display_name">
+        </div>
+        
+        <div class="form-group">
+          Age: <input type="text" class="form-control" name="age">
+        </div>
     
-    <p>Instrument(s) played:</p>
-    <input type="checkbox" id="banjo" name="skills" value="banjo">
-    <label for="banjo">Banjo</label><br>
-    <input type="checkbox" id="bass" name="skills" value="bass">
-    <label for="bass">Bass</label><br>
-    <input type="checkbox" id="cello" name="skills" value="cello">
-    <label for="cello">Cello</label><br>
-    <input type="checkbox" id="drums" name="skills" value="drums">
-    <label for="drums">Drums</label><br>
-    <input type="checkbox" id="flute" name="skills" value="flute">
-    <label for="flute">Flute</label><br>
-    <input type="checkbox" id="guitar" name="skills" value="guitar">
-    <label for="guitar">Guitar</label><br>
-    <input type="checkbox" id="keyboard" name="skills" value="keyboard">
-    <label for="keyboard">Keyboard</label><br>
-    <input type="checkbox" id="piano" name="skills" value="piano">
-    <label for="piano">Piano</label><br>
-    <input type="checkbox" id="trumpet" name="skills" value="trumpet">
-    <label for="trumpet">Trumpet</label><br>
-    <input type="checkbox" id="violin" name="skills" value="violin">
-    <label for="violin">Violin</label><br>
-    <input type="checkbox" id="vocals" name="skills" value="vocals">
-    <label for="vocals">Vocals</label><br>
-    <input type="checkbox" id="saxophone" name="skills" value="saxophone">
-    <label for="saxophone">Saxophone</label><br>
-    <input type="checkbox" id="synth" name="skills" value="synth">
-    <label for="synth">Synth</label><br>
-  
-    <p>Select Genre(s):</p>
-    <input type="checkbox" id="blues" name="genres" value="blues">
-    <label for="blues">Blues</label><br>
-    <input type="checkbox" id="country" name="genres" value="country">
-    <label for="country">Country</label><br>
-    <input type="checkbox" id="electronic" name="genres" value="electronic">
-    <label for="electronic">Electronic</label><br>
-    <input type="checkbox" id="experimental" name="genres" value="experimental">
-    <label for="experimental">Experimental</label><br>
-    <input type="checkbox" id="folk" name="genres" value="folk">
-    <label for="folk">Folk</label><br>
-    <input type="checkbox" id="hip hop" name="genres" value="hip hop">
-    <label for="hip hop">Hip hop</label><br>
-    <input type="checkbox" id="jazz" name="genres" value="jazz">
-    <label for="jazz">Jazz</label><br>
-    <input type="checkbox" id="latin" name="genres" value="latin">
-    <label for="latin">Latin</label><br>
-    <input type="checkbox" id="pop" name="genres" value="pop">
-    <label for="pop">Pop</label><br>
-    <input type="checkbox" id="Rock" name="genres" value="rock">
-    <label for="rock">Rock</label><br>
-    <input type="checkbox" id="R&B" name="genres" value="R&B">
-    <label for="R&B">R&B</label><br>
-    
+          <!-- gender and location rendering as "on" in db -->
 
-      <p><input type="submit"></p>
-  </form>
-  
-{% endblock %}
+          Gender:
+        <div class="container">
+
+          <div class="form-check">
+            <label class="form-check-label" for="male">Male
+              <input type="radio" class="form-check-input" id="Male" name="gender">
+            </label>
+          </div>
+        
+
+          <div class="form-check">
+            <label for="female">Female
+              <input type="radio" class="form-check-input" id="Female" name="gender">
+            </label>
+          </div>
+          
+        
+          <div class="form-check">
+            <label for="nonbinary">Nonbinary
+              <input type="radio" class="form-check-input" id="Nonbinary" name="gender">
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label for="other">Other
+              <input type="radio" class="form-check-input" id="Other" name="gender">
+            </label>
+          </div>
+      </div>
+      
+        Location
+        <div class="form-check">
+          <label for="New York City">New York City
+            <input type="radio" class="form-check-input" id="New York City" name="location">
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label for="Los Angeles">Los Angeles
+            <input type="radio" class="form-check-input" id="Los Angeles" name="location">
+          </label>
+        </div>
+
+        <!-- fix gender and location -->
+        Influences:
+        <div class="form-group">
+          <input type="text" class="form-control" name="influences">
+        </div>
+
+        About me: 
+        <div class="form-group">
+          <input type="text" class="form-control" name="description">
+        </div>
+
+        Instrument(s) played:
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="banjo" name="skills" value="banjo">
+          <label class="form-check-label" for="banjo">
+            Banjo
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="bass" name="skills" value="bass">
+          <label class="form-check-label" for="bass">
+            Bass
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cello" name="skills" value="cello">
+          <label class="form-check-label" for="cello">
+            Cello
+          </label>
+        </div>
+      
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="drums" name="skills" value="drums">
+          <label class="form-check-label" for="drums">
+            Drums
+          </label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flute" name="skills" value="flute">
+          <label class="form-check-label" for="flute">
+            Flute
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="guitar" name="skills" value="guitar">
+          <label class="form-check-label" for="guitar">
+            Guitar
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="keyboard" name="skills" value="keyboard">
+          <label class="form-check-label" for="keyboard">
+            Keyboard
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="piano" name="skills" value="piano">
+          <label class="form-check-label" for="piano">
+            Piano
+          </label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="trumpet" name="skills" value="trumpet">
+          <label class="form-check-label" for="trumpet">
+            Trumpet
+          </label>
+        </div>
+      
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="violin" name="skills" value="violin">
+          <label class="form-check-label" for="violin">
+            Violin
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="vocals" name="skills" value="vocals">
+          <label class="form-check-label" for="vocals">
+            Vocals
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="saxophone" name="skills" value="saxophone">
+          <label class="form-check-label" for="saxophone">
+            Saxophone
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="synth" name="skills" value="synth">
+          <label class="form-check-label" for="synth">
+            Synth
+          </label>
+        </div>
+
+        Genres:
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="blues" name="genres" value="blues">
+          <label class="form-check-label" for="blues">
+            Blues
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="country" name="genres" value="country">
+          <label class="form-check-label" for="country">
+            Country
+          </label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="electronic" name="genres" value="electronic">
+          <label class="form-check-label" for="electronic">
+            Electronic
+          </label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="experimental" name="genres" value="experimental">
+          <label class="form-check-label" for="experimental">
+            Experimental
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="folk" name="genres" value="folk">
+          <label class="form-check-label" for="folk">
+            Folk
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="hip hop" name="genres" value="hip hop">
+          <label class="form-check-label" for="hip hop">
+            Hip hop
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="jazz" name="genres" value="jazz">
+          <label class="form-check-label" for="jazz">
+            Jazz
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="latin" name="genres" value="latin">
+          <label class="form-check-label" for="latin">
+            Latin
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="pop" name="genres" value="pop">
+          <label class="form-check-label" for="pop">
+            Pop
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="Rock" name="genres" value="rock">
+          <label class="form-check-label" for="rock">
+            Rock
+          </label>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="R&B" name="genres" value="R&B">
+          <label class="form-check-label" for="R&B">
+            R&B
+          </label>
+        </div>
+        
+        <p><input type="submit" class="btn btn-primary"></p>
+        
+      </form>
+  </div>
+
+    {% endblock %}
