@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 import crud
 from model import connect_to_db
 from jinja2 import StrictUndefined
+#from twiliojam import send_message  ###tests twilio api 
 
 
 app = Flask(__name__)
@@ -196,7 +197,8 @@ def dashboard():
         influences = band.influences
         location = band.location
         description = band.description
-        #seeking = band_skills .. user_id ? 
+        seeking = band.skills
+
         return render_template('dashboard.html',
                                 user_type=user_type,
                                 display_name=display_name,
@@ -204,7 +206,8 @@ def dashboard():
                                 gender=gender,
                                 influences=influences,
                                 location=location,
-                                description=description) 
+                                description=description,
+                                seeking=seeking) 
 
     if user_type == 'musician':
         musician = crud.get_musician_by_id(user_id)
@@ -215,6 +218,7 @@ def dashboard():
         influences = musician.influences
         location = musician.location
         description = musician.description
+        skills = musician.skills
 
         return render_template('dashboard.html',
                                 user_type=user_type,
@@ -223,7 +227,8 @@ def dashboard():
                                 gender=gender,
                                 influences=influences,
                                 location=location,
-                                description=description)
+                                description=description,
+                                skills=skills)
 
 
 @app.route('/match-queue')
@@ -249,7 +254,7 @@ def match_queue():
 def matched():
     """Displays profiles the user has matched with"""
     user_type = session.get('user_type')
-
+    #send_message() ###tests twilio api
     if user_type == None:
         return  redirect ('/login')
     if user_type == 'band':

@@ -63,7 +63,7 @@ with open('./data/musicians.json') as f:
                                     influences=dict['influences'],
                                     location=dict['location'],
                                     description=dict['description'],
-                                    skill_list=dict['skills'])  
+                                    skill_list=dict['skills'])  ####
                                     #genres
 
     db.session.add(musician)

@@ -19,7 +19,10 @@ def create_musician(email, password, display_name, age, gender, influences, loca
     
     found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
     print(found_skills)
-
+    
+    db.session.add(musician)
+    db.session.commit()
+    
     musician_skills = []
     #check through list of skill objects
     # #add each skill to musician 
@@ -27,11 +30,8 @@ def create_musician(email, password, display_name, age, gender, influences, loca
         musician_skill = MusicianSkill(skill_id=skill.skill_id,
                             musician_id=musician.musician_id)
         musician_skills.append(musician_skill)
-
-    db.session.add(musician_skill)
-
-
-    db.session.add(musician)
+        db.session.add(musician_skill)
+        
     db.session.commit()
 
     return musician

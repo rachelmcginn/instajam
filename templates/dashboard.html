@@ -9,16 +9,24 @@
     <h3>{{ display_name }}</h3><br>
     Location: {{ location }} <br>
       {% if user_type == 'band' %}
-      Seeking: {{ display_name }} skills go here <br>
+        Seeking: {{ seeking }}
+        <ul>
+          {% for skill in seeking %}
+          <li>{{ skill.skill_name }}</li>
+          {% endfor %}
+        </ul>
       {% else %}
-      Talents: Skill list goes here 
+      Talents: 
+      <ul>
+        {% for skill in skills %}
+        <li>{{ skill.skill_name }}</li>
+        {% endfor %}
+      </ul>
       {% endif %} <br>
+
     About: {{ description }} <br>
     Genre: Genre list goes here <br>
     Influences: {{ influences }} <br>
-      {% if user_type == 'band' %}
-      Members: {{ display_name }} members go here <br>
-      {% endif %}
     <br>
   </div>
   
