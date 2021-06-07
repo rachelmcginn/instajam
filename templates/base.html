@@ -11,20 +11,23 @@
     <meta name="viewport" content="width=device-width">
     
     <title>
-      {% block title %}Instajam{% endblock %}
+      {% block title %}Instajaam{% endblock %}
     </title>
     <link rel="icon" 
       type="image/png" 
-      href="static/strawberry.png">
+      href="static/jammy.png">
 
     {% block head %}{% endblock %}
   </head>
   <body>
-    <h2>Navigation</h2>
-  <a href="/">Home</a>
-  <a href="/dashboard">Dashboard</a>
-  <a href="/login">Login</a>
-  <a href="/sign-up">Sign Up</a>
+    <h1><img src="static/jammy.png" alt="Instajam's logo">Instajam</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/login">Login</a>
+      <a href="/sign-up">Sign Up</a>
+    </nav>
+  
 
     {% for msg in get_flashed_messages() %} 
       <p class="flash-msg">
