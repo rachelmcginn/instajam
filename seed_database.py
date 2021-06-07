@@ -41,11 +41,9 @@ with open('./data/bands.json') as f:
                             gender=dict['gender'],
                             influences=dict['influences'],
                             location=dict['location'],
-                            description=dict['description'])
-                            #skills=dict['description'])
+                            description=dict['description'],
+                            skill_list=dict['skills'])
                             #genres
-    
-    #could call add_band_skills, add_band_genres instead?
 
     db.session.add(band)
     db.session.commit()

@@ -3,11 +3,9 @@ from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, Ba
 import os
 
 
-def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list): #pass in skills 
+def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list):  
     """Create and return a new musician"""
-    print(skill_list)
-
-    #create musician 
+    
     musician = Musician(email=email,
                         password=password, 
                         display_name=display_name,
@@ -18,14 +16,12 @@ def create_musician(email, password, display_name, age, gender, influences, loca
                         description=description)
     
     found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
-    print(found_skills)
     
     db.session.add(musician)
     db.session.commit()
     
     musician_skills = []
-    #check through list of skill objects
-    # #add each skill to musician 
+    
     for skill in found_skills:
         musician_skill = MusicianSkill(skill_id=skill.skill_id,
                             musician_id=musician.musician_id)
@@ -37,7 +33,7 @@ def create_musician(email, password, display_name, age, gender, influences, loca
     return musician
 
 
-def create_band(email, password, display_name, age, gender, influences, location, description): #pass in skills
+def create_band(email, password, display_name, age, gender, influences, location, description, skill_list):
     """Create and return a new band"""
 
     band = Band(email=email,
@@ -49,7 +45,19 @@ def create_band(email, password, display_name, age, gender, influences, location
                 location=location,
                 description=description)
 
+    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
+    
     db.session.add(band)
+    db.session.commit()
+
+    band_skills = []
+    
+    for skill in found_skills:
+        band_skill = BandSkill(skill_id=skill.skill_id,
+                            band_id=band.band_id)
+        band_skills.append(band_skill)
+        db.session.add(band_skill)
+    
     db.session.commit()
 
     return band
