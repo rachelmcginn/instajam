@@ -206,12 +206,18 @@ def get_musician_by_email(email):
     return Musician.query.filter(Musician.email == email).first()
 
 
-def find_matching_bands(musician):
+def find_matching_bands(current_musician):
     """Finds matching bands"""
+    print("***************")
+    print(current_musician)
     matches = set()
     bands = Band.query.all()
-    musician_skills = musician.skills
-    musician_genres = musician.genres
+    musician_skills = current_musician.skills
+    print("***")
+    print(musician_skills)
+    musician_genres = current_musician.genres
+    print("***")
+    print(musician_genres)
 
     for band in bands:
         matching_skill = False 

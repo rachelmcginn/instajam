@@ -247,13 +247,11 @@ def match_queue():
     #if matches is empty
         #return come back later 
     else:
-        print(find_matches(user_id))
-        #for musician musicians 
-            #if skill in user_id.band_skills
-            #render musician profile 
-        return render_template('match-queue.html')
-    if user_type == 'musician':
-        return render_template('match-queue.html')
+        matches = crud.find_matches(user_type)
+       
+        return render_template('match-queue.html',
+                                matches=matches)
+
 
 
 @app.route('/matched')
