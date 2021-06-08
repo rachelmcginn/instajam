@@ -13,10 +13,10 @@ body {
     /* height: 100%; */
 /* } */ 
 
-#skill-list ul{
+#skill-genre-lists ul{
     list-style: none;
   }
-  #skill-list li{
+  #skill-genre-lists li{
     display: inline;
   }
 

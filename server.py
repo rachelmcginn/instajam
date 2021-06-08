@@ -198,6 +198,7 @@ def dashboard():
         location = band.location
         description = band.description
         seeking = band.skills
+        genres = band.genres
 
         return render_template('dashboard.html',
                                 user_type=user_type,
@@ -207,7 +208,8 @@ def dashboard():
                                 influences=influences,
                                 location=location,
                                 description=description,
-                                seeking=seeking) 
+                                seeking=seeking,
+                                genres=genres) 
 
     if user_type == 'musician':
         musician = crud.get_musician_by_id(user_id)
@@ -219,6 +221,7 @@ def dashboard():
         location = musician.location
         description = musician.description
         skills = musician.skills
+        genres = musician.genres
 
         return render_template('dashboard.html',
                                 user_type=user_type,
@@ -228,7 +231,8 @@ def dashboard():
                                 influences=influences,
                                 location=location,
                                 description=description,
-                                skills=skills)
+                                skills=skills,
+                                genres=genres)
 
 
 @app.route('/match-queue')
