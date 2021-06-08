@@ -234,7 +234,7 @@ def find_matching_bands(musician):
 
 def find_matching_musicians(band):
     """Finds matching musicians"""
-    """Finds matching bands"""
+    
     matches = set()
     musicians = Musician.query.all()
     band_skills = band.skills
@@ -258,6 +258,7 @@ def find_matching_musicians(band):
 
     return matches
 
+
 def find_matches(user):
     """Match with another user"""
     
@@ -266,7 +267,6 @@ def find_matches(user):
     else:
         return find_matching_bands(user)
 
-    return matched_user
 
 # def show_matches(matches):
 #     """See all matches"""

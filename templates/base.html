@@ -11,16 +11,18 @@
     <meta name="viewport" content="width=device-width">
     
     <title>
-      {% block title %}Instajaam{% endblock %}
+      {% block title %}Instajam{% endblock %}
     </title>
+
     <link rel="icon" 
       type="image/png" 
       href="static/jammy.png">
 
     {% block head %}{% endblock %}
   </head>
+
   <body>
-    <h1>
+    <!-- <h1>
       <a href="/">
         <img src="static/jammy.png" alt="Instajam's logo"></a>Instajam
     </h1>
@@ -29,8 +31,41 @@
       <a href="/dashboard">Dashboard</a>
       <a href="/login">Login</a>
       <a href="/sign-up">Sign Up</a>
-    </nav>
+    </nav> -->
   
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/">
+        <img src="static/jammy.png" alt="Instajam's logo">
+      </a>
+      <h1>Instajam</h1>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/sign-up">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Dashboard">Dashboard</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+
+
+
+
+
 
     {% for msg in get_flashed_messages() %} 
       <p class="flash-msg">
