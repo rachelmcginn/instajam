@@ -9,7 +9,7 @@
         "location": "New York City",
         "description": "The Billionaires are an eclectic mix of classic & psychedelic rock. ",
         "skills": ["guitar"],
-        "genre": ["rock"]
+        "genres": ["rock"]
     },
     {
         "email": "venusfly@example.com",
@@ -21,7 +21,7 @@
         "location": "New York City",
         "description": "We are a riot grrl band looking for a female vocalist.",
         "skills": ["vocals"],
-        "genre": ["rock", "experimental"]
+        "genres": ["rock", "experimental"]
         
     },
     {
@@ -34,7 +34,7 @@
         "location": "New York City",
         "description": "Looking for a drummer ASAP so our name is less embarassing.",
         "skills": ["drums"],
-        "genre": ["rock", "jazz"]
+        "genres": ["rock", "jazz"]
     },
     {
         "email": "frank@example.com",
@@ -46,6 +46,6 @@
         "location": "New York City",
         "description": "We're looking for a saxophonist to join Frank and the Other Guys.",
         "skills": ["saxophone"],
-        "genre": ["jazz", "blue", "R&B"]
+        "genres": ["jazz", "blue", "R&B"]
     }
 ]

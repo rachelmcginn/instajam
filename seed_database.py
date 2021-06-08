@@ -42,8 +42,8 @@ with open('./data/bands.json') as f:
                             influences=dict['influences'],
                             location=dict['location'],
                             description=dict['description'],
-                            skill_list=dict['skills'])
-                            #genres
+                            skill_list=dict['skills'],
+                            genre_list=dict['genres'])
 
     db.session.add(band)
     db.session.commit()
@@ -61,8 +61,9 @@ with open('./data/musicians.json') as f:
                                     influences=dict['influences'],
                                     location=dict['location'],
                                     description=dict['description'],
-                                    skill_list=dict['skills'])  ####
-                                    #genres
+                                    skill_list=dict['skills'],
+                                    genre_list=dict['genres'])
+                                    
 
     db.session.add(musician)
     db.session.commit()

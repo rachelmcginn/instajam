@@ -21,7 +21,7 @@
         "location": "New York City",
         "description": "I've been singing as long as I can remember. Experienced live performer.",
         "skills": ["vocals"],
-        "genre": ["rock", "pop", "country"]
+        "genres": ["rock", "pop", "country"]
     },
     {
         "email": "eddy@example.com",
@@ -33,7 +33,7 @@
         "location": "New York City",
         "description": "Get you a man who can sing *and* drum (not necessarily very good at either. But still.)",
         "skills": ["drums", "vocals"],
-        "genre": ["rock", "R&B", "blues", "hip hop"]
+        "genres": ["rock", "R&B", "blues", "hip hop"]
     },
     {
         "email": "luke@example.com",
@@ -45,6 +45,6 @@
         "location": "New York City",
         "description": "I can't wait to jam out with a band who truly appreciates my fluting talents.",
         "skills": ["flute"],
-        "genre": ["experimental", "folk"]
+        "genres": ["experimental", "folk"]
     }
 ]

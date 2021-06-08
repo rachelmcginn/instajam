@@ -2,27 +2,31 @@
 {% block title %}Instajam{% endblock %}
 
 {% block body %}
-  <h1>Dashboard</h1>
+  <h2>Dashboard</h2>
+
   <p>Hello, {{ display_name }}!</p>
-  <h2>Profile</h2>
+
   <div>
-    <h3>{{ display_name }}</h3><br>
-    Location: {{ location }} <br>
-      {% if user_type == 'band' %}
-        Seeking: {{ seeking }}
-        <ul>
+    <h3>{{ display_name }}</h3>
+
+    Location: {{ location }}
+    
+    {% if user_type == 'band' %}
+        <ul id="skill-list">
+          Seeking:
           {% for skill in seeking %}
           <li>{{ skill.skill_name }}</li>
-          {% endfor %}
+            {% endfor %}
         </ul>
-      {% else %}
-      Talents: 
-      <ul>
-        {% for skill in skills %}
-        <li>{{ skill.skill_name }}</li>
+      
+    {% else %}
+    <ul id="skill-list">
+      Talents:
+      {% for skill in skills %}
+      <li>{{ skill.skill_name }}</li>
         {% endfor %}
-      </ul>
-      {% endif %} <br>
+    </ul>
+      {% endif %} 
 
     About: {{ description }} <br>
     Genre: Genre list goes here <br>

@@ -2,8 +2,8 @@ from typing import NoReturn
 from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-
-def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list):  
+################################ rachel start 
+def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list):  
     """Create and return a new musician"""
     
     musician = Musician(email=email,
@@ -15,25 +15,35 @@ def create_musician(email, password, display_name, age, gender, influences, loca
                         location=location,
                         description=description)
     
-    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
-    
     db.session.add(musician)
     db.session.commit()
+
+    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
+    found_genres = Genre.query.filter(Genre.genre_name.in_(genre_list)).all()
     
     musician_skills = []
+    musician_genres = []
     
     for skill in found_skills:
         musician_skill = MusicianSkill(skill_id=skill.skill_id,
-                            musician_id=musician.musician_id)
+                                        musician_id=musician.musician_id)
         musician_skills.append(musician_skill)
         db.session.add(musician_skill)
         
     db.session.commit()
 
+    for genre in found_genres:
+        musician_genre = MusicianGenre(genre_id=genre.genre_id,
+                                        musician_id=musician.musician_id)
+        musician_genres.append(musician_genre)
+        db.session.add(musician_genre)
+    
+    db.session.commit()
+
     return musician
 
 
-def create_band(email, password, display_name, age, gender, influences, location, description, skill_list):
+def create_band(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list):
     """Create and return a new band"""
 
     band = Band(email=email,
@@ -45,22 +55,34 @@ def create_band(email, password, display_name, age, gender, influences, location
                 location=location,
                 description=description)
 
-    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
-    
     db.session.add(band)
     db.session.commit()
 
+    found_skills = Skill.query.filter(Skill.skill_name.in_(skill_list)).all()
+    found_genres = Genre.query.filter(Genre.genre_name.in_(genre_list)).all()
+
     band_skills = []
+    band_genres = []
     
     for skill in found_skills:
         band_skill = BandSkill(skill_id=skill.skill_id,
-                            band_id=band.band_id)
+                                band_id=band.band_id)
         band_skills.append(band_skill)
         db.session.add(band_skill)
     
     db.session.commit()
 
+    for genre in found_genres:
+        band_genre = BandGenre(genre_id=genre.genre_id,
+                                        band_id=band.band_id)
+        band_genres.append(band_genre)
+        db.session.add(band_genre)
+    
+    db.session.commit()
+
     return band
+
+###################################################### end 
 
 def create_a_skill(skill):
     """Add a new skill to the db"""
