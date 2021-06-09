@@ -8,8 +8,8 @@
         "influences":"The Beatles, Tame Impala, Kurt Vile",
         "location": "New York City",
         "description": "The Billionaires are an eclectic mix of classic & psychedelic rock. ",
-        "skills": ["guitar"],
-        "genres": ["rock"]
+        "skills": ["banjo", "bass", "cello", "drums", "flute", "guitar", "keyboard", "piano", "trumpet", "violin", "vocals", "saxophone", "synth"],
+        "genres": ["blues", "country", "electronic", "experimental", "folk", "hip hop", "jazz", "latin", "pop", "rock", "R&B"]
     },
     {
         "email": "venusfly@example.com",

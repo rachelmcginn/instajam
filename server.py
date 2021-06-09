@@ -63,21 +63,21 @@ def handle_create_band():
     location = request.form['location']
     description = request.form['description']
     
-    skills_list = request.form.getlist('skills')
-    genres_list = request.form.getlist('genres')
+    skill_list = request.form.getlist('skills')
+    genre_list = request.form.getlist('genres')
     
     user = crud.get_band_by_email(email)
     
     if user:
         flash("Band already exists, please log in.")
-    else:
-        band = crud.create_band(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_band_skills(band, skills_list)
-        saved_genres = crud.add_band_genres(band, genres_list)
-
+        return render_template("login.html") #***************
+    else: 
+        band = crud.create_band(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list)
+        # saved_skills = crud.add_band_skills(band, skill_list)
+        # saved_genres = crud.add_band_genres(band, genre_list)
         flash("Band profile successfully created!")
         return render_template("login.html")
-
+    
 
 @app.route('/create-musician')
 def create_musician(): 
@@ -100,17 +100,17 @@ def handle_create_musician():
     location = request.form['location']
     description = request.form['description']
 
-    skills_list = request.form.getlist('skills')
-    genres_list = request.form.getlist('genres')
+    skill_list = request.form.getlist('skills')
+    genre_list = request.form.getlist('genres')
 
     user = crud.get_musician_by_email(email)
 
     if user:
         flash("Musician already exists, please log in.")
-    else:
+    else: ######## missing args (skill_list and genre_list)
         musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_musician_skills(musician, skills_list)
-        saved_genres = crud.add_musician_genres(musician, genres_list)
+        saved_skills = crud.add_musician_skills(musician, skill_list)
+        saved_genres = crud.add_musician_genres(musician, genre_list)
         
         flash("Musician profile successfully created!")
         return render_template("login.html")
@@ -235,7 +235,7 @@ def dashboard():
                                 genres=genres)
 
 ############ rachel
-@app.route('/match-queue')
+@app.route('/matches')
 def match_queue():
     """Displays potential matches"""
     
@@ -249,7 +249,7 @@ def match_queue():
         found_matches = crud.find_matches(current_band)
         #if found_matches is empty
             #"no matches found" message  
-        return render_template('match-queue.html',
+        return render_template('matches.html',
                                 found_matches=found_matches,
                                 user_type=user_type)
     elif user_type == 'musician':
@@ -257,23 +257,23 @@ def match_queue():
         found_matches = crud.find_matches(current_musician)
             # if found_matches == []:
             #     no_matches_msg = "No matches found" message
-        return render_template('match-queue.html',
+        return render_template('matches.html',
                                 found_matches=found_matches,
                                 user_type=user_type)
 
 
 
-@app.route('/matched')
-def matched():
-    """Displays profiles the user has matched with"""
-    user_type = session.get('user_type')
-    #send_message() ###tests twilio api
-    if user_type == None:
-        return  redirect ('/login')
-    if user_type == 'band':
-        return render_template('matched.html')
-    if user_type == 'musician':
-        return render_template('matched.html')
+# @app.route('/matched')
+# def matched():
+#     """Displays profiles the user has matched with"""
+#     user_type = session.get('user_type')
+#     #send_message() ###tests twilio api
+#     if user_type == None:
+#         return  redirect ('/login')
+#     if user_type == 'band':
+#         return render_template('matched.html')
+#     if user_type == 'musician':
+#         return render_template('matched.html')
 
 
 ##Condense into 1 function most likely 

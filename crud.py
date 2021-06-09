@@ -2,7 +2,7 @@ from typing import NoReturn
 from model import db, Skill, Genre, Band, Musician, BandSkill, MusicianSkill, BandGenre, MusicianGenre, connect_to_db
 import os
 
-################################ rachel start 
+
 def create_musician(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list):  
     """Create and return a new musician"""
     
@@ -81,6 +81,7 @@ def create_band(email, password, display_name, age, gender, influences, location
     db.session.commit()
 
     return band
+
 
 ###################################################### end 
 

@@ -8,8 +8,8 @@
         "influences":"The Beatles",
         "location": "New York City",
         "description": "Hey I'm Ted & I play the guitar.",
-        "skills": ["guitar", "violin"],
-        "genres": ["rock", "R&B"]
+        "skills": ["banjo", "bass", "cello", "drums", "flute", "guitar", "keyboard", "piano", "trumpet", "violin", "vocals", "saxophone", "synth"],
+        "genres": ["blues", "country", "electronic", "experimental", "folk", "hip hop", "jazz", "latin", "pop", "rock", "R&B"]
     },
     {
         "email": "caroline@example.com",
