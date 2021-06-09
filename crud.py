@@ -205,9 +205,11 @@ def get_musician_by_email(email):
 
     return Musician.query.filter(Musician.email == email).first()
 
-
+###########################################################################################bookmark 
 def find_matching_bands(current_musician):
     """Finds matching bands"""
+    #find the current_musician object in order to access current_musicain.skills
+
     print("***************")
     print(current_musician)
     matches = set()
@@ -238,13 +240,13 @@ def find_matching_bands(current_musician):
     return matches
         
 
-def find_matching_musicians(band):
+def find_matching_musicians(current_band):
     """Finds matching musicians"""
     
     matches = set()
     musicians = Musician.query.all()
-    band_skills = band.skills
-    band_genres = band.genres
+    band_skills = current_band.skills
+    band_genres = current_band.genres
 
     for musician in musicians:
         matching_skill = False 
@@ -267,12 +269,12 @@ def find_matching_musicians(band):
 
 def find_matches(user):
     """Match with another user"""
-    
+    #should add user_id to the function?
     if isinstance(user, Band):
         return find_matching_musicians(user)
     else:
         return find_matching_bands(user)
-
+##################################################################################################################
 
 # def show_matches(matches):
 #     """See all matches"""

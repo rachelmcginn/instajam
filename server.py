@@ -1,4 +1,4 @@
-from model import Musician
+from model import Band, Musician
 from crud import create_band, create_musician, find_matches
 from flask import (Flask, render_template, request, flash, session, redirect)
 
@@ -244,13 +244,22 @@ def match_queue():
 
     if user_type == None:
         return  redirect ('/login')
-    #if matches is empty
-        #return come back later 
-    else:
-        matches = crud.find_matches(user_type)
-       
+    elif user_type == 'band':
+        current_band = Band.query.get(user_id)
+        found_matches = crud.find_matches(current_band)
+        #if found_matches is empty
+            #"no matches found" message  
         return render_template('match-queue.html',
-                                matches=matches)
+                                found_matches=found_matches,
+                                user_type=user_type)
+    elif user_type == 'musician':
+        current_musician = Musician.query.get(user_id)
+        found_matches = crud.find_matches(current_musician)
+        #if found_matches is empty
+            #"no matches found" message
+        return render_template('match-queue.html',
+                                found_matches=found_matches,
+                                user_type=user_type)
 
 
 

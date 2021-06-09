@@ -4,7 +4,43 @@
 {% block body %}
   <h1>Match Queue</h1>
 
-  {{ matches }}
+  <!-- display each match's profile  -->
+  {% for match in found_matches %} 
+    {{ match.display_name }}
+
+    <!-- shows matched bands for musician users  -->
+    {% if user_type == 'musician' %}
+      <ul id="skill-genre-lists">
+        Seeking:
+        {% for skill in match.skills %}
+        <li>{{ skill.skill_name }}</li>
+        {% endfor %}
+      </ul>
+    <!-- shows matched musicians for band users  -->
+    {% else %}
+      <ul id="skill-genre-lists">
+        Talents:
+        {% for skill in skills %}
+        <li>{{ skill.skill_name }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %} 
+
+    {{ match.location }}
+    {{ match.description }}
+
+    <ul id="skill-genre-lists">
+      Genre: 
+      {% for genre in match.genres %}
+      <li>{{ genre.genre_name }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endfor %}
+
+  
+
+
   <!-- for every match in Matches
     matches = []
   render profile
