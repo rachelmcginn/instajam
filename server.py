@@ -255,8 +255,8 @@ def match_queue():
     elif user_type == 'musician':
         current_musician = Musician.query.get(user_id)
         found_matches = crud.find_matches(current_musician)
-        #if found_matches is empty
-            #"no matches found" message
+            # if found_matches == []:
+            #     no_matches_msg = "No matches found" message
         return render_template('match-queue.html',
                                 found_matches=found_matches,
                                 user_type=user_type)

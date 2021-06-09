@@ -6,7 +6,7 @@
 
   <!-- display each match's profile  -->
   {% for match in found_matches %} 
-    {{ match.display_name }}
+    <h2>{{ match.display_name }}</h3>
 
     <!-- shows matched bands for musician users  -->
     {% if user_type == 'musician' %}
@@ -17,20 +17,23 @@
         {% endfor %}
       </ul>
     <!-- shows matched musicians for band users  -->
-    {% else %}
+    {% elif user_type == 'band' %}
       <ul id="skill-genre-lists">
         Talents:
-        {% for skill in skills %}
+        {% for skill in match.skills %}
         <li>{{ skill.skill_name }}</li>
         {% endfor %}
       </ul>
+    {% else %}
+      There are currently no matches. Check back again soon!
+
     {% endif %} 
 
-    {{ match.location }}
-    {{ match.description }}
+    Location: {{ match.location }} <br>
+    About: {{ match.description }}
 
     <ul id="skill-genre-lists">
-      Genre: 
+      Genres: 
       {% for genre in match.genres %}
       <li>{{ genre.genre_name }}</li>
         {% endfor %}
