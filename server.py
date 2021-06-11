@@ -70,11 +70,10 @@ def handle_create_band():
     
     if user:
         flash("Band already exists, please log in.")
-        return render_template("login.html") #***************
+        return render_template("login.html") 
     else: 
         band = crud.create_band(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list)
-        # saved_skills = crud.add_band_skills(band, skill_list)
-        # saved_genres = crud.add_band_genres(band, genre_list)
+
         flash("Band profile successfully created!")
         return render_template("login.html")
     
@@ -107,11 +106,10 @@ def handle_create_musician():
 
     if user:
         flash("Musician already exists, please log in.")
-    else: ######## missing args (skill_list and genre_list)
-        musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description)
-        saved_skills = crud.add_musician_skills(musician, skill_list)
-        saved_genres = crud.add_musician_genres(musician, genre_list)
-        
+        return render_template("login.html")
+    else:
+        musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list)
+    
         flash("Musician profile successfully created!")
         return render_template("login.html")
 
@@ -124,8 +122,16 @@ def sign_up():
 
 @app.route('/login')
 def login():
-    """Log in"""
+    """Log in user"""
     return render_template('login.html')
+
+@app.route ('/logout')
+def logout():
+    """Log out user"""
+
+    session.clear()
+    flash("See you next time!")
+    return redirect('/')
 
 
 @app.route('/handle-login-band', methods = ['POST'])
@@ -247,19 +253,23 @@ def match_queue():
     elif user_type == 'band':
         current_band = Band.query.get(user_id)
         found_matches = crud.find_matches(current_band)
-        #if found_matches is empty
-            #"no matches found" message  
+        if found_matches == []:
+            flash("No matches found. Check back again soon!")
+            return render_template("matches.html")  
         return render_template('matches.html',
                                 found_matches=found_matches,
                                 user_type=user_type)
     elif user_type == 'musician':
         current_musician = Musician.query.get(user_id)
         found_matches = crud.find_matches(current_musician)
-            # if found_matches == []:
-            #     no_matches_msg = "No matches found" message
+        if found_matches == []:
+            flash("No matches found. Check back again soon!")
+            return render_template("matches.html")  
         return render_template('matches.html',
                                 found_matches=found_matches,
                                 user_type=user_type)
+
+
 
 
 
@@ -296,6 +306,11 @@ def match_queue():
 ###Contact match###
 #twilio api 
 
+# @app.route('matches.html')
+# def contact_match():
+
+    #get match's email
+    #contact them 
 
 
 

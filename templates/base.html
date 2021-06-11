@@ -22,16 +22,6 @@
   </head>
 
   <body>
-    <!-- <h1>
-      <a href="/">
-        <img src="static/jammy.png" alt="Instajam's logo"></a>Instajam
-    </h1>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a href="/">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/login">Login</a>
-      <a href="/sign-up">Sign Up</a>
-    </nav> -->
   
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="/">
@@ -53,18 +43,14 @@
             <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Dashboard">Dashboard</a>
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard">Dashboard</a>
           </li>
         </ul>
       </div>
     </nav>
-
-
-
-
-
-
-
 
 
     {% for msg in get_flashed_messages() %} 

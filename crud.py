@@ -81,9 +81,7 @@ def create_band(email, password, display_name, age, gender, influences, location
     db.session.commit()
 
     return band
-
-
-###################################################### end 
+    
 
 def create_a_skill(skill):
     """Add a new skill to the db"""
@@ -206,21 +204,14 @@ def get_musician_by_email(email):
 
     return Musician.query.filter(Musician.email == email).first()
 
-###########################################################################################bookmark 
+
 def find_matching_bands(current_musician):
     """Finds matching bands"""
-    #find the current_musician object in order to access current_musicain.skills
 
-    print("***************")
-    print(current_musician)
     matches = set()
     bands = Band.query.all()
     musician_skills = current_musician.skills
-    print("***")
-    print(musician_skills)
     musician_genres = current_musician.genres
-    print("***")
-    print(musician_genres)
 
     for band in bands:
         matching_skill = False 
@@ -270,27 +261,16 @@ def find_matching_musicians(current_band):
 
 def find_matches(user):
     """Match with another user"""
-    #should add user_id to the function?
     if isinstance(user, Band):
         return find_matching_musicians(user)
     else:
         return find_matching_bands(user)
-##################################################################################################################
-
-# def show_matches(matches):
-#     """See all matches"""
-#     
-#     return matches    
-
-#View profile
-
-#See potential matches
-
-#Match with user
-
-#See all matches
 
 
+def get_user(contact_target, user_phone_number):
+    """Contact match via Twilio"""
+
+    return 
 
 
 if __name__ == '__main__':
