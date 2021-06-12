@@ -3,9 +3,10 @@ from crud import create_band, create_musician, find_matches
 from flask import (Flask, render_template, request, flash, session, redirect)
 
 import crud
+import os
 from model import connect_to_db
 from jinja2 import StrictUndefined
-#from twiliojam import send_message  ###tests twilio api 
+from twilio.rest import Client
 
 
 app = Flask(__name__)
@@ -240,7 +241,7 @@ def dashboard():
                                 skills=skills,
                                 genres=genres)
 
-############ rachel
+
 @app.route('/matches')
 def match_queue():
     """Displays potential matches"""
@@ -269,50 +270,32 @@ def match_queue():
                                 found_matches=found_matches,
                                 user_type=user_type)
 
+###################################
+@app.route('/matches', methods=['POST'])
+def send_twilio_sms():
+    account_sid = os.environ['TWILIO_ACCOUNT_SID'] 
+    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+    twilio_number = os.environ['TWILIO_PHONE_NUMBER']
 
+    client = Client(account_sid, auth_token)
+    
+    match_name = request.form.get("match.display_name")
+    match_email = request.form.get("match.email")
+    phone_input = request.form.get("phone_input")
 
+    msg = f"Hello from Instajam!\nYou can email {match_name} at {match_email}.\nHappy jamming!",
 
+    message = client.messages \
+                    .create(
+                        body=msg,
+                        from_=twilio_number,
+                        to=phone_input
+                    )
 
-# @app.route('/matched')
-# def matched():
-#     """Displays profiles the user has matched with"""
-#     user_type = session.get('user_type')
-#     #send_message() ###tests twilio api
-#     if user_type == None:
-#         return  redirect ('/login')
-#     if user_type == 'band':
-#         return render_template('matched.html')
-#     if user_type == 'musician':
-#         return render_template('matched.html')
-
-
-##Condense into 1 function most likely 
-# @app.route('/users/<musician_id>') ###
-# def musician_profile(musician_id):
-#     """View a musician's profile"""
-
-#     musician = crud.get_musician_by_id(musician_id)
-
-#     return render_template('user_profile.html', musician=musician_id)
-
-# @app.route('/users/<band_id>')  ###
-# def band_profile(band_id):
-#     """View a band's profile"""
-
-#     band = crud.get_band_by_id(band_id)
-
-#     return render_template('user_profile.html', band=band_id)
-
-###Contact match###
-#twilio api 
-
-# @app.route('matches.html')
-# def contact_match():
-
-    #get match's email
-    #contact them 
-
-
+    return render_template('matches.html',
+                            match_name=match_name,
+                            match_email=match_email,
+                            message=message)
 
 if __name__ == '__main__':
     connect_to_db(app)
