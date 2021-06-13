@@ -17,6 +17,35 @@
         <li>{{ skill.skill_name }}</li>
         {% endfor %}                         
       </ul>
+
+      <ul id="skill-genre-lists">
+        Genres: 
+        {% for genre in match.genres %}        
+        <li>{{ genre.genre_name }}</li>
+        {% endfor %}           
+      </ul>
+
+      Location: {{ match.location }} <br>
+      About: {{ match.description }}
+
+      <form action="/contact-match" method="POST"> 
+        <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+        <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
+        <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+        <input id="email" name="email" type="hidden" value="{{match.email}}">
+        <button onclick="alert()">Contact</button>
+        <script>
+          function alert() {
+            alert("Message sent!");
+          }
+        </script>
+      </form>
+
+      
+
+      
+    
+
     <!-- shows matched musicians for band users  -->
     {% elif user_type == 'band' %}
       <ul id="skill-genre-lists">
@@ -25,31 +54,26 @@
         <li>{{ skill.skill_name }}</li>
         {% endfor %}                            
       </ul>
+      <form action="/contact-match" method="POST"> 
+        <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+        <input id="prodId" name="prodId" type="hidden" value="{{match.location}}">
+        <button onclick="alert()">Contact</button>
+        <script>
+          function alert() {
+            alert("Message sent!");
+          }
+        </script>
+      </form>
     {% else %}
       There are currently no matches. Check back again soon!
     {% endif %} 
 
-    Location: {{ match.location }} <br>
-    About: {{ match.description }}
-
-    <ul id="skill-genre-lists">
-      Genres: 
-      {% for genre in match.genres %}        
-      <li>{{ genre.genre_name }}</li>
-      {% endfor %}           
-    </ul>
   
+
+    
     
     <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
-    <form action="/contact-match" method="POST"> 
-      <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-      <button onclick="alert()">Contact</button>
-      <script>
-        function alert() {
-          alert("Message sent!");
-        }
-      </script>
-    </form>
+   
   {% endfor %}     
 
 

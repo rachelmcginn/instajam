@@ -279,8 +279,9 @@ def match_queue():
 @app.route('/contact-match', methods=['POST'])
 def send_twilio_sms():
     
-    match_name = request.form.get("match.display_name")
-    match_email = request.form.get("match.email")
+    match_name = request.form.get("display_name")
+    print(request.form)
+    match_email = request.form.get("email")
     phone_input = request.form.get("phone_input")
 
     user_type = session.get('user_type')
@@ -292,11 +293,11 @@ def send_twilio_sms():
         current_band = Band.query.get(user_id)
         found_matches = crud.find_matches(current_band)
     elif user_type == 'musician':
-        current_musician = Musician.query.get(user_id)
+        current_musician = Musician.query.get(user_id) 
         found_matches = crud.find_matches(current_musician)
-
+        
     msg = f"Hello from Instajam!\nYou can email {match_name} at {match_email}.\nHappy jamming!",
-
+    
     message = client.messages \
                     .create(
                         body=msg,
