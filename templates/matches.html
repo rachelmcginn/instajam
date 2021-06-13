@@ -8,9 +8,10 @@
   {% for match in found_matches %}           
     <h2>{{ match.display_name }}</h3>
 
-    <!-- shows matched bands for musician users  -->
+    <!-- shows musician user match's   -->
     {% if user_type == 'musician' %}
-        
+
+      <!-- match's needed skills (band skills) -->
       <ul id="skill-genre-lists">
         Seeking:
         {% for skill in match.skills %}       
@@ -18,6 +19,7 @@
         {% endfor %}                         
       </ul>
 
+    <!-- genre match (band genres) -->
       <ul id="skill-genre-lists">
         Genres: 
         {% for genre in match.genres %}        
@@ -28,6 +30,7 @@
       Location: {{ match.location }} <br>
       About: {{ match.description }}
 
+      <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
       <form action="/contact-match" method="POST"> 
         <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
         <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
@@ -41,22 +44,35 @@
         </script>
       </form>
 
-      
-
-      
-    
-
     <!-- shows matched musicians for band users  -->
     {% elif user_type == 'band' %}
+
+      <!-- match talents (musician skills) -->
       <ul id="skill-genre-lists">
         Talents:
         {% for skill in match.skills %}         
         <li>{{ skill.skill_name }}</li>
         {% endfor %}                            
       </ul>
+      
+      <!-- match genres (musician genres) -->
+      <ul id="skill-genre-lists">
+        Genres: 
+        {% for genre in match.genres %}        
+        <li>{{ genre.genre_name }}</li>
+        {% endfor %}           
+      </ul>
+
+      Location: {{ match.location }} <br>
+      About: {{ match.description }}
+
+      <!-- contact match form  -->
+      <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
       <form action="/contact-match" method="POST"> 
         <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-        <input id="prodId" name="prodId" type="hidden" value="{{match.location}}">
+        <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
+        <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+        <input id="email" name="email" type="hidden" value="{{match.email}}">
         <button onclick="alert()">Contact</button>
         <script>
           function alert() {
@@ -64,18 +80,11 @@
           }
         </script>
       </form>
+
     {% else %}
       There are currently no matches. Check back again soon!
     {% endif %} 
 
-  
-
-    
-    
-    <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
-   
   {% endfor %}     
-
-
 {% endblock %}
 

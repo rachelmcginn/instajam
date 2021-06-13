@@ -296,7 +296,7 @@ def send_twilio_sms():
         current_musician = Musician.query.get(user_id) 
         found_matches = crud.find_matches(current_musician)
         
-    msg = f"Hello from Instajam!\nYou can email {match_name} at {match_email}.\nHappy jamming!",
+    msg = f"\nHello from Instajam!\nYou can reach {match_name} at {match_email}.\nHappy Jamming!",
     
     message = client.messages \
                     .create(
