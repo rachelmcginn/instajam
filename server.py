@@ -8,6 +8,11 @@ from model import connect_to_db
 from jinja2 import StrictUndefined
 from twilio.rest import Client
 
+account_sid = os.environ['TWILIO_ACCOUNT_SID'] 
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+twilio_number = os.environ['TWILIO_PHONE_NUMBER'] 
+
+client = Client(account_sid, auth_token)
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -271,17 +276,24 @@ def match_queue():
                                 user_type=user_type)
 
 ###################################
-@app.route('/matches', methods=['POST'])
+@app.route('/contact-match', methods=['POST'])
 def send_twilio_sms():
-    account_sid = os.environ['TWILIO_ACCOUNT_SID'] 
-    auth_token = os.environ['TWILIO_AUTH_TOKEN']
-    twilio_number = os.environ['TWILIO_PHONE_NUMBER']
-
-    client = Client(account_sid, auth_token)
     
     match_name = request.form.get("match.display_name")
     match_email = request.form.get("match.email")
     phone_input = request.form.get("phone_input")
+
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
+
+    if user_type == None:
+        return  redirect ('/login')
+    elif user_type == 'band':
+        current_band = Band.query.get(user_id)
+        found_matches = crud.find_matches(current_band)
+    elif user_type == 'musician':
+        current_musician = Musician.query.get(user_id)
+        found_matches = crud.find_matches(current_musician)
 
     msg = f"Hello from Instajam!\nYou can email {match_name} at {match_email}.\nHappy jamming!",
 
@@ -295,7 +307,11 @@ def send_twilio_sms():
     return render_template('matches.html',
                             match_name=match_name,
                             match_email=match_email,
-                            message=message)
+                            phone_input=phone_input,
+                            message=message,
+                            found_matches=found_matches,
+                            user_type=user_type,
+                            user_id=user_id)
 
 if __name__ == '__main__':
     connect_to_db(app)
