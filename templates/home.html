@@ -5,15 +5,22 @@
 
 
   <h2>Welcome to Instajam</h2>
+  {% if user_type != None %}
+    <p>Welcome back, {{ display_name }}!</p>
+  {% endif %}
+
   <p>Sign up and match with your newest bandmates today!
   </p>
+  <h2>Sign up</h2>
+  <a href="/create-band">Bands</a>
+  <a href="/create-musician">Musicians</a>
 
   <!-- resize -->
   <!-- <img src="static/home_image.png" 
   alt="Three members in a band playing guitar, playing drums, 
   and singing into a microphone."> -->
 
-  <li><a href="/sign-up">Sign Up</a></li>
-  <li><a href="/login">Login</a></li>
+  <!-- <li><a href="/login">Login</a></li> -->
+
 
 {% endblock %}

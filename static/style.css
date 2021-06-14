@@ -13,9 +13,13 @@ body {
     /* height: 100%; */
 /* } */ 
 
-/* #skill-genre-lists ul{
-    list-style: none;
-  } */
+.skill-item {
+  border: 1px solid green ;
+}
+
+.genre-item {
+  border: 1px solid green ;
+}
   
   li {
     display: inline;

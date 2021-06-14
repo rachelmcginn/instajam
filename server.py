@@ -45,20 +45,40 @@ def display_session():
 @app.route('/')
 def homepage():
     """View homepage"""
-    return render_template('home.html')
+
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
+
+    user = crud.get_band_by_id(user_id)
+
+    # session['display_name'] = user.display_name 
+
+    display_name = user.display_name
+
+    return render_template('home.html',
+                            user_type=user_type,
+                            user_id=user_id,
+                            display_name=display_name)
 
 
 @app.route('/create-band')
 def create_band(): 
     """Displays form to create a new band user"""
     
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
     
-    return render_template('create-band.html')
+    return render_template('create-band.html',
+                            user_type=user_type,
+                            user_id=user_id)
 
 
 @app.route('/handle-create-band', methods=['POST'])
 def handle_create_band(): 
     """Handles new band user"""
+
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
     
     email = request.form['email']
     password = request.form['password']
@@ -76,25 +96,36 @@ def handle_create_band():
     
     if user:
         flash("Band already exists, please log in.")
-        return render_template("login.html") 
+        return render_template("login.html",
+                            user_type=user_type,
+                            user_id=user_id) 
     else: 
         band = crud.create_band(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list)
 
         flash("Band profile successfully created!")
-        return render_template("login.html")
+        return render_template("login.html",
+                            user_type=user_type,
+                            user_id=user_id)
     
 
 @app.route('/create-musician')
 def create_musician(): 
     """Displays form to create a new musician user"""
     
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
     
-    return render_template('create-musician.html')
+    return render_template('create-musician.html',
+                            user_type=user_type,
+                            user_id=user_id)
 
 
 @app.route('/handle-create-musician', methods=['POST'])
 def handle_create_musician(): 
     """Handles new musician user"""
+
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
     
     email = request.form['email']
     password = request.form['password']
@@ -112,24 +143,34 @@ def handle_create_musician():
 
     if user:
         flash("Musician already exists, please log in.")
-        return render_template("login.html")
+        return render_template("login.html",
+                                user_type=user_type,
+                                user_id=user_id)
     else:
         musician = crud.create_musician(email, password, display_name, age, gender, influences, location, description, skill_list, genre_list)
     
         flash("Musician profile successfully created!")
-        return render_template("login.html")
+        return render_template("login.html",
+                                user_type=user_type,
+                                user_id=user_id)
 
 
-@app.route('/sign-up')
-def sign_up():
-    """Displays sign up options."""
-    return render_template('sign-up.html')
+# @app.route('/sign-up')
+# def sign_up():
+#     """Displays sign up options."""
+#     return render_template('sign-up.html')
 
 
 @app.route('/login')
 def login():
     """Log in user"""
-    return render_template('login.html')
+
+    user_type = session.get('user_type')
+    user_id = session.get('user_id')
+
+    return render_template('login.html',
+                            user_type=user_type,
+                            user_id=user_id)
 
 @app.route ('/logout')
 def logout():
@@ -275,12 +316,11 @@ def match_queue():
                                 found_matches=found_matches,
                                 user_type=user_type)
 
-###################################
+
 @app.route('/contact-match', methods=['POST'])
 def send_twilio_sms():
     
     match_name = request.form.get("display_name")
-    print(request.form)
     match_email = request.form.get("email")
     phone_input = request.form.get("phone_input")
 

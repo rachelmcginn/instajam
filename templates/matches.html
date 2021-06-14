@@ -12,18 +12,18 @@
     {% if user_type == 'musician' %}
 
       <!-- match's needed skills (band skills) -->
-      <ul id="skill-genre-lists">
+      <ul>
         Seeking:
         {% for skill in match.skills %}       
-        <li>{{ skill.skill_name }}</li>
+        <li class="skill-item">{{ skill.skill_name }}</li>
         {% endfor %}                         
       </ul>
 
     <!-- genre match (band genres) -->
-      <ul id="skill-genre-lists">
+      <ul>
         Genres: 
         {% for genre in match.genres %}        
-        <li>{{ genre.genre_name }}</li>
+        <li class="genre-item">{{ genre.genre_name }}</li>
         {% endfor %}           
       </ul>
 
@@ -44,27 +44,30 @@
         </script>
       </form>
 
+      <button type="button">Next</button>
+
+
     <!-- shows matched musicians for band users  -->
     {% elif user_type == 'band' %}
 
       <!-- match talents (musician skills) -->
-      <ul id="skill-genre-lists">
+      <ul>
         Talents:
         {% for skill in match.skills %}         
-        <li>{{ skill.skill_name }}</li>
+        <li class="skill-item">{{ skill.skill_name }}</li>
         {% endfor %}                            
       </ul>
-      
+
       <!-- match genres (musician genres) -->
-      <ul id="skill-genre-lists">
+      <ul>
         Genres: 
         {% for genre in match.genres %}        
-        <li>{{ genre.genre_name }}</li>
+        <li class="genre-item">{{ genre.genre_name }}</li>
         {% endfor %}           
       </ul>
 
       Location: {{ match.location }} <br>
-      About: {{ match.description }}
+      About: {{ match.description }} <br>
 
       <!-- contact match form  -->
       <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
@@ -80,6 +83,7 @@
           }
         </script>
       </form>
+
 
     {% else %}
       There are currently no matches. Check back again soon!
