@@ -49,12 +49,13 @@ def homepage():
     user_type = session.get('user_type')
     user_id = session.get('user_id')
 
-    user = crud.get_band_by_id(user_id)
+    if user_type != None:
+        user = crud.get_band_by_id(user_id)
 
-    # session['display_name'] = user.display_name 
-
-    display_name = user.display_name
-
+        display_name = user.display_name
+    else:
+        display_name = "Guest"
+        
     return render_template('home.html',
                             user_type=user_type,
                             user_id=user_id,
