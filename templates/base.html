@@ -1,7 +1,10 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <!-- bootstrap -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- bootstrap css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- custom -->
@@ -9,9 +12,6 @@
     <!-- intl-tel-input plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    
     <title>
       {% block title %}Instajam{% endblock %}
     </title>
@@ -22,75 +22,78 @@
 
     {% block head %}{% endblock %}
   </head>
-
   <body>
-    {% for msg in get_flashed_messages() %}
-      <p class="flash-msg">
-        {{ msg }}
-      </p>
-    {% endfor %}
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="/">
-        <img src="static/jammy.png" alt="Instajam's logo">
-      </a>
-      <h1>Instajam</h1>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="dashboard">Dashboard</a>
-          </li>
-          {% if user_type == None %}
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+    <div class="container">
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+      <!-- nav bar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">
+          <img src="static/jammy.png" alt="Instajam's logo">
+        </a>
+        <h1>Instajam</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
             </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard">Dashboard</a>
+            </li>
+            {% if user_type == None %}
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
 
 
-    {% for msg in get_flashed_messages() %} 
-      <p class="flash-msg">
-        {{ msg }}
-      </p>
-    {% endfor %}
+      {% for msg in get_flashed_messages() %} 
+        <p class="flash-msg">
+          {{ msg }}
+        </p>
+      {% endfor %}
 
-    {% block body %}{% endblock %}
+      {% block body %}{% endblock %}
 
-    {% block after_body %}{% endblock %}
-    
-    <!-- jQuery script tag -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.js"
-      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-      crossorigin="anonymous">
+      {% block after_body %}{% endblock %}
+      
+      <!-- jQuery script tag -->
+      <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+      </script>
+      
+      <!-- Script tags from getbootstrap.com -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+      </script>
+
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+      </script>
+    </body>
+
+    <script>
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js",
+      });
     </script>
-    
-    <!-- Script tags from getbootstrap.com -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-  </body>
-
-  <script>
-    const phoneInputField = document.querySelector("#phone");
-    const phoneInput = window.intlTelInput(phoneInputField, {
-      utilsScript:
-        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js",
-    });
-  </script>
+  </div>
 </html>
