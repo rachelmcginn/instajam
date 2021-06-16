@@ -8,7 +8,7 @@
   {% for match in found_matches %}           
     <!-- shows musician user match's   -->
     {% if user_type == 'musician' %}
-    <h2><img src="static/drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
+    <h2><img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
 
 
       <!-- match's needed skills (band skills) -->
@@ -50,7 +50,10 @@
 
     <!-- shows matched musicians for band users  -->
     {% elif user_type == 'band' %}
-      <h2><img src="static/guitarist_black.png" alt="Black silhouette of a guitarist">{{ match.display_name }}</h2>
+      <h2>
+        <container class="user_icon"> 
+          <img src="static/icon_guitarist_black.png" alt="Black silhouette of a guitarist">{{ match.display_name }}</h2>
+        </container>
       
       <!-- match talents (musician skills) -->
       <ul>
