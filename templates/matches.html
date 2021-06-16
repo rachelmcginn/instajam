@@ -2,7 +2,7 @@
 {% block title %}Instajam{% endblock %}
 
 {% block body %}
-  <h1>Match Queue</h1>
+  <h1>Matches</h1>
 
   <!-- display each match's profile  -->
   {% for match in found_matches %}           
@@ -72,16 +72,16 @@
       About: {{ match.description }} <br>
 
       <!-- contact match form  -->
-      <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
       <form action="/contact-match" method="POST"> 
         <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
         <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
         <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
         <input id="email" name="email" type="hidden" value="{{match.email}}">
-        <button onclick="alert()">Contact</button>
+
+        <button onclick="message_sent()">Contact</button>
         <script>
-          function alert() {
-            alert("Message sent!");
+          function message_sent() {
+            alert("Match info successfully sent!");
           }
         </script>
       </form>

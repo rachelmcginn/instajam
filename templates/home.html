@@ -4,34 +4,35 @@
 {% block body %}
 
 
-  <h2>Welcome to Instajam</h2>
-  {% if user_type != None %}
-    <p>Welcome back, {{ display_name }}!</p>
-  {% endif %}
-
+  <!-- About, top left -->
   <div class="row">
-    <p>Sign up and match with your newest bandmates today!
-    </p>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-10 row">
-      <h2>Sign up</h2>
-      <a href="/create-band">Bands</a>
-      <a href="/create-musician">Musicians</a>
-    </div>
-
-    <div class="row">
-      <div class="col-md-10 row">
-        <img class="center-block" src="static/home_image.png" alt="Three members in a band 
-      playing guitar, playing drums, and singing into a microphone.">
+    <div class="col">
+      <h2>Welcome to Instajam</h2>
+      <p>Sign up and match with your newest bandmates today!
+      </p>
+      <div class="row">
+        <div class="row">
+          <h2>Sign up</h2>
+          <a href="/create-band">Bands</a>
+          <a href="/create-musician">Musicians</a>
+        </div>
       </div>
     </div>
-    
+    <!-- graphics, top right  -->
+    <div class="col">
+      <img class="center-block img-fluid" src="static/home_image.png" alt="Three members in a band 
+      playing guitar, playing drums, and singing into a microphone.">
+    </div>
   </div>
+<!-- links, bottom left -->
+  <!-- <div class="row">
+    <h2>Sign up</h2>
+    <a href="/create-band">Bands</a>
+    <a href="/create-musician">Musicians</a>
+  </div> -->
   
 
-  
+  <!-- <div class="col-md-10 row"></div> -->
 
   <!-- resize -->
   <!-- <img src="static/home_image.png" 
