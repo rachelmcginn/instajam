@@ -9,23 +9,16 @@
       <p>Hello, {{ display_name }}!</p>
       </div>
     </div>
-
-  <!-- <div>
-    {% if user_type == 'musician' %}
-    <img src="static/drumkit_red.png" alt="Red silhouette of a drumkit">
-    {% else %}
-    <img src="static/guitarist_black.png" alt="Black silhouette of a guitarist">
-    {% endif %}
-  </div> -->
+    
 
   <div class="row">
     {% if user_type == 'musician' %}
     <h3>
-      <img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ display_name }}
+      <img class="user_icon" src="static/icon_guitarist_red.png" alt="Red silhouette of a drumkit">{{ display_name }}
     </h3>
     {% else %}
     <h3>
-      <img class="user_icon" src="static/icon_guitarist_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
+      <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
     </h3>
     {% endif %}
 

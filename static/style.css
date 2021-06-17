@@ -20,11 +20,19 @@ body {
 }
 
 .skill-item {
-  border: 1px solid green ;
+  border-radius: 8px;
+  background: #df847d;
+  padding: 5px;
+  width: 80px;
+  height: 40px;
 }
 
 .genre-item {
-  border: 1px solid green ;
+  border-radius: 8px;
+  background: #e9ecef;
+  padding: 5px;
+  width: 100px;
+  height: 50px;
 }
   
   li {
