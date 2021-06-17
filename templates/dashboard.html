@@ -12,48 +12,63 @@
     
 
   <div class="row">
-    {% if user_type == 'musician' %}
-    <h3>
-      <img class="user_icon" src="static/icon_guitarist_red.png" alt="Red silhouette of a drumkit">{{ display_name }}
-    </h3>
-    {% else %}
-    <h3>
-      <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
-    </h3>
-    {% endif %}
-
-    Location: {{ location }}
-    
-    {% if user_type == 'band' %}
-        <ul id="skill-genre-lists">
-          Seeking:
-          {% for skill in seeking %}
-          <li>{{ skill.skill_name }}</li>
-            {% endfor %}
-        </ul>
-      
-    {% else %}
-    <ul id="skill-genre-lists">
-      Talents:
-      {% for skill in skills %}
-      <li>{{ skill.skill_name }}</li>
-        {% endfor %}
-    </ul>
-      {% endif %} 
-
-    About: {{ description }} <br>
-
-    <ul id="skill-genre-lists">
-      Genre: 
-      {% for genre in genres %}
-      <li>{{ genre.genre_name }}</li>
-        {% endfor %}
-    </ul>
-
-    Influences: {{ influences }} <br>
-    <br>
     <div class="col">
-      <div class="row">
+      {% if user_type == 'musician' %}
+      <h3>
+        <img class="user_icon" src="static/icon_guitarist_black.png" alt="Black silhouette of a drumkit">{{ display_name }}
+      </h3>
+      {% else %}
+      <h3>
+        <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
+      </h3>
+      {% endif %}
+
+      <p>
+        <span class="user-data">
+          Location:</span> {{ location }}
+      </p> 
+
+      <p>
+        <span class="user-data">
+          About:</span> {{ description }}
+      </p> 
+      
+      {% if user_type == 'band' %}
+          <ul>
+            <span class="user-data">
+            Seeking: </span>
+            {% for skill in seeking %}
+            <li class="skill-item">{{ skill.skill_name }}</li>
+              {% endfor %}
+          </ul>
+        
+      {% else %}
+      <ul>
+        <span class="user-data">
+          Talents: </span> 
+            {% for skill in skills %}
+            <li class="skill-item">{{ skill.skill_name }}</li>
+            {% endfor %}
+      </ul>
+      {% endif %} 
+      
+      <ul>
+        <span class="user-data">
+          Genre: </span> 
+            {% for genre in genres %}
+            <li class="genre-item">{{ genre.genre_name }}</li>
+            {% endfor %}
+      </ul>
+
+      <br>
+      
+      <p>
+        <span class="user-data">
+          Influences: </span> {{ influences }}
+      </p>
+  </div>
+    <div class="row">
+      <div class="col">
         <a href="/matches">My Matches</a>
       </div>
     </div>

@@ -34,7 +34,11 @@ body {
   width: 100px;
   height: 50px;
 }
-  
+
+.user-data {
+  font-weight: bold;
+}
+
   li {
     display: inline;
   }
