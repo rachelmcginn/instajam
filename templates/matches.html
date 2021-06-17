@@ -2,98 +2,101 @@
 {% block title %}Instajam{% endblock %}
 
 {% block body %}
-  <h1>Matches</h1>
+  <div class="container">
 
-  <!-- display each match's profile  -->
-  {% for match in found_matches %}           
-    <!-- shows musician user match's   -->
-    {% if user_type == 'musician' %}
-    <h2><img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
+    <h1>Matches</h1>
 
-
-      <!-- match's needed skills (band skills) -->
-      <ul>
-        Seeking:
-        {% for skill in match.skills %}       
-        <li class="skill-item">{{ skill.skill_name }}</li>
-        {% endfor %}                         
-      </ul>
-
-    <!-- genre match (band genres) -->
-      <ul>
-        Genres: 
-        {% for genre in match.genres %}        
-        <li class="genre-item">{{ genre.genre_name }}</li>
-        {% endfor %}           
-      </ul>
-
-      Location: {{ match.location }} <br>
-      About: {{ match.description }}
-
-      <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
-      <form action="/contact-match" method="POST"> 
-        <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-        <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
-        <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
-        <input id="email" name="email" type="hidden" value="{{match.email}}">
-        <button onclick="alert()">Contact</button>
-        <script>
-          function alert() {
-            alert("Message sent!");
-          }
-        </script>
-      </form>
-
-      <button type="button">Next</button>
+    <!-- display each match's profile  -->
+    {% for match in found_matches %}           
+      <!-- shows musician user match's   -->
+      {% if user_type == 'musician' %}
+      <h2><img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
 
 
+        <!-- match's needed skills (band skills) -->
+        <ul>
+          Seeking:
+          {% for skill in match.skills %}       
+          <li class="skill-item">{{ skill.skill_name }}</li>
+          {% endfor %}                         
+        </ul>
 
-    <!-- shows matched musicians for band users  -->
-    {% elif user_type == 'band' %}
-      <h2>
-        <container class="user_icon"> 
-          <img src="static/icon_guitarist_red.png" alt="Red silhouette of a guitarist">{{ match.display_name }}</h2>
-        </container>
-      
-      <!-- match talents (musician skills) -->
-      <ul>
-        Talents:
-        {% for skill in match.skills %}         
-        <li class="skill-item">{{ skill.skill_name }}</li>
-        {% endfor %}                            
-      </ul>
+      <!-- genre match (band genres) -->
+        <ul>
+          Genres: 
+          {% for genre in match.genres %}        
+          <li class="genre-item">{{ genre.genre_name }}</li>
+          {% endfor %}           
+        </ul>
 
-      <!-- match genres (musician genres) -->
-      <ul>
-        Genres: 
-        {% for genre in match.genres %}        
-        <li class="genre-item">{{ genre.genre_name }}</li>
-        {% endfor %}           
-      </ul>
+        Location: {{ match.location }} <br>
+        About: {{ match.description }}
 
-      Location: {{ match.location }} <br>
-      About: {{ match.description }} <br>
+        <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
+        <form action="/contact-match" method="POST"> 
+          <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+          <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
+          <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+          <input id="email" name="email" type="hidden" value="{{match.email}}">
+          <button onclick="alert()">Contact</button>
+          <script>
+            function alert() {
+              alert("Message sent!");
+            }
+          </script>
+        </form>
 
-      <!-- contact match form  -->
-      <form action="/contact-match" method="POST"> 
-        <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-        <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
-        <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
-        <input id="email" name="email" type="hidden" value="{{match.email}}">
-
-        <button onclick="message_sent()">Contact</button>
-        <script>
-          function message_sent() {
-            alert("Match info successfully sent!");
-          }
-        </script>
-      </form>
+        <button type="button">Next</button>
 
 
-    {% else %}
-      There are currently no matches. Check back again soon!
-    {% endif %} 
 
-  {% endfor %}     
+      <!-- shows matched musicians for band users  -->
+      {% elif user_type == 'band' %}
+        <h2>
+          <container class="user_icon"> 
+            <img src="static/icon_guitarist_red.png" alt="Red silhouette of a guitarist">{{ match.display_name }}</h2>
+          </container>
+        
+        <!-- match talents (musician skills) -->
+        <ul>
+          Talents:
+          {% for skill in match.skills %}         
+          <li class="skill-item">{{ skill.skill_name }}</li>
+          {% endfor %}                            
+        </ul>
+
+        <!-- match genres (musician genres) -->
+        <ul>
+          Genres: 
+          {% for genre in match.genres %}        
+          <li class="genre-item">{{ genre.genre_name }}</li>
+          {% endfor %}           
+        </ul>
+
+        Location: {{ match.location }} <br>
+        About: {{ match.description }} <br>
+
+        <!-- contact match form  -->
+        <form action="/contact-match" method="POST"> 
+          <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+          <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
+          <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+          <input id="email" name="email" type="hidden" value="{{match.email}}">
+
+          <button onclick="message_sent()">Contact</button>
+          <script>
+            function message_sent() {
+              alert("Match info successfully sent!");
+            }
+          </script>
+        </form>
+
+
+      {% else %}
+        There are currently no matches. Check back again soon!
+      {% endif %} 
+
+    {% endfor %}     
+</div>
 {% endblock %}
 

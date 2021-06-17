@@ -3,43 +3,33 @@
 
 {% block body %}
 
-
-  <!-- About, top left -->
-  <div class="row">
-    <div class="col">
-      <h2>Welcome to Instajam</h2>
-      <p>Sign up and match with your newest bandmates today!
-      </p>
-      <div class="row">
+<div class="container">
+    <!-- About, top left -->
+    <div class="row">
+      <div class="col">
+        <h2>Welcome to Instajam</h2>
+        <p>Sign up and match with your newest bandmates today!
+        </p>
         <div class="row">
-          <h2>Sign up</h2>
-          <a href="/create-band">Bands</a>
-          <a href="/create-musician">Musicians</a>
+          <div class="row">
+            <h2>Sign up</h2>
+            <h3>
+              <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a drumkit">
+              <a href="/create-band" class="link-header">Bands</a>
+            </h3>
+            <h3>
+              <img class="user_icon" src="static/icon_guitarist_red.png" alt="Red silhouette of a guitarist">
+              <a href="/create-musician" class="link-header">Musicians</a>
+            </h3>
+          </div>
         </div>
       </div>
+      <!-- graphics, top right  -->
+      <div class="col">
+        <img class="center-block img-fluid" src="static/home_image.png" alt="Three members in a band 
+        playing guitar, playing drums, and singing into a microphone.">
+      </div>
     </div>
-    <!-- graphics, top right  -->
-    <div class="col">
-      <img class="center-block img-fluid" src="static/home_image.png" alt="Three members in a band 
-      playing guitar, playing drums, and singing into a microphone.">
-    </div>
-  </div>
-<!-- links, bottom left -->
-  <!-- <div class="row">
-    <h2>Sign up</h2>
-    <a href="/create-band">Bands</a>
-    <a href="/create-musician">Musicians</a>
-  </div> -->
-  
 
-  <!-- <div class="col-md-10 row"></div> -->
-
-  <!-- resize -->
-  <!-- <img src="static/home_image.png" 
-  alt="Three members in a band playing guitar, playing drums, 
-  and singing into a microphone."> -->
-
-  <!-- <li><a href="/login">Login</a></li> -->
-
-
+</div>
 {% endblock %}

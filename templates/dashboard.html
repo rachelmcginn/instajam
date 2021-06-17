@@ -2,75 +2,76 @@
 {% block title %}Instajam{% endblock %}
 
 {% block body %}
-
-  <div class="row">
-    <div class="col">
-      <h2>Dashboard</h2>
-      <p>Hello, {{ display_name }}!</p>
-      </div>
-    </div>
-    
-
-  <div class="row">
-    <div class="col">
-      {% if user_type == 'musician' %}
-      <h3>
-        <img class="user_icon" src="static/icon_guitarist_black.png" alt="Black silhouette of a drumkit">{{ display_name }}
-      </h3>
-      {% else %}
-      <h3>
-        <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
-      </h3>
-      {% endif %}
-
-      <p>
-        <span class="user-data">
-          Location:</span> {{ location }}
-      </p> 
-
-      <p>
-        <span class="user-data">
-          About:</span> {{ description }}
-      </p> 
-      
-      {% if user_type == 'band' %}
-          <ul>
-            <span class="user-data">
-            Seeking: </span>
-            {% for skill in seeking %}
-            <li class="skill-item">{{ skill.skill_name }}</li>
-              {% endfor %}
-          </ul>
-        
-      {% else %}
-      <ul>
-        <span class="user-data">
-          Talents: </span> 
-            {% for skill in skills %}
-            <li class="skill-item">{{ skill.skill_name }}</li>
-            {% endfor %}
-      </ul>
-      {% endif %} 
-      
-      <ul>
-        <span class="user-data">
-          Genre: </span> 
-            {% for genre in genres %}
-            <li class="genre-item">{{ genre.genre_name }}</li>
-            {% endfor %}
-      </ul>
-
-      <br>
-      
-      <p>
-        <span class="user-data">
-          Influences: </span> {{ influences }}
-      </p>
-  </div>
-    <div class="row">
+  <div class="container">
+    <div class="row title-row">
       <div class="col">
-        <a href="/matches">My Matches</a>
+        <h2>Dashboard</h2>Hello, {{ display_name }}!
+        </div>
       </div>
+      
+  <!-- trying to center this row (not the text, just center the contents) -->
+    <div class="row profile-row">
+      <div class="col">
+        {% if user_type == 'musician' %}
+        <h3>
+          <img class="user_icon" src="static/icon_guitarist_black.png" alt="Black silhouette of a guitarist">{{ display_name }}
+        </h3>
+        {% else %}
+        <h3>
+          <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a drumkit">{{ display_name }}
+        </h3>
+        {% endif %}
+
+        <p>
+          <span class="user-data">
+            Location:</span> {{ location }}
+        </p> 
+
+        <p>
+          <span class="user-data">
+            About:</span> {{ description }}
+        </p> 
+        
+        {% if user_type == 'band' %}
+            <ul>
+              <span class="user-data">
+              Seeking: </span>
+              {% for skill in seeking %}
+              <li class="skill-item">{{ skill.skill_name }}</li>
+                {% endfor %}
+            </ul>
+          
+        {% else %}
+        <ul>
+          <span class="user-data">
+            Talents: </span> 
+              {% for skill in skills %}
+              <li class="skill-item">{{ skill.skill_name }}</li>
+              {% endfor %}
+        </ul>
+        {% endif %} 
+        
+        <ul>
+          <span class="user-data">
+            Genre: </span> 
+              {% for genre in genres %}
+              <li class="genre-item">{{ genre.genre_name }}</li>
+              {% endfor %}
+        </ul>
+
+        <br>
+        
+        <p>
+          <span class="user-data">
+            Influences: </span> {{ influences }}
+        </p>
+    </div>
+    <div class="col">
+      <h3>
+        <img src="static/red_musician_64.png" alt="Red line drawing of a person and a music note">
+        <a href="/matches" class="link-header">My Matches</a>
+      </h3>
+    </div>
     </div>
   </div>
   
