@@ -5,37 +5,45 @@
   <div class="container">
     <h1>Login</h1>
     <p>Welcome back!</p>
+
+  
     <!-- Band login form  -->
-    <form action='handle-login-band' method='POST'> 
-      <h3>
-        <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a drumkit">
-        Bands
-      </h3> 
-      <p>
-        Email: <input type="text" name="email">
-      </p>
+    <div class="row center-content">
+      <div class="col-md-6 form-group">
+        <form action='handle-login-band' method='POST'> 
+          <h3>
+            <img class="user_icon" src="static/icon_drumkit_black.png" alt="Black silhouette of a drumkit">
+            Bands
+          </h3> 
+          <p>
+            Email: <input type="text" class="form-control" name="email">
+          </p>
 
-      <p>
-        Password: <input type="password" name="password">
-      </p>
-      <input type='submit'></input>
-    </form>
+          <p>
+            Password: <input type="password" class="form-control" name="password">
+          </p>
+          <input type='submit'></input>
+        </form>
+      </div>
 
-    <!-- Musician login form  -->
-    <form action='handle-login-musician' method='POST'>
-      <h3>
-        <img class="user_icon" src="static/icon_guitarist_red.png" alt="Red silhouette of a person playing guitar.">
-        Musicians
-      </h3> 
-      <p>
-        Email: <input type="text" name="email">
-      </p>
+      <!-- Musician login form  -->
+      <div class="col-md-6 form-group">
+        <form action='handle-login-musician' method='POST'>
+          <h3>
+            <img class="user_icon" src="static/icon_guitarist_red.png" alt="Red silhouette of a person playing guitar.">
+            Musicians
+          </h3> 
+          <p>
+            Email: <input type="text" class="form-control" name="email">
+          </p>
 
-      <p>
-        Password: <input type="password" name="password">
-      </p>
-      <input type='submit'></input>
-    </form>
+          <p>
+            Password: <input type="password" class="form-control" name="password">
+          </p>
+          <input type='submit'></input>
+        </form>
+      </div>
+    </div>
   </div>
 
 {% endblock %}

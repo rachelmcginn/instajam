@@ -6,89 +6,115 @@
 
     <h1>Matches</h1>
 
-    <!-- display each match's profile  -->
-    {% for match in found_matches %}           
-      <!-- shows musician user match's   -->
-      {% if user_type == 'musician' %}
-      <h2><img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
+    <div class="row mx-auto" style="width: 600px;">
+      <div class="container">
+      <!-- display each match's profile  -->
+      {% for match in found_matches %}           
+        <!-- shows musician user match's   -->
+        {% if user_type == 'musician' %}
+        <h2><img class="user_icon" src="static/icon_drumkit_red.png" alt="Red silhouette of a drumkit">{{ match.display_name }}</h2>
 
 
-        <!-- match's needed skills (band skills) -->
-        <ul>
-          Seeking:
-          {% for skill in match.skills %}       
-          <li class="skill-item">{{ skill.skill_name }}</li>
-          {% endfor %}                         
-        </ul>
+          <!-- match's needed skills (band skills) -->
+          <ul>
+            <span class="user-data">
+              Seeking:
+            </span>
+            {% for skill in match.skills %}       
+            <li class="skill-item">{{ skill.skill_name }}</li>
+            {% endfor %}                         
+          </ul>
 
-      <!-- genre match (band genres) -->
-        <ul>
-          Genres: 
-          {% for genre in match.genres %}        
-          <li class="genre-item">{{ genre.genre_name }}</li>
-          {% endfor %}           
-        </ul>
+        <!-- genre match (band genres) -->
+          <ul>
+            <span class="user-data">
+              Genres:
+            </span> 
+            {% for genre in match.genres %}        
+            <li class="genre-item">{{ genre.genre_name }}</li>
+            {% endfor %}           
+          </ul>
 
-        Location: {{ match.location }} <br>
-        About: {{ match.description }}
+          <span class="user-data">
+            Location:
+          </span>{{ match.location }} <br>
+          <span class="user-data">
+            About:
+          </span>{{ match.description }} <br>
 
-        <!-- Submit number, gets sent through twilio API  -->
-        <form action="/contact-match" method="POST"> 
-          <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-          <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
-          <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
-          <input id="email" name="email" type="hidden" value="{{match.email}}">
+          <!-- contact match form  -->
+            <form action="/contact-match" method="POST"> 
+              <span class="user-data">
+                Contact:
+              </span>
+              <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+              <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
+              <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+              <input id="email" name="email" type="hidden" value="{{match.email}}">
+              
+              <input type="submit" value="Send"
+              onclick="document.getElementById('message_sent').style.visibility='visible'">
+              <p id="message_sent">Message sent!</p>
+            </form>
+
+
+        <!-- shows matched musicians for band users  -->
+        {% elif user_type == 'band' %}
+          <h2>
+            <container class="user_icon"> 
+              <img src="static/icon_guitarist_red.png" alt="Red silhouette of a guitarist">{{ match.display_name }}</h2>
+            </container>
           
-          <input type="submit" value="Send"
-          onclick="document.getElementById('message_sent').style.visibility='visible'">
-          <p id="message_sent">Message sent!</p>
-        </form>
+          <!-- match talents (musician skills) -->
+          <ul>
+            <span class="user-data">
+              Talents:
+            </span>
+            {% for skill in match.skills %}         
+            <li class="skill-item">{{ skill.skill_name }}</li>
+            {% endfor %}                            
+          </ul>
+
+          <!-- match genres (musician genres) -->
+          <ul>
+            <span class="user-data">
+              Genres:
+            </span> 
+            {% for genre in match.genres %}        
+            <li class="genre-item">{{ genre.genre_name }}</li>
+            {% endfor %}           
+          </ul>
+
+          <span class="user-data">
+            Location:
+          </span>{{ match.location }} <br>
+          <span class="user-data">
+            About:
+          </span>{{ match.description }} <br>
+
+          <!-- contact match form  -->
+          <form action="/contact-match" method="POST"> 
+            <span class="user-data">
+              Contact:
+            </span>
+            <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+            <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
+            <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
+            <input id="email" name="email" type="hidden" value="{{match.email}}">
+
+            <input type="submit" value="Send"
+            onclick="document.getElementById('message_sent').style.visibility='visible'">
+            <p id="message_sent">Message sent!</p>
+          </form>
 
 
-      <!-- shows matched musicians for band users  -->
-      {% elif user_type == 'band' %}
-        <h2>
-          <container class="user_icon"> 
-            <img src="static/icon_guitarist_red.png" alt="Red silhouette of a guitarist">{{ match.display_name }}</h2>
-          </container>
-        
-        <!-- match talents (musician skills) -->
-        <ul>
-          Talents:
-          {% for skill in match.skills %}         
-          <li class="skill-item">{{ skill.skill_name }}</li>
-          {% endfor %}                            
-        </ul>
+        {% else %}
+          There are currently no matches. Check back again soon!
+        {% endif %} 
 
-        <!-- match genres (musician genres) -->
-        <ul>
-          Genres: 
-          {% for genre in match.genres %}        
-          <li class="genre-item">{{ genre.genre_name }}</li>
-          {% endfor %}           
-        </ul>
-
-        Location: {{ match.location }} <br>
-        About: {{ match.description }} <br>
-
-        <!-- contact match form  -->
-        <form action="/contact-match" method="POST"> 
-          <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
-          <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
-          <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
-          <input id="email" name="email" type="hidden" value="{{match.email}}">
-
-          <input type="submit" value="Send"
-          onclick="document.getElementById('message_sent').style.visibility='visible'">
-          <p id="message_sent">Message sent!</p>
-        </form>
-
-
-      {% else %}
-        There are currently no matches. Check back again soon!
-      {% endif %} 
-
-    {% endfor %}     
+      {% endfor %}     
+    </div>
+  </div>
 </div>
 
 {% endblock %}
