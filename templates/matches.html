@@ -32,22 +32,17 @@
         Location: {{ match.location }} <br>
         About: {{ match.description }}
 
-        <!-- On click, ask for their number. Submit number, gets sent through twilio API  -->
+        <!-- Submit number, gets sent through twilio API  -->
         <form action="/contact-match" method="POST"> 
           <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
           <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
           <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
           <input id="email" name="email" type="hidden" value="{{match.email}}">
-          <button onclick="alert()">Contact</button>
-          <script>
-            function alert() {
-              alert("Message sent!");
-            }
-          </script>
+          
+          <input type="submit" value="Send"
+          onclick="document.getElementById('message_sent').style.visibility='visible'">
+          <p id="message_sent">Message sent!</p>
         </form>
-
-        <button type="button">Next</button>
-
 
 
       <!-- shows matched musicians for band users  -->
@@ -83,12 +78,9 @@
           <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
           <input id="email" name="email" type="hidden" value="{{match.email}}">
 
-          <button onclick="message_sent()">Contact</button>
-          <script>
-            function message_sent() {
-              alert("Match info successfully sent!");
-            }
-          </script>
+          <input type="submit" value="Send"
+          onclick="document.getElementById('message_sent').style.visibility='visible'">
+          <p id="message_sent">Message sent!</p>
         </form>
 
 
@@ -98,5 +90,6 @@
 
     {% endfor %}     
 </div>
+
 {% endblock %}
 

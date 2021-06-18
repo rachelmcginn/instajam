@@ -50,6 +50,7 @@ h3 {
   padding: 5px;
   width: 80px;
   height: 40px;
+  line-height: 2.5;
 }
 
 .genre-item {
@@ -98,3 +99,7 @@ h3 {
     color:#df847d;
     border-color:#df847d;
     }
+
+  #message_sent {
+    visibility: hidden;
+  }
