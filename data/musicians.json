@@ -26,7 +26,7 @@
     {
         "email": "eddy@example.com",
         "password": "1234",
-        "display_name": "Stix McGee",
+        "display_name": "Stix",
         "age": 32,
         "gender": "Male",
         "influences":"Phil Collins",
