@@ -47,13 +47,12 @@
               <span class="user-data">
                 Contact:
               </span>
-              <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+              <input type="text" name="phone_input" placeholder="1-123-456-7891" match_name="match_name" match_email="match_email">
               <input id="band_id" name="band_id" type="hidden" value="{{match.band_id}}">
               <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
               <input id="email" name="email" type="hidden" value="{{match.email}}">
               
-              <input type="submit" value="Send"
-              onclick="document.getElementById('message_sent').style.visibility='visible'">
+              <input class="button" type="submit" value="Send" onclick="document.getElementById('message_sent').style.visibility='visible'">
               <p id="message_sent">Message sent!</p>
             </form>
 
@@ -97,13 +96,12 @@
             <span class="user-data">
               Contact:
             </span>
-            <input type="text" name="phone_input" match_name="match_name" match_email="match_email">
+            <input type="text" name="phone_input" placeholder="1-123-456-7891" match_name="match_name" match_email="match_email">
             <input id="musician_id" name="musician_id" type="hidden" value="{{match.musician_id}}">
             <input id="display_name" name="display_name" type="hidden" value="{{match.display_name}}">
             <input id="email" name="email" type="hidden" value="{{match.email}}">
 
-            <input type="submit" value="Send"
-            onclick="document.getElementById('message_sent').style.visibility='visible'">
+            <input class="button" type="submit" value="Send" onclick="document.getElementById('message_sent').style.visibility='visible'">
             <p id="message_sent">Message sent!</p>
           </form>
 

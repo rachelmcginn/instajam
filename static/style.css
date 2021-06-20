@@ -73,14 +73,13 @@ h3 {
       height:auto;
   }
 
-  button {
-    display:inline-block;
+  .button {
+    display: inline-block;
     padding:0.5em 3em;
     border:0.16em solid #050505;
     margin:0 0.3em 0.3em 0;
     box-sizing: border-box;
     text-decoration:none;
-    /* text-transform:uppercase; */
     font-family:'Roboto',sans-serif;
     font-weight:400;
     color:#000000;
@@ -88,11 +87,27 @@ h3 {
     transition: all 0.15s;
     background-color: #ffffff;
     }
-  button:hover {
+
+  .button:hover {
     color:#df847d;
     border-color:#df847d;
     }
 
   #message_sent {
     visibility: hidden;
+    color:#df847d;
+  }
+
+  .red-text {
+    color:#df847d;
+  }
+
+  .button_container {
+    margin: auto 0;
+    width: 200px;
+    text-align: center;
+  }
+
+  .center_button {
+    text-align: center;
   }
