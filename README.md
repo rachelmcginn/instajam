@@ -1,4 +1,5 @@
 # Instajam
+![picture alt](static/home_image.png "Title is optional")
 
 Instajam connects musicians to bands that are in need of their skills. After creating a profile as either a band or a musician,  users are then matched to the best potential bandmates based on the information they have provided. Users can then choose to receive the contact information of any match via text message.
 
