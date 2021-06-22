@@ -4,16 +4,16 @@ Instajam connects musicians to bands that are in need of their skills. After cre
 
 
 # Technologies 
-*Python3
-*Flask
-*PostgresSQL
-*SQLAlchemy
-*Jinja
-*Bootstrap
-*CSS
-*JavaScript
-*AJAX
-*Twilio API
+* Python3
+* Flask
+* PostgresSQL
+* SQLAlchemy
+* Jinja
+* Bootstrap
+* CSS
+* JavaScript
+* AJAX
+* Twilio API
 
 
 ## Installation
